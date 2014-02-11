@@ -54,6 +54,20 @@ I use Jade for HTML templates and Stylus as a stylesheet language. They have a s
 
 \subsection {Build Process}
 
+I use Grunt for build automation. The site isn't typical so building it is a bit more complex. It is meant to be used in two modes: development and production. Development all the debuging options. It also includes deploying to remote systems by SSH.
+
+The first step is creating a custom user if it doesn't exist. The user is used for running the Node server. This is safer than running as root or a human user.
+
+Then file system structure is layed out if it doesn't exist.
+
+Optionally, the templates can be rebuilt.
+
+For modularity, the client-side scripts and stylesheets are split in multiple files. This requires they be built before packaging with the web server.
+
+I use the Browserify module for joining the JavaScript files into a single one. They are then minified using the Uglify package. Minification is code refactoring for making files smaller. Usualy techniques are renaming variables with shorter ones and removing unecessary whitespace.
+
+This, howerver, makes code unreadable for browser side debugging. The solution for this is adding a source map. This is a way of packaging the original sources of the files such that browsers can point to them, even is stack traces. It works even if the original language wasn't JavaScript.
+
 \section{Client}
 
 
