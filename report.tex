@@ -14,7 +14,7 @@
 
 \begin{abstract}
 
-In this report I describe building a system for collaborative editing of \LaTeX{} projects and maintaining their history. Sharing features.
+This report describes the building of a system for collaborative editing of \LaTeX{} projects. This includes simultaneous editing of multiple files, manipulating the history, ... Sharing features... This paper only describes the technical details and not all the features (which are reviewed in a demo on the website: \texttt{multilatex.com}).
 
 \end{abstract}
 
@@ -38,7 +38,25 @@ Although it as an ecelent tool at its inception in the limited systems of the da
 
 Some of these problems are solved by web sites like \mbox{ShareLaTeX} and \mbox{writeLaTeX}. In this paper I describe building a similar web site.
 
-\section{Other Projects}
+\section{Server}
+
+\subsection{Stack}
+
+The development and production websites run on Ubuntu 12.04, but other Linux distibutions can be used.
+
+The server-side logic in written in JavaScript for Node.
+
+Multilatex depends on the \texttt{texlive-full} package which requires about 2~GiB of disk space and provides a large selection of \LaTeX packages.
+
+As a web framework I use Express which is the most widely used framework for Node.
+
+I use Jade for HTML templates and Stylus as a stylesheet language. They have a similar clutter-free syntax based on whitespace.
+
+\subsection {Build Process}
+
+\section{Client}
+
+
 
 \section{Conclusion}
 
