@@ -46,7 +46,7 @@ The development and production websites run on Ubuntu 12.04, but other Linux dis
 
 The server-side logic in written in JavaScript for Node.
 
-Multilatex depends on the \texttt{texlive-full} package which requires about 2~GiB of disk space and provides a large selection of \LaTeX packages.
+Multilatex depends on the \texttt{texlive-full} package which requires about 2~GiB of disk space and provides a large selection of \LaTeX{} packages.
 
 As a web framework I use Express which is the most widely used framework for Node.
 
@@ -70,7 +70,17 @@ This, howerver, makes code unreadable for browser side debugging. The solution f
 
 \section{Client}
 
+\subsection{Stack}
 
+I use Bootstrap for styling with a few modifications for distinction.
+
+I also use jQuery for a few things but it's also required by the Bootstrap script.
+
+For some of the dynamic features of the web site I use Backbone. It depends on Underscore which also provides simple but powerful templates.
+
+The editor is build with Ace. It is a code editor written in JavaScript created by Cloud9 for use in their web-based IDE. It includes many advanced features and has support for multiple languages including \LaTeX{}.
+
+\subsection{Editor}
 
 \section{Conclusion}
 
