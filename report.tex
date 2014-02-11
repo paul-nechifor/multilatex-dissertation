@@ -1,40 +1,48 @@
 \documentclass{llncs}
 
-%\usepackage{graphicx}
-%
-\begin{document}
+\usepackage[utf8x]{inputenc}
 
+\begin{document}
 
 \title{Multilatex: a collaborative web editor for \LaTeX}
 
 \author{Paul Nechifor}
 
-\institute{Faculty of Computer Science,\\University of Iasi}
+\institute{Faculty of Computer Science,\\University of Iași}
 
 \maketitle
 
 \begin{abstract}
 
-Abstract is here.
+In this report I describe building a system for collaborative editing of \LaTeX{} projects and maintaining their history. Sharing features.
 
 \end{abstract}
 
-\section{Introduction}\label{sec:Introduction}
+\section{Introduction}
 
-Introduction is here.
+\TeX{} was started in 1977 by D. Knuth to better typeset scientific articles and books. \LaTeX{} is a generalised set of macros based on \TeX{}.
 
-\section{Other Sections}\label{sec:Others}
+The advantages it has over WYSIWYG editors is that it allows you to focus on the content rather than its presentation. In those editors beginers are frequently tempted to insert spaces and new lines for alignment and page breaking because they are editing the presentation rather than the semantincs.
 
-Other sections are here. 
+Although it as an ecelent tool at its inception in the limited systems of the day, \TeX{} fails to take advantace of more recent advancements. Some of the problems are:
 
+\begin{itemize}
 
-\section{Conclusion}\label{sec:Conclusion}
+\item Static workflow. The usual workflow is: edit text file, compile, review output, repeat. \LaTeX{} doesn't compile what changed, it can only compile the whole document which is slow.
+
+\item Package system. \LaTeX{} supports packages in a limited way. There is no versioning in requiring packages. Repositories are based on distributions.
+
+\item ...
+
+\end{itemize}
+
+Some of these problems are solved by web sites like \mbox{ShareLaTeX} and \mbox{writeLaTeX}. In this paper I describe building a similar web site.
+
+\section{Other Projects}
+
+\section{Conclusion}
 
 Conclusions are here.
-
-\section*{Acknowledgments}\label{sec:Acknowledgments}
-
-Authors would like to thank YYYYY.
 
 \begin{thebibliography}{1}
 
