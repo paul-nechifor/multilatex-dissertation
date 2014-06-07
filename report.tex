@@ -52,6 +52,10 @@ As a web framework I use Express which is the most widely used framework for Nod
 
 I use Jade for HTML templates and Stylus as a stylesheet language. They have a similar clutter-free syntax based on whitespace.
 
+\subsection{Communication}
+
+The server and the editor instances communicate by WebSockets.
+
 \subsection {Build Process}
 
 I use Grunt for build automation. The site isn't typical so building it is a bit more complex. It is meant to be used in two modes: development and production. Development all the debuging options. It also includes deploying to remote systems by SSH.
@@ -81,6 +85,10 @@ For some of the dynamic features of the web site I use Backbone. It depends on U
 The editor is build with Ace. It is a code editor written in JavaScript created by Cloud9 for use in their web-based IDE. It includes many advanced features and has support for multiple languages including \LaTeX{}.
 
 \subsection{Editor}
+
+The editor is a single page application for editing a \LaTeX{} project.
+
+It has a three pane GUI interface: the project pane, the editor and the output.
 
 \section{Conclusion}
 
