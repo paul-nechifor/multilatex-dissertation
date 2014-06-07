@@ -1,16 +1,84 @@
 \documentclass{llncs}
 
 \usepackage[utf8x]{inputenc}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+\usepackage{tikz}
+% Use Open Sans as the sans serif font.
+\usepackage[defaultsans,osfigures,scale=0.95]{opensans}
+\usepackage[T1]{fontenc}
+
+\renewcommand{\seriesdefault}{l}
 
 \begin{document}
+\frenchspacing % Don't use double spacing.
+\onehalfspace % Larger line space.
 
-\title{Multilatex: a collaborative web editor for \LaTeX}
+\fontdimen2\font=5.00pt % Interword space (default 3.91663pt).
+\fontdimen3\font=2.00pt % Interword stretch (default 1.95831pt).
+\fontdimen4\font=1.50pt % Interword shrink (default 1.30554pt).
+\fontdimen7\font=0.00pt % Extra space (default 1.30554pt).
 
-\author{Paul Nechifor}
+\pagestyle{empty} % Hide page number.
 
-\institute{Faculty of Computer Science,\\University of Iași}
+% Cover background color.
+\begin{tikzpicture}[overlay]
+    \definecolor{albastru de fii}{rgb}{0.176, 0.447, 0.713}
+    \fill [fill=albastru de fii] (-5,5) rectangle (21.0,-29.7);
+\end{tikzpicture}
 
-\maketitle
+\begin{figure}[!htb]
+\minipage{2cm}
+    \includegraphics[width=2cm]{uaic}
+\endminipage\hfill
+\minipage{11cm}
+    \centering
+    \color{white}
+    \large{\textsf{Alexandru Ioan Cuza University of Iași}}
+
+    \LARGE{\textsf{Faculty of Computer Science}}
+
+    \large{\textsf{Master Ingineria Sistemelor Soft}}
+\endminipage\hfill
+\minipage{2cm}%
+    % FCS logo.
+    \begin{tikzpicture}[scale=0.26]
+        \def\taie{0.5}
+        \definecolor{alb}{rgb}{1, 1, 1}
+
+        \fill [fill=alb]
+            (0,0) -- (2,0) -- (2,3) -- (3,3) -- (5,5) -- (2,5) --
+            (2,6) -- (6,6) -- (8,8) -- (0,8) -- cycle;
+        \fill [fill=alb]
+            (3,0) -- (3,3-\taie) -- (5,5-\taie) -- (5,0) -- cycle;
+        \fill [fill=alb]
+            (6,0) -- (6,6-\taie) -- (8,8-\taie) -- (8,0) -- cycle;
+    \end{tikzpicture}
+\endminipage
+\end{figure}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \centering
+    \color{white}
+    {\fontsize{55}{60}\selectfont \textsf{\textbf{Multilatex}}}\\
+    \vspace{0.5cm}
+    {\fontsize{20}{24}\selectfont \textsf{a collaborative web editor for} \LaTeX}\\
+    \vspace{1.5cm}
+    \large{\textsf{realizat de}}\\
+    \vspace{1.5cm}
+    {\fontsize{32}{38}\selectfont \textsf{Paul \textbf{Nechifor}}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \color{white}\textsf{Iași, 2014}
+\end{center}
+
+\pagebreak
 
 \begin{abstract}
 
