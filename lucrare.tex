@@ -1,0 +1,215 @@
+\documentclass[a4wide,12pt]{report}
+
+\usepackage[romanian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+\usepackage{tikz}
+% Use Open Sans as the sans serif font.
+\usepackage[defaultsans,osfigures,scale=0.95]{opensans}
+\usepackage[T1]{fontenc}
+
+\renewcommand{\seriesdefault}{l}
+
+% Opțiuni la diagrame tikz.
+\usetikzlibrary{patterns, trees, matrix, arrows, decorations.pathmorphing, decorations.pathreplacing}
+
+% Comenzi
+\newcommand{\eng}[1]{\emph{#1}} % Pentru cuvinte în limba engleză.
+\newcommand{\cod}[1]{\texttt{#1}}
+\newcommand{\url}[1]{\texttt{#1}}
+\newcommand{\uplu}[1]{$\langle$#1$\rangle$} % Pentru uple conținute între paranteze unghiulare.
+\newcommand{\floor}[1]{\lfloor{}#1\rfloor} % Pentru trunchere.
+\newcommand{\acr}[1]{{\textsmaller[1]{\textsc{#1}}}} % Pentru acronime.
+
+
+\newcommand{\capfara}[1]{
+    \chapter*{#1}
+    \addcontentsline{toc}{chapter}{#1}
+}
+
+\newcommand{\secfara}[1]{
+    \section*{#1}
+    \addcontentsline{toc}{section}{#1}
+}
+
+% Variabile
+\newcommand{\subtitlu}{editor colaborativ de \LaTeX}
+\newcommand{\titlu}{Multilatex: \subtitlu}
+\newcommand{\autor}{Paul Răzvan Nechifor} % Ăsta-s io. :)
+\newcommand{\coordonator}{conf. dr. Sabin-Corneliu Buraga}
+\newcommand{\sesiunea}{iulie, 2014}
+\newcommand{\datacurenta}{99 iunie 2014}
+\newcommand{\loculsisemnatura}{
+    \vspace{20mm}
+    \noindent
+    Iași, \datacurenta
+    \vspace{20mm}
+    \begin{flushright}
+        Absolvent \emph{\autor}\\
+        \setlength{\unitlength}{1cm}
+        \begin{picture}
+            (4, 1)\put(0, 0)
+            {\line(1, 0){4}}
+        \end{picture}
+        \vspace{5mm}\\
+        (semnătura în original)
+    \end{flushright}
+}
+
+\begin{document}
+\frenchspacing % Don't use double spacing.
+\onehalfspace % Larger line space.
+
+\fontdimen2\font=5.00pt % Interword space (default 3.91663pt).
+\fontdimen3\font=2.00pt % Interword stretch (default 1.95831pt).
+\fontdimen4\font=1.50pt % Interword shrink (default 1.30554pt).
+\fontdimen7\font=0.00pt % Extra space (default 1.30554pt).
+
+\pagestyle{empty} % Hide page number.
+
+% Cover background color.
+\begin{tikzpicture}[overlay]
+    \definecolor{albastru de fii}{rgb}{0.176, 0.447, 0.713}
+    \fill [fill=albastru de fii] (-5,5) rectangle (21.0,-29.7);
+\end{tikzpicture}
+
+\begin{figure}[!htb]
+\minipage{2cm}
+    \includegraphics[width=2cm]{imagini/uaic}
+\endminipage\hfill
+\minipage{11cm}
+    \centering
+    \color{white}
+    \large{\textsf{Universitatea Alexandru Ioan Cuza Iași}}
+
+    \LARGE{\textsf{Facultatea de Informatică}}
+
+    \large{\textsf{Master Ingineria Sistemelor Soft}}
+\endminipage\hfill
+\minipage{2cm}%
+    % FCS logo.
+    \begin{tikzpicture}[scale=0.26]
+        \def\taie{0.5}
+        \definecolor{alb}{rgb}{1, 1, 1}
+
+        \fill [fill=alb]
+            (0,0) -- (2,0) -- (2,3) -- (3,3) -- (5,5) -- (2,5) --
+            (2,6) -- (6,6) -- (8,8) -- (0,8) -- cycle;
+        \fill [fill=alb]
+            (3,0) -- (3,3-\taie) -- (5,5-\taie) -- (5,0) -- cycle;
+        \fill [fill=alb]
+            (6,0) -- (6,6-\taie) -- (8,8-\taie) -- (8,0) -- cycle;
+    \end{tikzpicture}
+\endminipage
+\end{figure}
+
+\vspace{2cm}
+
+\begin{center}
+    \centering
+    \color{white}
+    {\fontsize{22}{26}\selectfont \textsf{LUCRARE DE DIZERTAȚIE}}\\
+    \vspace{1.5cm}
+    {\fontsize{40}{46}\selectfont \textsf{\textbf{Multilatex}}}\\
+    \vspace{0.5cm}
+    {\fontsize{26}{28}\selectfont \textsf{\subtitlu}}\\
+    \vspace{1.5cm}
+    \large{\textsf{propusă de}}\\
+    \vspace{1.5cm}
+    {\fontsize{26}{28}\selectfont \textsf{Paul Răzvan \textbf{Nechifor}}}\\
+    \vspace{1.5cm}
+    {\fontsize{16}{26}\selectfont \textsf{\textbf{Sesiunea:} \sesiunea}}\\
+    \vspace{1.5cm}
+    {\fontsize{14}{26}\selectfont \textsf{Coordonator științific}}\\
+    {\fontsize{18}{26}\selectfont \textsf{\textbf{\coordonator}}}\\
+\end{center}
+
+\pagebreak
+
+% Pagina de titlu
+\begin{center}
+    \textbf{UNIVERSITATEA ALEXANDRU IOAN CUZA IAȘI}\\
+    \vspace{3mm}
+    \textbf{FACULTATEA DE INFORMATICĂ}\\
+    \vspace{89mm}
+    \Huge{\textbf{\titlu}}\\
+    \vspace{30mm}
+    \Large{\textbf{\emph{\autor}}}\\
+    \vspace{11mm}
+    \Large{\textbf{Sesiunea:} \sesiunea}\\
+    \vspace{10mm}
+    \normalsize{Coordonator științific}\\
+    \vspace{3mm}
+    \large{\textbf{\coordonator}}\\
+    \end{center}
+\pagebreak
+
+\section*{Declarație privind originalitate și respectarea drepturilor de autor}
+
+Prin prezenta declar că lucrarea de licență cu titlul „\titlu“ este scrisă de mine și nu a mai fost prezentată
+niciodată la o altă facultate sau instituție de învățământ superior din țară sau străinătate. De asemenea, declar că
+toate sursele utilizate, inclusiv cele preluate de pe internet, sunt indicate în lucrare, cu respectarea regulilor de
+evitare a plagiatului:
+
+\begin{itemize}
+    \item toate fragmentele de text reproduse exact, chiar și în traducere proprie din altă limbă, sunt scrise între
+    ghilimele și dețin referința precisă a sursei;
+    \item reformularea în cuvinte proprii a textelor scrise de către alți autori deține referința precisă;
+    \item codul sursă, imagini etc. preluate din proiecte cu sursă publică sau alte surse sunt utilizate cu respectarea
+    drepturilor de autor și dețin referințe precise;
+    \item rezumarea ideilor altor autori precizează referința precisă la textul original.
+\end{itemize}
+
+\loculsisemnatura
+
+\pagebreak
+
+\section*{Declarație de consimțământ}
+Prin prezenta declar că sunt de acord ca lucrarea de licență cu titlul „\titlu“, codul sursă al programelor și
+celelalte conținuturi (grafice, multimedia, date de test etc.) care însoțesc această lucrare să fie utilizate în cadrul
+Facultății de Informatică.
+
+De asemenea, sunt de acord ca Facultatea de Informatică de la Universitatea Alexandru Ioan Cuza Iași să utilizeze,
+modifice, reproducă și să distribuie în scopuri necomerciale programele-calculator, format executabil și sursă,
+realizate de mine în cadrul prezentei lucrări de licență.
+
+\loculsisemnatura
+
+\pagebreak
+
+% Cuprins
+\pagestyle{plain}
+\setcounter{page}{1} % Începe numerotarea de la 1.
+
+\tableofcontents
+
+\pagebreak
+
+\capfara{Introducere}
+
+\secfara{Motivație}
+
+\secfara{Challanges}
+
+\capfara{Contribuții}
+
+\chapter{Sisteme existente}
+
+\chapter{Sistemul propriu}
+
+\chapter{Rezultate}
+
+\chapter{Îmbunătățiri}
+
+\chapter{Aplicații}
+
+\capfara{Concluzii}
+
+\begin{thebibliography}{1}
+\addcontentsline{toc}{chapter}{Bibliografie}
+
+\end{thebibliography}
+
+\end{document}
