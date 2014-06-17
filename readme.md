@@ -1,5 +1,7 @@
 # Multilatex (lucrarea de dizertație)
 
+![screenshot](screenshot.png)
+
 ## Pentru lucru ușor
 
 Trebuie instalat (în Ubuntu):
