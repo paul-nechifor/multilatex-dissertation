@@ -233,6 +233,48 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \subsection{Stylus}
 
+Stylus (2010) este un limbaj \eng{stylesheet} care compilează în CSS. Este
+asemănător cu Sass (2007) și LESS (2009), dar cu diferența principală că este
+mult mai succint și este bazat pe indentare.
+
+În următorul exemplu este arătat codul Stylus în stânga și rezultatul CSS în
+dreapta. Se folosește o variabliă \cod{main-color} pentru culoare care este și
+manipulată pentru \cod{:hover} (înalbită cu 20~\%). Folosind \cod{main-size}
+mărimea textului pe dispozitive cu ecran mic este micșorată la 80~\%. Este
+demonstrată și imbricarea care evită repetarea: se folosește doar \cod{\&:hover}
+în loc de \cod{a:hover, code:hover}.
+
+\minipage{9cm}
+\begin{verbatim}
+main-color = #f7a
+main-size = 18px
+
+a, code
+  color main-color
+  font-size main-size
+  @media (max-width: 479px)
+    font-size floor(main-size * 0.8)
+  &:hover
+    color lighten(main-color, 20%)
+\end{verbatim}
+\endminipage
+\minipage{4cm}
+\begin{verbatim}
+a, code {
+  color: #f7a;
+  font-size: 18px;
+}
+@media (max-width: 479px) {
+  a, code {
+    font-size: 14px;
+  }
+}
+a:hover, code:hover {
+  color: #ff92bb;
+}
+\end{verbatim}
+\endminipage
+
 \subsection{MongoDB}
 
 \subsection{Share.JS}
