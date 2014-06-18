@@ -9,6 +9,7 @@
 % Use Open Sans as the sans serif font.
 \usepackage[defaultsans,osfigures,scale=0.95]{opensans}
 \usepackage[T1]{fontenc}
+\usepackage{color}
 
 \renewcommand{\seriesdefault}{l}
 
@@ -23,7 +24,8 @@ decorations.pathreplacing}
 \newcommand{\uplu}[1]{$\langle$#1$\rangle$}
 \newcommand{\floor}[1]{\lfloor{}#1\rfloor} % Pentru trunchere.
 \newcommand{\acr}[1]{{\textsmaller[1]{\textsc{#1}}}} % Pentru acronime.
-
+\newcommand{\idee}[1]{{\color{red} #1}}
+\newcommand{\poate}[1]{#1}
 
 \newcommand{\capfara}[1]{
     \chapter*{#1}
@@ -249,7 +251,61 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \section{Authentication}
 
-\section{Sandboxing \LaTeX}
+\section{Izolare \LaTeX}
+
+\TeX este un limbaj puternic și deci posibil periculos. Trebuie avut grijă când
+se execută cod arbitrar de la surse necunoscute.
+
+Am scris un modul care să izoleze (\eng{sandboxing}) pe cât posibil compilarea
+proiectelor \LaTeX.
+
+\subsection{Execuția comenzilor de sistem}
+
+Una dintre primele probleme este că \LaTeX{} poate să execute comenzi de sistem
+arbitrare folosind construcția \cod{\textbackslash write18\{comandă\}}.
+
+\idee{Arată un exemplu de comandă.}
+
+In mod normal acestă construcție nu este disponibilă, dar pentru mai mare
+siguranță poate fi oprită direct din execuția \cod{pdflatex} cu argumentul
+\cod{-no-shell-escape}. \poate{Se mai folosește în plus argumentul
+\cod{-halt-on-error} pentru a se opri execuția programului în loc să aștepte
+corectarea interactivă a erorilor.}
+
+\subsection{Cod rău-intenționat}
+
+\TeX{} este un limbaj Turing-complet \idee{(dovadă)} deci nu se poate determina
+fără a fi fie excutat codul dacă compilarea documentului se va termina.
+
+\LaTeX{}, cu toate pachetele sale, este uriaș, deci foarte probabil există
+probleme nedescoperite care pot duce la umplerea memoriei sau intrarea în bucle
+infinite.
+
+Problema terminării poate fi ameliorată prin folosirea unui \eng{timeout} pentru
+compilarea documentelor, dar acest lucru poate fi problematic pentru documente
+foarte mari.
+
+În plus, se folosește un utilizator special pentru execuția programului
+\cod{pdflatex} astfel încât să fie limitată compromiterea procesului prin codul
+rulat.
+
+Acest lucru permite în Linux și setarea de limite:
+
+\begin{itemize}
+\item spre unde poate scrie un utilizator;
+\item câtă memorie virtuală poate utiliza (folosing \cod{ulimits});
+\item cât timp de CPU poate folosi, și altele.
+\end{itemize}
+
+Codul rău nu este în mod necesar malițios deci un utilizator trebuie prezentat
+cu o eroare în loc să fie interzis.
+
+\subsection{Altele}
+
+Mai sunt alte feluri în care se poate influența sistemul, spre exemplu prin
+scrierea de fișiere folosind pachetul \cod{newfile}. Așa se poate umple sistemul
+de fișiere. Și această problemă este rezolvată prin setarea de limite pe
+utilizator.
 
 \section{File store}
 
