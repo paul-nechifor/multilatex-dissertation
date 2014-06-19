@@ -209,7 +209,55 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \section{\TeX}
 
+\TeX{} este un program de compoziție tipografică care a fost început în 1977 de
+către Donald Knuth pentru a permite o compoziție mai bună a articolelor și
+cărților științifice.
+
+Codul sursă pentru \TeX{}\cite{texweb} este scris în WEB, un limbaj de
+programare literară\footnote{Un tip de programare prin care codul sursă este
+îmbinat descrierea lui astfel încât să poată fi citit similar cu o carte.}
+similar cu Pascal. Folosind acest tip de programare codul sursă poate fi
+compilat într-un fișier PDF\cite{texwebpdf}.
+
 \section{\LaTeX}
+
+\LaTeX{} este un set generalizat de macrouri bazat pe \TeX{}.
+
+Spre diferența de editoarele WYSIWYG, \LaTeX{} are avantajul că permite
+concentrarea pe conținut și nu pe presentarea lui. În editoare WYSIWYG
+utilizatorii sunt temptați să folosească spații și linii goale pentru aliniere
+și \cod{page breaking} pentru că editează prezentarea în loc de semantică.
+
+Deși era un program bun la conceperea lui pe sistemele limitate de atunci,
+astăzi \LaTeX{} nu exploatează avantajele aduse de sistemele moderne.
+
+Unele dintre problemele pe care urmează să le prezint sunt rezolvate de situri
+precum ShareLatex și WriteLatex. În capitolul următor am să descriu sistemul
+propriu.
+
+\subsection{Modul de lucru}
+
+\LaTeX{} are un mod de lucru static: editarea fișierelor, compilarea,
+vizualizarea documentului compilat, repetarea. \LaTeX{} nu suportă doar
+recompilarea modificărilor ci necesită recompilarea întregului document ceea ce
+este încet. Mai rău este că este nevoie de mai multe compilări dacă se folosește
+un cuprins, bibliografie, referințe și altele.
+
+Această problemă nu poate fi rezolvată ușor deoarece ar necesita rescrierea
+aplicațiilor de bază.
+
+\subsection{Memorarea stării}
+
+\LaTeX{} operează prin folosirea și modificarea unor fișiere în dosarul de
+lucru. Acest lucru complică orice program care vrea să-l folosească pentru că 
+
+\subsection{Sistemul de pachete}
+
+\LaTeX{} are suport limitat pentru pachete. Nu există versionarea declararea
+folosirii pachetelor, deci compilarea unui document poate duce la rezultatea
+diferite (sau la erori) într-un mod neașteptat.
+
+\idee{Repositories are based on distributions.}
 
 \section{ShareLatex}
 
@@ -580,6 +628,12 @@ utilizator.
 
 \begin{thebibliography}{1}
 \addcontentsline{toc}{chapter}{Bibliografie}
+
+\bibitem{texweb}
+\url{mirrors.ctan.org/systems/knuth/dist/tex/tex.web}
+
+\bibitem{texwebpdf}
+\url{brokestream.com/tex.pdf}
 
 \bibitem{passleak}
 \url{thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
