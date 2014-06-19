@@ -221,6 +221,79 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \section{Structura sitului}
 
+\section{Construirea}
+
+Construirea proiectului a susținut cele mai mari modificări și a trecut prin
+trei variante. Prin construire mă refer la compilarea, configurearea și
+instalarea părților necesare.
+
+\subsection{Programul propriu}
+
+Inițial am încept prin a scrie propriul program pentru a face construirea.
+Programul folosea pachetul \cod{commander} pentru a procesa argumentele (spre
+exemplu pentru a suprascrie opțiuni din fișierul de configurație) și avea
+opțiunile de a instala și de a face \eng{deployment}.
+
+Instalarea implica copierea fișierelor prin \cod{rsync}, crearea dosarelor speciale și repornirea
+serviciului Upstart. Atunci nu făceam compilare de niciun fel.
+
+\eng{Deployment}-ul implica copierea dosarului de dezvoltare pe un sistem
+specificat și rularea scriptului de instalare.
+
+După asta am descoperit Grunt care rezolvă această problemă într-un mod general.
+
+\subsection{Grunt}
+
+Grunt este un sistem de automatizare a proceselor de lucru cu foarte multe
+\eng{plugin}-uri care funcționeaza prin descrirea de sarcini de lucru.
+
+\subsubsection{Compilare Stylus}
+
+Fișierele Stylus pot fi compilate la \eng{runtime} de Express, dar este mai
+eficient să fie compilate dinainte în CSS.
+
+\subsubsection{Unificare JavaScript}
+
+\idee{TODO}
+
+\subsubsection{Minificare}
+
+Pentru fișierele JavaScript și CSS se poate realiza o optimizare
+prin care se scot toate spațiile și comentariile inutile. Operații mai avansate
+de optimizare reprezintă redenumirea variabilelor locale la JavaScript sau
+eliminarea de cod nefolosit (cod după \cod{return} în JavaScript sau opțiuni
+suprascrise de mai multe ori la CSS).
+
+\subsubsection{Unificare JavaScript}
+
+\idee{TODO}
+
+\subsubsection{Instalarea și \eng{deployment}-ul}
+
+\idee{TODO}
+
+\subsubsection{Altele}
+
+\idee{Compilarea șabloanelor, vizualizarea fișierelor de logare.}
+
+\subsubsection{Problema}
+
+Problema la Grunt este că preferă configurația înainte de cod. Acest lucru duce
+la configurații mari și organizate pe operații în loc de ordinea logică a
+construirii.
+
+\subsection{Gulp}
+
+Gulp este tot un sistem de automatizare similar, dar cu diferența principală
+că sarcinile sunt descrise prin fluxuri de transformare și se preferă cod
+înainte de configurații stufoase.
+
+\subsubsection{Bower}
+
+\idee{TODO}
+
+\section{Deployment}
+
 \section{\eng{Back-end}}
 
 \subsection{Vagrant}
@@ -311,8 +384,6 @@ a:hover, code:hover {
 \subsection{Ace}
 
 \subsection{PDF.js}
-
-\section{Deployment}
 
 \section{Autentificare}
 
