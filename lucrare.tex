@@ -43,7 +43,7 @@ decorations.pathreplacing}
 \newcommand{\autor}{Paul Răzvan Nechifor} % Ăsta-s io. :)
 \newcommand{\coordonator}{conf. dr. Sabin-Corneliu Buraga}
 \newcommand{\sesiunea}{iulie, 2014}
-\newcommand{\datacurenta}{99 iunie 2014}
+\newcommand{\datacurenta}{\today}
 \newcommand{\loculsisemnatura}{
     \vspace{20mm}
     \noindent
@@ -219,7 +219,82 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \section{Proiectare}
 
+În scrierea sistemului propriu am început întâi cu proiectarea pe care am
+descris-o pe situl proiectului la \cod{multilatex.com/blog} . Urmează
+principalele probleme asupra cărora a trebuit să mă decid.
+
+\subsection{Documente mari}
+
+Deseori, un document \LaTeX{} mare este împărțit în mai multe fișiere \cod{.tex}
+care sunt incluse în cel principal. Deși acest lucru este suportat, eu am ales
+să nu încurajez acest lucru pentru că am observat că întră în conflict cu modul
+meu de lucru: când încep un document nu specific perfect structura lui și ajung
+des să mut secțiuni și paragrafe prin el.
+
+Principala problemă la a folosi un fișier monolitic este greutatea de navigare,
+deci am ales să rezolv problema asta prin a implementa în panoul arborelui de
+fișiere un nivel suplimentar prin care fișierele \cod{.tex} listează toate
+capitolele, secțiunile și subsecțiunile. Astfel se poate sări ușor printre
+părțile documenului.
+
+\subsection{Editarea colaborativă}
+
+Există două modalități de editare colaborativă: în timp real (precum Google
+Docs) sau bazată pe commit-uri (precum Git sau alte sisteme de control a
+versiunilor).
+
+Deoarece \LaTeX{} nu funcționează precum un editor WYSIWYG, a doua variantă pare
+mai bună, dar operațiile de integrare ar complica mult sistemul.
+
+Sunt problema și la colaborarea în timp real. Aici se complică operațiile de
+anulare (\eng{undo}) deoarece nu există un istoric bine definit. În plus, nu se
+poate decide ușor care sunt versiunile intermediare.
+
+Am ales până la urmă să le împlementez pe ambele variante. Prima folosind
+Share.JS și a doua folosind MongoDB și un \eng{file store} propriu. În
+retrospectivă, acest lucru a complicat mult sistemul.
+
+\subsection{Compararea modificărilor}
+
+O altă problemă pe care mi-am pus-o la proiectarea a fost compararea versiunilor
+intermediare și contribuțiilor de la fiecare persoană. Folosind doar
+\eng{commit}-uri acest lucru este ușor, dar cu versiune în timp real este greu
+să fie revizuite contribuțiile fiecărei persoane deoare ce se pot suprapune
+foarte mult.
+
+Ca soluție am decis ca să permit \eng{commit}-uri cu mai mulți autori. Astfel
+când se face un \eng{commit}, fiecare persoană care a făcut o modificare între
+timp va apărea ca un autor. Dezavantajul este că nu se poate stabili pentru o
+versiune ce modificare a făcut fiecare dintre autori, deci trebuiesc făcute
+\eng{commit}-uri dese.
+
+\subsection{Compilatorul de \LaTeX}
+
+Am considerat și folosirea unui compilator de \LaTeX{} care să genereze
+PDF-urile pe partea de client. Spre exemplu \cod{texlive.js}\cite{texlivejs}
+poate compila proiecte direct din navigator. Acest lucru este posibil pentru că
+\TeX{} Live a fost compilat în JavaScript folosind Emscripten.
+
+Problemele majore sunt că este prea încet și nu suportă toate pachetele \TeX{}
+Live. Acest lucru chiar ar fi imposibil deoarece o instalare completă a
+\cod{texlive-full} are mai mult de 2~GiB.
+
+\subsection{Importare/Exportare}
+
+Un factor important pentru succesul unui astfel de sit este compatibilitatea și
+încrederea, deci trebuie să existe un mecanism ușor de a importa și de a exporta
+proiectele . Acest lucru este parțial complicat de faptul că proiectele \LaTeX{}
+pot avea o multitudine de fișiere.
+
+\subsection{Altele}
+
+Alte probleme au fost legate de tehnologiile pe care să le folosesc pentru
+construirea proiectului. Aceste programe/librării vor fi prezentate mai departe
+în acest capitol.
+
 \section{Structura sitului}
+
+
 
 \section{Construirea}
 
@@ -507,7 +582,10 @@ utilizator.
 \addcontentsline{toc}{chapter}{Bibliografie}
 
 \bibitem{passleak}
-\url{http://thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
+\url{thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
+
+\bibitem{texlivejs}
+\url{manuels.github.io/texlive.js}
 
 \end{thebibliography}
 
