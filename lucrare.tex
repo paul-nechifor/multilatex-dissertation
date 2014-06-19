@@ -158,16 +158,20 @@ sursele utilizate, inclusiv cele preluate de pe internet, sunt indicate în
 lucrare, cu respectarea regulilor de evitare a plagiatului:
 
 \begin{itemize}
-    \item toate fragmentele de text reproduse exact, chiar și în traducere
-    proprie din altă limbă, sunt scrise între ghilimele și dețin referința
-    precisă a sursei;
-    \item reformularea în cuvinte proprii a textelor scrise de către alți autori
-    deține referința precisă;
-    \item codul sursă, imagini etc. preluate din proiecte cu sursă publică sau
-    alte surse sunt utilizate cu respectarea drepturilor de autor și dețin
-    referințe precise;
-    \item rezumarea ideilor altor autori precizează referința precisă la textul
-    original.
+
+\item toate fragmentele de text reproduse exact, chiar și în traducere proprie
+din altă limbă, sunt scrise între ghilimele și dețin referința precisă a sursei;
+
+\item reformularea în cuvinte proprii a textelor scrise de către alți autori
+deține referința precisă;
+
+\item codul sursă, imagini etc. preluate din proiecte cu sursă publică sau alte
+surse sunt utilizate cu respectarea drepturilor de autor și dețin referințe
+precise;
+
+\item rezumarea ideilor altor autori precizează referința precisă la textul
+original.
+
 \end{itemize}
 
 \loculsisemnatura
@@ -327,7 +331,7 @@ Problemele majore sunt că este prea încet și nu suportă toate pachetele \TeX
 Live. Acest lucru chiar ar fi imposibil deoarece o instalare completă a
 \cod{texlive-full} are mai mult de 2~GiB.
 
-\subsection{Importare/Exportare}
+\subsection{Importare/exportare}
 
 Un factor important pentru succesul unui astfel de sit este compatibilitatea și
 încrederea, deci trebuie să existe un mecanism ușor de a importa și de a exporta
@@ -355,8 +359,9 @@ Programul folosea pachetul \cod{commander} pentru a procesa argumentele (spre
 exemplu pentru a suprascrie opțiuni din fișierul de configurație) și avea
 opțiunile de a instala și de a face \eng{deployment}.
 
-Instalarea implica copierea fișierelor prin \cod{rsync}, crearea dosarelor speciale și repornirea
-serviciului Upstart. Atunci nu făceam compilare de niciun fel.
+Instalarea implica copierea fișierelor prin \cod{rsync}, crearea dosarelor
+speciale și repornirea serviciului Upstart. Atunci nu făceam compilare de niciun
+fel.
 
 \eng{Deployment}-ul implica copierea dosarului de dezvoltare pe un sistem
 specificat și rularea scriptului de instalare.
@@ -379,11 +384,11 @@ eficient să fie compilate dinainte în CSS.
 
 \subsubsection{Minificare}
 
-Pentru fișierele JavaScript și CSS se poate realiza o optimizare
-prin care se scot toate spațiile și comentariile inutile. Operații mai avansate
-de optimizare reprezintă redenumirea variabilelor locale la JavaScript sau
-eliminarea de cod nefolosit (cod după \cod{return} în JavaScript sau opțiuni
-suprascrise de mai multe ori la CSS).
+Pentru fișierele JavaScript și CSS se poate realiza o optimizare prin care se
+scot toate spațiile și comentariile inutile. Operații mai avansate de optimizare
+reprezintă redenumirea variabilelor locale la JavaScript sau eliminarea de cod
+nefolosit (cod după \cod{return} în JavaScript sau opțiuni suprascrise de mai
+multe ori la CSS).
 
 \subsubsection{Instalarea și \eng{deployment}-ul}
 
@@ -401,9 +406,9 @@ construirii.
 
 \subsection{Gulp}
 
-Gulp este tot un sistem de automatizare similar, dar cu diferența principală
-că sarcinile sunt descrise prin fluxuri de transformare și se preferă cod
-înainte de configurații stufoase.
+Gulp este tot un sistem de automatizare similar, dar cu diferența principală că
+sarcinile sunt descrise prin fluxuri de transformare și se preferă cod înainte
+de configurații stufoase.
 
 \subsubsection{Bower}
 
@@ -421,21 +426,25 @@ cu suport pe termen lung când am început proiectul.
 \subsection{Upstart}
 
 Programul construit rulează pe \eng{backend} ca un serviciu în Upstart. Upstart
-este un sistem de administrare a serviciilor pentru Unix bazat pe evenimente.
-El a fost proiectat ca un înlocuitor pentru init.
+este un sistem de administrare a serviciilor pentru Unix bazat pe evenimente. El
+a fost proiectat ca un înlocuitor pentru init.
 
 Am ales Upstart pentru că este instalat inițial în Ubuntu 12.04. Din următoarele
 versiuni, însă, Ubuntu și Debian se vor schimba la Systemd care are mai multe
 funcționalități.
 
 Eu folosesc Upstart prin scriptul care specifică:
+
 \begin{itemize}
-    \item ce utilizator să fie folosit pentru executarea programului (ca să nu
-    fie utilizat \cod{root} pentru sigurantă;
-    \item cum să repornească serviciul în caz de erori (se abandonează
-    repornirea în cazul în care eșuează mai multe de 10 ori în 5 secunde);
-    \item spre ce fișier de logare să fie redirectate ieșirile.
-    
+
+\item ce utilizator să fie folosit pentru executarea programului (ca să nu fie
+utilizat \cod{root} pentru sigurantă;
+
+\item cum să repornească serviciul în caz de erori (se abandonează repornirea în
+cazul în care eșuează mai multe de 10 ori în 5 secunde);
+
+\item spre ce fișier de logare să fie redirectate ieșirile.
+
 \end{itemize}
 
 \subsection{Node}
@@ -595,9 +604,13 @@ rulat.
 Acest lucru permite în Linux și setarea de limite:
 
 \begin{itemize}
+
 \item spre unde poate scrie un utilizator;
+
 \item câtă memorie virtuală poate utiliza (folosing \cod{ulimits});
+
 \item cât timp de CPU poate folosi, și altele.
+
 \end{itemize}
 
 Codul rău nu este în mod necesar malițios deci un utilizator trebuie prezentat
