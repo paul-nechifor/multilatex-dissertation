@@ -225,6 +225,29 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \subsection{Vagrant}
 
+Imaginea sistemului de operare folosită este Ubuntu 12.04 deoarece era varianta
+cu suport pe termen lung când am început proiectul.
+
+\subsection{Upstart}
+
+Programul construit rulează pe \eng{backend} ca un serviciu în Upstart. Upstart
+este un sistem de administrare a serviciilor pentru Unix bazat pe evenimente.
+El a fost proiectat ca un înlocuitor pentru init.
+
+Am ales Upstart pentru că este instalat inițial în Ubuntu 12.04. Din următoarele
+versiuni, însă, Ubuntu și Debian se vor schimba la Systemd care are mai multe
+funcționalități.
+
+Eu folosesc Upstart prin scriptul care specifică:
+\begin{itemize}
+    \item ce utilizator să fie folosit pentru executarea programului (ca să nu
+    fie utilizat \cod{root} pentru sigurantă;
+    \item cum să repornească serviciul în caz de erori (se abandonează
+    repornirea în cazul în care eșuează mai multe de 10 ori în 5 secunde);
+    \item spre ce fișier de logare să fie redirectate ieșirile.
+    
+\end{itemize}
+
 \subsection{Node}
 
 \subsection{Express}
