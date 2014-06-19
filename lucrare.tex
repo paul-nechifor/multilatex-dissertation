@@ -291,7 +291,55 @@ a:hover, code:hover {
 
 \section{Deployment}
 
-\section{Authentication}
+\section{Autentificare}
+
+Stocarea incorectă a parolelor încă este o problemă des întâlnită astăzi și a
+dus la compromiterea a milioane de conturi pentru multe companii (vezi
+tabelul~\ref{parole}).
+
+Eu am folosit \eng{hashing} a parolei cu \eng{salt} (data înregistrării). O altă
+variantă ar fi fost bcrypt, dar verificarea este mai computațional intensivă.
+
+\begin{table}[hb]
+\begin{center}
+\begin{tabular}{l l r r}
+Data & Compania & Parole unice & Parola totale \\
+\hline
+2012-07-11 & Yahoo & 342.508 & 442.832 \\
+2012-02-22 & YP & 833.994 & 1.566.156 \\
+2009-12-04 & RockYou & 14.344.173 & 32.603.145 \\
+2011-12 & CSDN & 4.037.902 & 6.428.632 \\
+\end{tabular}
+\end{center}
+\caption{Compromiterea parolelor stocate în clar\cite{passleak}.}
+\label{parole}
+\end{table}
+
+\subsection{Sugestii}
+
+Unele situri folosesc sau chiar obligă folosirea de sugestii pentru amintirea
+parolelor. Eu nu am făcut asta deoarece în cazul compromiterii bazei de date
+acest lucru ajută la găsirea parolelor. Acest lucru s-a întâmplat în 2013 când
+hash-urile și sugestiile pentru 150 de milioane de conturi Adobe au fost
+publicate. Deoarece nu se folosea \eng{salt}, dacă mai mulți utilizatori aveau
+aceeași parolă, sugestiile ajută la ghicirea parolei.
+
+\subsection{Părți terțe}
+
+O variantă de autentificare este folosirea unor părți terțe. Eu nu am făcut asta
+pentru că acest lucru implică dependența de alte sisteme care pot încetini
+dezvoltarea rapidă.
+
+\subsection{Înregistrare rapidă}
+
+În loc să permit autentificarea cu conturi de pe alte situri, am ales să permit
+înregistrarea foarte rapidă. De pe prima pagina se poate realiza înregistrarea
+scriind doar numele dorit și parola (și confirmarea ei).
+
+\subsection{Probleme}
+
+Deoarece nu am un certificat, încă nu folosesc HTTPS pe \cod{multilatex.com},
+deci autentificarea nu este foarte sigură.
 
 \section{Izolare \LaTeX}
 
@@ -363,6 +411,9 @@ utilizator.
 
 \begin{thebibliography}{1}
 \addcontentsline{toc}{chapter}{Bibliografie}
+
+\bibitem{passleak}
+\url{http://thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
 
 \end{thebibliography}
 
