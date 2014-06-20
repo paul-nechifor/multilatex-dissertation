@@ -5,6 +5,6 @@ listen:
 	while inotifywait -e close_write lucrare.tex; do sleep 1; make; done
 
 clean:
-	rm -f *.log *.aux *.pdf *.toc *~
+	rm -f *.log *.aux *.pdf *.toc *.csv *~
 
 .PHONY: listen clean
