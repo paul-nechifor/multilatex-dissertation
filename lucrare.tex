@@ -489,6 +489,10 @@ pagina editorului deoarece necesită un ecran mare.
 Stilul sitului nu se numără printre cele mai importante aspecte și am ales să
 folosesc Bootstrap 3 cu puține modificări pentru o estetică plată și simplă.
 
+\section{Integrare continuă}
+
+\idee{rsync}
+
 \section{Construirea}
 
 Construirea proiectului a susținut cele mai mari modificări și a trecut prin
@@ -516,6 +520,9 @@ După asta am descoperit Grunt care rezolvă această problemă într-un mod gen
 Grunt este un sistem de automatizare a proceselor de lucru cu foarte multe
 \eng{plugin}-uri care funcționeaza prin descrirea de sarcini de lucru.
 
+Un avantaj peste folosirea de fișiere \cod{Makefile} este că Grunt este scris în
+JavaScript și modulele sunt făcute să fie independente de platformă.
+
 \subsubsection{Compilare Stylus}
 
 Fișierele Stylus pot fi compilate la \eng{runtime} de Express, dar este mai
@@ -540,6 +547,13 @@ Node). Astfel, în loc să fie descris un pachet în mod liniar prin etichete
 dependințe are și Browserify compune tot codul necesar în funcție de fișierul de
 intrare și dependințele acestuia în mod recursiv.
 
+Un dezavantaj la acest mod de lucru este că se complică procesul de depanare
+doarece nu mai corespund liniile la \eng{runtime} cu liniile din fișierele
+proiectului. Din fericire acest lucru este rezolvat prin folosirea de mapări la
+sursă (\eng{source maps}) unde pe lângă codul modulului unificat este inclusă în
+comentarii și maparea la codul inițial. Însă recunoașterea mapărilor este
+prezentă doar în navigatoarele recente.
+
 \subsubsection{Minificare}
 
 Pentru fișierele JavaScript și CSS se poate realiza o optimizare prin care se
@@ -550,11 +564,16 @@ multe ori la CSS).
 
 \subsubsection{Instalarea și \eng{deployment}-ul}
 
-\idee{TODO}
+De data aceasta pașii pentru instalare sunt descriși in JavaScript. După
+compilarea fișierelor, ele sunt copiate în dosarul necesar (folosind \cod{rsync}
+pentru evitarea copierii fișierelor neschimbate) și se execută restul pașilor
+(crearea dosarelor și utilizatorilor dacă e nevoie, repornirea serviciului).
+\eng{Deployment}-ul este similar variantei precedente.
 
 \subsubsection{Altele}
 
-\idee{Compilarea șabloanelor, vizualizarea fișierelor de logare.}
+Alte sarcini descrise sunt de compilare a șabloanelor de proiecte \LaTeX{} și
+listarea fișierelor de logare în timp real de pe mașina țintă.
 
 \subsubsection{Problema}
 
@@ -564,15 +583,33 @@ construirii.
 
 \subsection{Gulp}
 
-Gulp este tot un sistem de automatizare similar, dar cu diferența principală că
+Gulp este un sistem de automatizare similar, dar cu diferența principală că
 sarcinile sunt descrise prin fluxuri de transformare și se preferă cod înainte
 de configurații stufoase.
 
+Astfel construirea proiectului poate fi descrisă printr-un graf de dependințe și
+transformări din care se execută doar cele necesare.
+
+\idee{Un grafic cu transformările.}
+
+\subsubsection{CoffeeScript}
+
+A treia iterație a fost și momentul în care am început să folosesc CoffeeScript.
+Însăși fișierul de configurare Gulp este scris în acest limbaj. Browserify poate
+fi făcut să recunoască fișiere CoffeeScript și să le compileze înainte de
+unificare.
+
 \subsubsection{Bower}
 
-\idee{TODO}
+În variantele precedente am inclus codul pentru modulele necesare (Ace, PDF.js
+etc) direct în codul sursă a proiectului. Acest lucru duce la supradimensionarea
+proiectului cu cod care nu-mi aparține. Pentru foarte mult timp acest mod de
+lucru era normal pentru că nu exista un mod de a administra pachetelele
+\eng{front-end}.
 
-\section{Deployment}
+Bower este un astfel de manager de pachete pentru web.
+
+\idee{TODO}
 
 \section{\eng{Back-end}}
 
