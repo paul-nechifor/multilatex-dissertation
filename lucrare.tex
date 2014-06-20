@@ -523,7 +523,22 @@ eficient să fie compilate dinainte în CSS.
 
 \subsubsection{Unificare JavaScript}
 
-\idee{TODO}
+În mod normal fișierele JavaScript sunt incluse individual in pagini prin
+etichete \cod{script}. Acest lucru obligă trimiterea unei cereri pentru fiecare
+fișier. În HTTP~1.1, nu mai este necesară creearea unei conexiuni noi per
+cerere, dar tot există \eng{overhead} pentru cereri.
+
+O altă problemă este lipsa de modularizare. Un modul logic compus din mai multe
+fișiere JavaScript trebuie inclus în fiecare pagină. Astfel pot exista coliziuni
+de variabile și includerea etichetelor \cod{script} în ordine greșită poate duce
+la erori.
+
+Pachetul Browserify permite compunerea fișierelor JavaScript într-unul singur
+folosind specificația CommonJS de descriere a modulelor (cea folosită și de
+Node). Astfel, în loc să fie descris un pachet în mod liniar prin etichete
+\cod{script} în fiecare pagină în care este inclus, fiecare fișier descrie ce
+dependințe are și Browserify compune tot codul necesar în funcție de fișierul de
+intrare și dependințele acestuia în mod recursiv.
 
 \subsubsection{Minificare}
 
@@ -782,6 +797,8 @@ utilizator.
 \section{Șabloane}
 
 \chapter{Rezultate}
+
+\idee{JavaScript, + Browserify, + minificare}
 
 \chapter{Îmbunătățiri}
 
