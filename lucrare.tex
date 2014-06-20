@@ -388,17 +388,26 @@ Alte lucruri de luat în considerare ar fi recomandandări de la alți utilizato
 
 Galeria prezintă cele mai populare proiecte. Într-un fel, rolul ei este de a
 lista cele mai bune creații și de a demonstra ceea ce este posibil cu acest
-proiect.
+proiect. Pagina este structurată ca o grilă de miniaturi.
 
-\idee{Grid}
+Luând inspirație de la Spreaker Deck, am decis să folosesc și eu o
+previzualizare dinamică a proiectelor. În loc să folosesc o pagină predefinită
+ca miniatură pentru un document, la compilarea unui \eng{commit} fac miniaturi
+la toate paginile și mișcarea pe orizontală asupra miniaturii decide care pagină
+să fie afișată. Astfel se poate previzualiza ușor un document fără să fie
+deschis.
 
-\idee{Șabloane}
+Tot aici sunt listate și șabloanele precompilate (secțiunea~\ref{sabloanesec},
+pagina~\pageref{sabloanesec}) de unde pot fi și duplicate ușor.
 
 \subsection{Editor}
 
 \subsection{Istoric}
 
 \subsection{Pagina utilizator}
+
+Nu am intenționat să fac un sit social deci pagina unui utilizator nu conține
+decât metadate publice și listări a proiectelor și activității lui.
 
 \subsection{\acr{URL}-uri}
 
@@ -410,6 +419,40 @@ un proiect este \cod{multilatex} \acr{URL}-ul pentru el este
 de transmis în medii non-electronice. A se compara cu alte variante des
 întâlnite precum un ipotetic
 \cod{github.com/projects.php?user=51234\&project=654742}.
+
+Urmează exemple a \acr{URL}-urilor folosite unde \cod{:nume} reprezintă o
+variabilă.
+
+\begin{description}
+
+\item[\cod{/}] Pagina principală.
+
+\item[\cod{/api/...}] Toate paginile de folosite de \acr{API}.
+
+\item[\cod{/blog}] Cele mai recente articole din blog.
+
+\item[\cod{/blog/:post}] Un articol specific.
+
+\item[\cod{/explore}] Pagina de explorare a galeriei de proiecte.
+
+\item[\cod{/:username}] Pagina personală a unui utilizator.
+
+\item[\cod{/:username/:location}] Pagina unui proiect.
+
+\item[\cod{/:username/:location/commit/:n}] Pagina unui proiect la o anumită
+versiune (\eng{commit}).
+
+\item[\cod{/:username/:location/commit/:n/fork}] \acr{URL}-ul de duplicare a
+unui proiect la o anumită versiune.
+
+\item[\cod{/:username/:location/head/pdf}] Vizualizarea documentului compilat
+(varianta curentă din editor).
+
+\item[\cod{/:username/:location/head/log}] Vizualizarea logului de compilare.
+
+\item[\cod{/:username/:location/zip}] Descărcarea proiectului în format ZIP.
+
+\end{description}
 
 \subsection{Dispozitive mobile}
 
@@ -557,7 +600,8 @@ cazul în care eșuează mai multe de 10 ori în 5 secunde);
 
 Stylus (2010) este un limbaj \eng{stylesheet} care compilează în CSS. Este
 asemănător cu Sass (2007) și LESS (2009), dar cu diferența principală că este
-mult mai succint și este bazat pe indentare.
+mult mai succint și este bazat pe indentare. Totuși, Stylus suportă și sintaxa
+CSS.
 
 În următorul exemplu este arătat codul Stylus în stânga și rezultatul CSS în
 dreapta. Se folosește o variabliă \cod{main-color} pentru culoare care este și
@@ -734,6 +778,7 @@ utilizator.
 
 \section{Editor}
 
+\label{sabloanesec}
 \section{Șabloane}
 
 \chapter{Rezultate}
