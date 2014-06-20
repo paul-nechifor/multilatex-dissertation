@@ -10,6 +10,7 @@
 \usepackage[defaultsans,osfigures,scale=0.95]{opensans}
 \usepackage[T1]{fontenc}
 \usepackage{color}
+\usepackage{relsize}        % Pentru mărimi relative de text.
 
 \renewcommand{\seriesdefault}{l}
 
@@ -331,12 +332,14 @@ Problemele majore sunt că este prea încet și nu suportă toate pachetele \TeX
 Live. Acest lucru chiar ar fi imposibil deoarece o instalare completă a
 \cod{texlive-full} are mai mult de 2~GiB.
 
-\subsection{Importare/exportare}
+\subsection{Importare și exportare}
 
 Un factor important pentru succesul unui astfel de sit este compatibilitatea și
-încrederea, deci trebuie să existe un mecanism ușor de a importa și de a exporta
-proiectele . Acest lucru este parțial complicat de faptul că proiectele \LaTeX{}
-pot avea o multitudine de fișiere.
+încrederea în permanența conținutului, deci trebuie să existe un mecanism ușor
+de a importa și de a exporta proiectele. Acest lucru este parțial complicat de
+faptul că proiectele \LaTeX{} pot avea o multitudine de fișiere. Pentru a
+rezolva această problemă am ales să consider că fișierul denumit \cod{main.txt}
+sau singurul fișier \cod{.tex} este cel principal.
 
 \subsection{Altele}
 
@@ -345,6 +348,59 @@ construirea proiectului. Aceste programe/librării vor fi prezentate mai departe
 în acest capitol.
 
 \section{Structura sitului}
+
+În ceea ce urmează am să descriu cum am structurat paginile, conținutul și
+organizarea sitului.
+
+Consider că audiența principală a sitului va fi construită din persoane care au
+mai folosit \LaTeX{} în trecut și doresc să se mute în \eng{cloud} și persoane
+care vor să colaboreze mai bine în editarea de proiecte \LaTeX{}.
+
+\subsection{Prima pagină}
+
+Rolul primei pagini este de a explica într-un mod foarte rapid ce se poate face
+cu acest sit și să-i convingă pe potențialii utlizatori să se înscrie. Pentru
+asta am făcut posibil o înscriere cât mai rapidă (vezi secțiunea~\ref{inregrap}
+la pagina \pageref{inregrap}).
+
+Principala funcționalitate este un \eng{jumbotron} cu o demonstrație și
+formularul de înregistrare rapidă.
+
+Alte lucruri de luat în considerare ar fi recomandandări de la alți utilizatori.
+
+\subsection{Galerie}
+
+Galeria prezintă cele mai populare proiecte. Într-un fel, rolul ei este de a
+lista cele mai bune creații și de a demonstra ceea ce este posibil cu acest
+proiect.
+
+\idee{Grid}
+
+\idee{Șabloane}
+
+\subsection{Editor}
+
+\subsection{Istoric}
+
+\subsection{Pagina utilizator}
+
+\subsection{\acr{URL}-uri}
+
+Cred că proiectarea \acr{URL}-urilor este importantă pentru că ajută la
+folosirea mai ușoară a sitului. Un exemplu de situri cu \acr{URL}-uri bune este
+GitHub unde dacă numele meu de utilizator este \cod{paul-nechifor} și numele la
+un proiect este \cod{multilatex} \acr{URL}-ul pentru el este
+\cod{github.com/paul-nechifor/multilatex}. Ceea ce este ușor de memorat și ușor
+de transmis în medii non-electronice. A se compara cu alte variante des
+întâlnite precum un ipotetic
+\cod{github.com/projects.php?user=51234\&project=654742}.
+
+\subsection{Dispozitive mobile}
+
+\subsection{Stil}
+
+Stilul sitului nu se numără printre cele mai importante aspecte și am ales să
+folosesc Bootstrap 3 cu puține modificări pentru o estetică plată și simplă.
 
 \section{Construirea}
 
@@ -509,6 +565,8 @@ a:hover, code:hover {
 
 \subsection{PDF.js}
 
+\subsection{Bower}
+
 \section{Comun \eng{backend} și \eng{frontend}}
 
 \subsection{Share.JS}
@@ -525,7 +583,7 @@ variantă ar fi fost bcrypt, dar verificarea este mai computațional intensivă.
 \begin{table}[hb]
 \begin{center}
 \begin{tabular}{l l r r}
-Data & Compania & Parole unice & Parola totale \\
+Data & Compania & Parole unice & Parole totale \\
 \hline
 2012-07-11 & Yahoo & 342.508 & 442.832 \\
 2012-02-22 & YP & 833.994 & 1.566.156 \\
@@ -552,6 +610,7 @@ O variantă de autentificare este folosirea unor părți terțe. Eu nu am făcut
 pentru că acest lucru implică dependența de alte sisteme care pot încetini
 dezvoltarea rapidă.
 
+\label{inregrap}
 \subsection{Înregistrare rapidă}
 
 În loc să permit autentificarea cu conturi de pe alte situri, am ales să permit
