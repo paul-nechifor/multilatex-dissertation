@@ -1072,6 +1072,15 @@ calculate la fiecare a fișare în pagina web);
 \section{Notificări}
 \label{notificarisec}
 
+Pentru utilizatorii care editează în mod direct un proiect este foarte important
+să poată comunica în mod direct. Din acest motiv am implementat notificările în
+mod direct. Ele fac parte din editor. Notificările principale sunt de tip
+\eng{chat}, dar sunt și cele generate automat din eveniment de tip \eng{commit}
+nou al proiectului.
+
+În baza de date notificările sunt stocate doar prin lista de mesaje care sunt
+recunoscute în mod diferit de editor.
+
 \section{\eng{File store}}
 
 \eng{File store}-ul este o aplatizare a fișierelor din toate proiectele după
