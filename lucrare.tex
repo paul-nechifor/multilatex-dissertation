@@ -617,17 +617,32 @@ unificare.
 
 \subsubsection{Bower}
 
-În variantele precedente am inclus codul pentru modulele necesare (Ace, PDF.js
-etc) direct în codul sursă a proiectului. Acest lucru duce la supradimensionarea
-proiectului cu cod care nu-mi aparține. Pentru foarte mult timp acest mod de
-lucru era normal pentru că nu exista un mod de a administra pachetelele
-\eng{front-end}.
-
-Bower este un astfel de manager de pachete pentru web.
-
-\idee{TODO}
+Începând cu mutarea la Gulp am început să folosesc și Bower (discutat la
+secțiunea~\ref{bowersub}, pagina~\pageref{bowersub}) pentru adminstrarea
+pachetelor pentru \eng{front-end}.
 
 \section{\eng{Back-end}}
+
+Pe partea de server am folosit următoarele aplicații/tehnologii:
+
+\begin{itemize}
+
+\item \textbf{Vagrant}, pentru administrarea mediului de lucru;
+
+\item \textbf{Upstart}, pentru descrierea serviciului Linux sub care rulează
+aplicația web
+
+\item \textbf{Node.js}, pentru aplicația web;
+
+\item \textbf{Express.js}, pentru \eng{framework}-ul web;
+
+\item \textbf{Jade}, pentru șabloane HTML;
+
+\item \textbf{Stylus}, pentru generarea CSS;
+
+\item și \textbf{MongoDB} pentru baza de date.
+
+\end{itemize}
 
 \subsection{Vagrant}
 
@@ -783,6 +798,20 @@ a:hover, code:hover {
 
 \section{\eng{Front-end}}
 
+Pe partea de client am folosit următoarele tehnologii/aplicații:
+
+\begin{itemize}
+
+\item \textbf{Backbone}
+
+\item \textbf{jQuery}
+
+\item \textbf{Ace}
+
+\item \textbf{PDF.js}
+
+\end{itemize}
+
 \subsection{Backbone}
 
 \subsection{jQuery}
@@ -791,9 +820,29 @@ a:hover, code:hover {
 
 \subsection{PDF.js}
 
-\subsection{Bower}
+\section{Comun \eng{back-end} și \eng{front-end}}
 
-\section{Comun \eng{backend} și \eng{frontend}}
+Comun pentru client și server este:
+
+\begin{itemize}
+
+\item \textbf{Bower} care-i folosit pentru administrarea pachetelor pentru
+\eng{front-end};
+
+\item și \textbf{Share.JS} care-i folosit pentru editarea colaborativă a
+fișierelor.
+
+\end{itemize}
+
+\subsection{Bower} \label{bowersub}
+
+În variantele precedente am inclus codul pentru modulele necesare (Ace, PDF.js
+etc) direct în codul sursă a proiectului. Acest lucru duce la supradimensionarea
+proiectului cu cod care nu-mi aparține. Pentru foarte mult timp acest mod de
+lucru era normal pentru că nu exista un mod de a administra pachetelele
+\eng{front-end}.
+
+Bower este un astfel de manager de pachete pentru web.
 
 \subsection{Share.JS}
 
