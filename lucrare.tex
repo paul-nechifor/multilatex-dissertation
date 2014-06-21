@@ -504,14 +504,14 @@ instalarea părților necesare.
 Inițial am încept prin a scrie propriul program pentru a face construirea.
 Programul folosea pachetul \cod{commander} pentru a procesa argumentele (spre
 exemplu pentru a suprascrie opțiuni din fișierul de configurație) și avea
-opțiunile de a instala și de a face \eng{deployment}.
+opțiunile de a instala și de a face lansarea.
 
 Instalarea implica copierea fișierelor prin \cod{rsync}, crearea dosarelor
 speciale și repornirea serviciului Upstart. Atunci nu făceam compilare de niciun
 fel.
 
-\eng{Deployment}-ul implica copierea dosarului de dezvoltare pe un sistem
-specificat și rularea scriptului de instalare.
+Lansarea implica copierea dosarului de dezvoltare pe un sistem specificat și
+rularea scriptului de instalare.
 
 După asta am descoperit Grunt care rezolvă această problemă într-un mod general.
 
@@ -562,13 +562,13 @@ reprezintă redenumirea variabilelor locale la JavaScript sau eliminarea de cod
 nefolosit (cod după \cod{return} în JavaScript sau opțiuni suprascrise de mai
 multe ori la CSS).
 
-\subsubsection{Instalarea și \eng{deployment}-ul}
+\subsubsection{Instalarea și lansarea}
 
 De data aceasta pașii pentru instalare sunt descriși in JavaScript. După
 compilarea fișierelor, ele sunt copiate în dosarul necesar (folosind \cod{rsync}
 pentru evitarea copierii fișierelor neschimbate) și se execută restul pașilor
 (crearea dosarelor și utilizatorilor dacă e nevoie, repornirea serviciului).
-\eng{Deployment}-ul este similar variantei precedente.
+Lansarea este similară variantei precedente.
 
 \subsubsection{Altele}
 
@@ -615,8 +615,68 @@ Bower este un astfel de manager de pachete pentru web.
 
 \subsection{Vagrant}
 
-Imaginea sistemului de operare folosită este Ubuntu 12.04 deoarece era varianta
-cu suport pe termen lung când am început proiectul.
+Dezvoltarea Web, mai mult decât alte tipuri, necesită folosirea a unei
+multitudini de tehnologii disparate sau strâns legate. Configurarea lor poate fi
+problematică și a dus la separarea în specializări de dezvoltare și operare
+\acr{IT}.
+
+O soluție este să se folosească mașini virtuale cu tot \eng{software}-ul
+instalat. Însă acest mod de lucru încetinește pasul de dezvoltare și necesită
+trafic mult: dacă se schimbă o piesă, durează mult timp până se reconfigurează
+sistemul virtual și până este transmis la toți dezvoltatorii.
+
+Vagrant este un sistem de a lucra cu și de a partaja medii de dezvoltare
+virtuale care rezolvă această problemă într-un mod diferit. Un sistem virtual
+este descris într-un singur fișier cu toate proprietățile sale cum ar fi:
+
+\begin{itemize}
+
+\item imaginea sistemului de operare de bază (neconfigurat);
+
+\item specificarea sistemului virtual (mărime \acr{RAM}, număr de procesoare
+etc)
+
+\item specificarea rețelei interne (adrese \acr{IP} folosite, redirectare
+porturi etc)
+
+\item modul de provizionare, fie prin scripturi de sistem sau folosind folosind
+programe avansate (Chef, Puppet)
+
+\end{itemize}
+
+Multe imagini de sisteme de operare sunt făcute publice și duplicate local. Prin
+urmare, transferul unui mediu de lucru nou deseori necesită doar copirea unor
+fișiere text și reprovizionarea.
+
+În mod normal se instalează sisteme de operare Linux pentru server care rulează
+fără un afișaj grafic și deci toată comunicarea se realizează prin \acr{SSH}.
+
+Vagrant folosește implicit VirtualBox pentru virtualizare, dar pot fi folosiți
+și alți furnizori cum ar fi VMware (pentru care pot fi folosite opțiuni de
+configurare specializate).
+
+Un alt avantaj este că Vagrant suportă și lansarea pe medii de lucru non-locale
+cum ar fi Amazon EC2. Acest lucru înseamnă că poate fi folosit pentru
+dezvoltare, dar și pentru lansare în producție.
+
+Imaginea sistemului de operare pe care o folosesc este Ubuntu 12.04 deoarece era
+varianta cu suport pe termen lung când am început proiectul.
+
+Pentru provizionare folosesc un script deoarece n-am nevoie de funcționalități
+mai avansate. În principal provizionarea consistă din:
+
+\begin{itemize}
+
+\item actualizarea pachetelor sistemului (pentru securitate);
+
+\item instalează versiunile cele mai recente de MongoDB și Node de la furnizori
+(nu din Ubuntu);
+
+\item instalarea distribuției \LaTeX{} \cod{texlive-full} care are peste 2~GB;
+
+\item și instalarea altor pachete folosite de aplicație.
+
+\end{itemize}
 
 \subsection{Upstart}
 
