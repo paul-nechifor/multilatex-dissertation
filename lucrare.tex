@@ -399,6 +399,7 @@ formularul de înregistrare rapidă.
 
 Alte lucruri de luat în considerare ar fi recomandandări de la alți utilizatori.
 
+\label{galeriesub}
 \subsection{Galerie}
 
 Galeria prezintă cele mai populare proiecte. Într-un fel, rolul ei este de a
@@ -933,7 +934,9 @@ curentă a proiectului;
 \end{itemize}
 
 Dosarul de lucru trebuie să existe din motivele listate la
-secțiunea~\ref{memstasub} de la pagina~\pageref{memstasub}.
+secțiunea~\ref{memstasub} de la pagina~\pageref{memstasub}. El poate fi accesat
+din editor doar de către colaboratori și este făcut public când este făcută o
+nouă versiune din starea curentă (\eng{commit}).
 
 Este important să fie enumerate fișierele sursă în baza de date pentru a fi
 distinse de cele generate de \LaTeX{}. Fișierele generate trebuiesc ignorate la
@@ -945,6 +948,49 @@ fișierului drept cod (spre exemplu în comunicarea dintre colaboratori la
 editare), dar acest lucru cauzează probleme la redenumire.
 
 \section{Versionare}
+
+Modul de memorarea a istoricului de editare este inspirat de Git. Mereu se
+stochează fișierele noi rezultate și nu doar diferențele. Acest lucru duce la
+folosirea a mai mult spațiu pe disc, dar se câștigă viteză pentru că nu
+trebuiesc citite toate modificările intermediare pentru a se reconstrui o
+anumită versiune. În secțiunea~\ref{filestoresec} de la
+pagina~\pageref{filestoresec} arăt cum s-ar putea reduce acest lucru.
+
+Ca și în Git, unitatea de bază este setul de modifcare a proiectului și nu este
+folosit un istoric separat pentru fiecare fișier în parte (cum se procedează la
+\acr{SVN}).
+
+Când se creează o nouă versiune a proiectulului toate fișierele sursă sunt
+intruduse în \eng{file store} unde primesc și un cod (rezumatul \acr{SHA1}).
+Dacă proiectul compilează cu succes, este introdus și \acr{PDF}-ul rezultat.
+Pentru fiecare pagină din \acr{PDF} este făcută o miniatură. Miniatura dinamică
+(explicată în secțiunea~\ref{galeriesub}, pagina~\pageref{galeriesub}) este
+afișată pe pagina proiectului și în galerie.
+
+Se poate face duplicare (\eng{fork}) la oricare versiune a unui proiect, nu doar
+la versiunea cea mai recentă.
+
+În baza de date o versiune conține:
+
+\begin{itemize}
+
+\item metadate specifice;
+
+\item lista fișierelor sursă din \eng{file store} identificate după rezumatul
+\acr{SHA1};
+
+\item fișierul \acr{PDF} (\eng{file store});
+
+\item lista fișierelor miniatură (\eng{file store});
+
+\item lista de colaboratori care au contribuit la versiunea curentă;
+
+\item lista de modificări efectuate față de versiunea precedentă (pentru a nu fi
+calculate la fiecare a fișare în pagina web);
+
+\item și altele.
+
+\end{itemize}
 
 \section{Notificări}
 
@@ -965,6 +1011,9 @@ editare), dar acest lucru cauzează probleme la redenumire.
 
 \chapter{Îmbunătățiri}
 
+\section{Compilator \LaTeX}
+
+\label{filestoresec}
 \section{\eng{File store}}
 
 \idee{hard links, soft links}
