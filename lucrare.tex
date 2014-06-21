@@ -996,7 +996,29 @@ calculate la fiecare a fișare în pagina web);
 
 \section{\eng{File store}}
 
-\idee{similar git}
+\eng{File store}-ul este o aplatizare a fișierelor din toate proiectele după
+rezumatul \acr{SHA1}. El dispune de următoare le avantaje.
+
+\begin{itemize}
+
+\item Dacă la o versiune nouă nu se modifică un fișier (sau se revine la o
+versiune mai vechi) nu trebuie stocat din nou.
+
+\item Se reduce costul duplicării proiectelor (\eng{forking}) la aproape zero
+pentru că nu este nevoie să fie creat niciun fișier nou la duplicare și până în
+momentul separării au un istoric comun.
+
+\item Oferă un nivel sporit de siguranță a datelor pentru că se poate verifica
+în viitor corespondența dintre numele din \eng{file store} și rezumatul
+\acr{SHA1} recalculat.
+
+\end{itemize}
+
+Toate fișierele sunt stocate într-un dosar, dar deoarece nu toate sistemele de
+fișiere suportă un număr mare de fișiere într-un singur dosar, se realizează o
+grupare după primele trei caractere din cod.
+
+Deci \cod{45ad3b07...} este stocat în \cod{\$file\_store/45a/d3b07...}.
 
 \section{Comunicare}
 
