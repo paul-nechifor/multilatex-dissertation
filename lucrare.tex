@@ -834,7 +834,8 @@ fișierelor.
 
 \end{itemize}
 
-\subsection{Bower} \label{bowersub}
+\subsection{Bower}
+\label{bowersub}
 
 În variantele precedente am inclus codul pentru modulele necesare (Ace, PDF.js
 etc) direct în codul sursă a proiectului. Acest lucru duce la supradimensionarea
@@ -844,7 +845,34 @@ lucru era normal pentru că nu exista un mod de a administra pachetelele
 
 Bower este un astfel de manager de pachete pentru web.
 
+\subsection{WebSocket}
+\label{websocketsub}
+
+WebSocket este un protocol de comunicare \eng{full-duplex} în principal
+implementat pentru comunicarea cu navigatoare web. Specificația WebSocket a fost
+standardizată în 2011 și face parte din grupul de funcționalități HTML5.
+
+WebSocket are mai multe avantaje peste versiunea de comunicarea Comet sau Ajax:
+
+\begin{itemize}
+
+\item se reduce traficul și latența deoarece nu trebuie retrimis tot antetul
+HTTP de mai multe ori;
+
+\item se poate face comunicare bidirecțională printr-o singură conexiune;
+
+\item permite trimiterea de mesaje text sau binare, nu doar de flux de caractere
+ca la HTTP.
+
+\end{itemize}
+
+În plus, datorita faptului că se folosește tot portul 80 se păstrează
+caracteristicile de securitate (el fiind rar blocat).
+
+În prezent, toate navigatoarele moderne suportă protocolul WebSocket.
+
 \subsection{Share.JS}
+\label{sharejssub}
 
 \section{Autentificare}
 
@@ -1070,6 +1098,22 @@ grupare după primele trei caractere din cod.
 Deci \cod{45ad3b07...} este stocat în \cod{\$file\_store/45a/d3b07...}.
 
 \section{Comunicare}
+
+Comunicarea dintre editorul de pe partea client și serverul se face printr-un
+\acr{RPC} prin protocolul WebSocket și colaborarea asupra unui fișier se face
+folosind Share.JS (care la fel folosește WebSocket sau Comet).
+
+\subsection{WebSocket}
+
+Când un utilizator se conectează la pagina editorului se stabilește o conexiune
+WebSocket (descris la secțiunea~\ref{websocketsub},
+pagina~\pageref{websocketsub}).
+
+\idee{folosesc pachetul \cod{ws}}
+
+\subsection{Share.JS}
+
+Share.JS (descris la secțiunea~\ref{sharejssub}, pagina~\pageref{sharejssub})
 
 \section{Editor}
 
