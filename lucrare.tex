@@ -1070,6 +1070,7 @@ calculate la fiecare a fișare în pagina web);
 \end{itemize}
 
 \section{Notificări}
+\label{notificarisec}
 
 \section{\eng{File store}}
 
@@ -1107,9 +1108,18 @@ folosind Share.JS (care la fel folosește WebSocket sau Comet).
 
 Când un utilizator se conectează la pagina editorului se stabilește o conexiune
 WebSocket (descris la secțiunea~\ref{websocketsub},
-pagina~\pageref{websocketsub}).
+pagina~\pageref{websocketsub}) cu controlorul de pe server.
 
-\idee{folosesc pachetul \cod{ws}}
+Dacă există mai mulți utilizatori conectați simultan aceștia sunt notificați de
+schimbările celorlalți. Dacă sunt mai mulți care editează un fișier, editarea
+lor este administrată prin Share.JS. În plus, ei pot comunica direct prin
+notificări (vezi secțiunea~\ref{notificarisec} la
+pagina~\pageref{notificarisec}), prin care anumite mesaje sunt adnotate. Spre
+exemplu, dacă un utilizator trimite mesajul „Uită-te la conținut.tex:84.“,
+atunci fraza „conținut.tex:84“ va fi o legatură la linia respectivă.
+
+Pe partea de server pentru comunicarea WebSocket folosesc pachetul Node numit
+\cod{ws}. El are avantajul că imită comunicarea JavaScript de pe client.
 
 \subsection{Share.JS}
 
