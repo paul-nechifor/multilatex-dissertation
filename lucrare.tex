@@ -267,10 +267,25 @@ un cuprins, bibliografie, referințe și altele.
 Această problemă nu poate fi rezolvată ușor deoarece ar necesita rescrierea
 aplicațiilor de bază.
 
+\label{memstasub}
 \subsection{Memorarea stării}
 
 \LaTeX{} operează prin folosirea și modificarea unor fișiere în dosarul de
-lucru. Acest lucru complică orice program care vrea să-l folosească pentru că 
+lucru. Acest lucru complică orice program care vrea să-l folosească pentru că
+fișierele generate sunt stocate laolaltă cu cele sursă:
+
+\begin{itemize}
+
+\item la curățare (eliminarea fișierelor generate) sunt multe fișiere care
+trebuiesc șterse;
+
+\item după o curățare trebuiesc efectuate un număr nespecificat de compilări
+până sunt rezolvate toate referințele;
+
+\item fișierele sursă nu pot fi prezente într-un \eng{data store} ci trebuiesc
+să existe în dosar.
+
+\end{itemize}
 
 \subsection{Sistemul de pachete}
 
@@ -894,7 +909,48 @@ utilizator.
 
 \section{Compilator \LaTeX}
 
+\section{Structura proiect}
+
+În baza de date un proiect conține:
+
+\begin{itemize}
+
+\item metadate de utilizare (data creației, număr de vizualizări etc);
+
+\item autorul principal sub care este listat proiectul;
+
+\item setul de colaboratori care pot edita proiectul;
+
+\item lista de versiuni (cu toate fișierele în \eng{file store});
+
+\item locația dosarului de lucru (denumit \eng{head}) unde este stocată starea
+curentă a proiectului;
+
+\item lista de fișiere sursă;
+
+\item și alte câmpuri.
+
+\end{itemize}
+
+Dosarul de lucru trebuie să existe din motivele listate la
+secțiunea~\ref{memstasub} de la pagina~\pageref{memstasub}.
+
+Este important să fie enumerate fișierele sursă în baza de date pentru a fi
+distinse de cele generate de \LaTeX{}. Fișierele generate trebuiesc ignorate la
+incluziunea în istoric. Singura excepție este însăși fișierul \acr{PDF} rezultat
+care este inclus separat.
+
+Fiecare fișier sursă are un cod numeric. Inițial foloseam însăși calea
+fișierului drept cod (spre exemplu în comunicarea dintre colaboratori la
+editare), dar acest lucru cauzează probleme la redenumire.
+
+\section{Versionare}
+
+\section{Notificări}
+
 \section{\eng{File store}}
+
+\idee{similar git}
 
 \section{Comunicare}
 
@@ -910,6 +966,8 @@ utilizator.
 \chapter{Îmbunătățiri}
 
 \section{\eng{File store}}
+
+\idee{hard links, soft links}
 
 \chapter{Aplicații}
 
