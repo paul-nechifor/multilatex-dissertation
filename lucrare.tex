@@ -832,6 +832,7 @@ jQuery este o librărie JavaScript care simplifică programarea pe partea de
 client și rezolvă parțial lipsa de compatibilitate între diferitele platforme.
 
 \subsection{Ace}
+\label{acesub}
 
 Ace\cite{ace} este un editor de text \eng{open source} făcut de Cloud9 care
 poate fi incorporat în pagini \acr{HTML}.
@@ -1052,6 +1053,13 @@ utilizator.
 
 \section{Compilator \LaTeX}
 
+La momentul de față modulul pentru compilarea \LaTeX{} face parte din aplicația
+web.
+
+Compilarea documentelor \LaTeX{} este partea cea mai costisitoare din punctul de
+vederea al procesorului, deci ar trebui extrasă într-un serviciu separat
+(discutat în secțiunea~\ref{comlatsec} de la pagina~\pageref{comlatsec}).
+
 \section{Structura proiect}
 
 În baza de date un proiect conține:
@@ -1203,6 +1211,89 @@ ShareJS (descris la secțiunea~\ref{sharejssub}, pagina~\pageref{sharejssub})
 
 \section{Editor}
 
+Editorul este compus ca o aplicație care folosește întreaga pagină. Deoarece
+necesită un ecran mare, editorul nu este suportat și pe platforme mobile.
+
+El are și funcționalitatea de a fi folosit pe tot ecranul (\eng{fullscreen}).
+
+Editorul este compus din patru părți: meniul, panoul de proiect, panoul de
+editare și panoul de previzualizare.
+
+Cele trei panouri principale sunt separate de marcaje de control. Panoul din
+stânga (de proiect) poate fi ascuns în stânga prin marcajul de control și panoul
+din dreapta (de previzualizare) poate fi ascuns în dreapta. Panoul de editare
+este singurul care nu poate fi minimizat.
+
+Editorul are mai multe setări care pot fi controlate fie prin meniu fie prin
+controale. Setările sunt sincronizate în timp direct cu serverul și prin urmare
+vor fi disponibile de fiecare dată când este redeschis documentul.
+
+Inițial plănuiam să fie două nivele de setări: cele individuale și cele de
+proiecte care să aibă prioritate. Însă au fost implementate doar cele
+individuale.
+
+Din meniu poate fi și compilat documentul \LaTeX{}.
+
+\subsection{Meniu}
+
+În meniu sunt organizate toate acțiunile care au efect asupra întregului
+proiect. Pentru a fi mai compact, ele sunt reprezentate doar prin iconițe de tip
+font. Iconițele afișează meniul text la \eng{hover}.
+
+Funcționalitățile implementate în meniu sunt de:
+
+\begin{itemize}
+
+\item compilare a documentului \LaTeX{};
+
+\item crearea unei versiuni noi (\eng{commit});
+
+\item vizualizrea fișierului de logare de la compilarea documentului (pentru
+depanare);
+
+\item și modificarea setărilor de editor.
+
+\end{itemize}
+
+\subsection{Proiect}
+
+Panoul de proiect are ca rol să reprezinte starea curentă a proiectului dintr-un
+punct înalt de vedere. În momentul de față el este compus din arborele de
+fișiere și lista de notificări.
+
+\subsubsection{Arbore de fișiere}
+
+Arborele de fișiere reprezintă lista curentă de fișiere a proiectului și ceea ce
+se poate realiza cu fiecare fișier. Acțiunile asupra fișierelor sunt afișate
+doar când este selectat un fișier sau se efectuează operația de \eng{hover}
+asupra lui.
+
+Proiectul este reprezentat ca rădăcina fișierelor. De acolo pot fi controlate și
+acțiunile care pot fi efectuate asupra lui.
+
+Acțiunile disponibile sunt afișate doar când sunt necesare pentru a nu confuza.
+
+\subsubsection{Notificări}
+
+Panoul de notificări conține toate notificările proiectului care este editat în
+mod curent. Tipurile de notificări sunt discutate la
+secțiunea~\ref{notificarisec} de la pagina~\pageref{notificarisec}.
+
+\subsection{Editare text}
+
+Panoul de editare de text este cel care conține editorul Ace (descris la
+secțiunea~\ref{acesub}, pagina~\pageref{acesub}). Acesta este configurat special
+pentru editarea de fișiere de tip \LaTeX{} cu tot cu colorarea sintactică. Alte
+tipuri de setări ale editorului pot fi accesate din meniu.
+
+\subsection{Previzualizare}
+
+Panoul de previzualizare este cel care conține paginile randate prin
+\acr{PDF}.js. Paginile sunt recreate de fiecare dată când este compilat
+documentul \LaTeX{}. Deoarece paginile sunt create ca imagini în etichete
+\cod{canvas} ele trebuiesc recreate când se redimensionează mărimea panoului
+pentru că altfel n-ar fi la fel de clare.
+
 \section{Șabloane}
 \label{sabloanesec}
 
@@ -1236,6 +1327,7 @@ paralel și pot fi folosite și pentru alte proiecte.
 \chapter{Îmbunătățiri}
 
 \section{Compilator \LaTeX}
+\label{comlatsec}
 
 \section{\eng{File store}}
 \label{filestoresec}
