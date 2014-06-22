@@ -335,7 +335,7 @@ anulare (\eng{undo}) deoarece nu există un istoric bine definit. În plus, nu s
 poate decide ușor care sunt versiunile intermediare.
 
 Am ales până la urmă să le împlementez pe ambele variante. Prima folosind
-Share.JS și a doua folosind MongoDB și un \eng{file store} propriu. În
+ShareJS și a doua folosind MongoDB și un \eng{file store} propriu. În
 retrospectivă, acest lucru a complicat mult sistemul.
 
 \subsection{Compararea modificărilor}
@@ -844,7 +844,7 @@ este succesorul proiectului Mozilla Skywriter care folosea \cod{canvas} pentru
 afișare.
 
 El este modular și poate fi extins. Datorită acestul lucru am putut să folosesc
-plugin-ul de la Share.JS pentru editare colaborativă.
+plugin-ul de la ShareJS pentru editare colaborativă.
 
 \subsection{\acr{PDF}.js}
 
@@ -882,7 +882,7 @@ Comun pentru client și server este:
 
 \item \textbf{WebSocket} prin care se face comunicarea dintre editor și server;
 
-\item și \textbf{Share.JS} care-i folosit pentru editarea colaborativă a
+\item și \textbf{ShareJS} care-i folosit pentru editarea colaborativă a
 fișierelor.
 
 \end{itemize}
@@ -924,8 +924,20 @@ caracteristicile de securitate (el fiind rar blocat).
 
 În prezent, toate navigatoarele moderne suportă protocolul WebSocket.
 
-\subsection{Share.JS}
+\subsection{ShareJS}
 \label{sharejssub}
+
+ShareJS este \eng{framework} pentru editarea colaborativă a fișierelor text.
+Este compus dintr-o librărie pentru partea de client și un pachet pentru Node.
+
+Pentru permanența fișierelor, ShareJS folosește mai multe tipuri de baze de
+date.
+
+În mod normal comunicarea dintre client și server se poate face prin WebSocket,
+dar dacă nu este disponibilă se poate face și folosind comunicarea Comet.
+
+Pentru menținerea modelului de consistență este folosită technologia operational
+transformation (\acr{OT}).
 
 \section{Autentificare}
 
@@ -1168,7 +1180,7 @@ Deci \cod{45ad3b07...} este stocat în \cod{\$file\_store/45a/d3b07...}.
 
 Comunicarea dintre editorul de pe partea client și serverul se face printr-un
 \acr{RPC} prin protocolul WebSocket și colaborarea asupra unui fișier se face
-folosind Share.JS (care la fel folosește WebSocket sau Comet).
+folosind ShareJS (care la fel folosește WebSocket sau Comet).
 
 \subsection{WebSocket}
 
@@ -1178,16 +1190,16 @@ pagina~\pageref{websocketsub}) cu controlorul de pe server.
 
 Dacă există mai mulți utilizatori conectați simultan aceștia sunt notificați de
 schimbările celorlalți. Dacă sunt mai mulți care editează un fișier, editarea
-lor este administrată prin Share.JS. În plus, ei pot comunica direct prin
+lor este administrată prin ShareJS. În plus, ei pot comunica direct prin
 notificări (vezi secțiunea~\ref{notificarisec} la
 pagina~\pageref{notificarisec}).
 
 Pe partea de server pentru comunicarea WebSocket folosesc pachetul Node numit
 \cod{ws}. El are avantajul că imită comunicarea JavaScript de pe client.
 
-\subsection{Share.JS}
+\subsection{ShareJS}
 
-Share.JS (descris la secțiunea~\ref{sharejssub}, pagina~\pageref{sharejssub})
+ShareJS (descris la secțiunea~\ref{sharejssub}, pagina~\pageref{sharejssub})
 
 \section{Editor}
 
