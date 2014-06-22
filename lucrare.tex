@@ -806,9 +806,10 @@ Pe partea de client am folosit următoarele tehnologii/aplicații:
 
 \item \textbf{jQuery}
 
-\item \textbf{Ace}
+\item \textbf{Ace}, ca editor de cod în pagini web;
 
-\item \textbf{PDF.js}
+\item și \textbf{PDF.js}, pentru randarea și vizualizarea documentelor
+\acr{PDF}.
 
 \end{itemize}
 
@@ -818,7 +819,43 @@ Pe partea de client am folosit următoarele tehnologii/aplicații:
 
 \subsection{Ace}
 
-\subsection{PDF.js}
+Ace\cite{ace} este un editor de text \eng{open source} făcut de Cloud9 care
+poate fi incorporat în pagini \acr{HTML}.
+
+Este făcut specific pentru editare de cod și suport o multitudine de limbaje
+(printre care și \LaTeX{}).
+
+Editorul este scris în JavaScript și folosește \acr{DOM}-ul pentru afișare. Ace
+este succesorul proiectului Mozilla Skywriter care folosea \cod{canvas} pentru
+afișare.
+
+El este modular și poate fi extins. Datorită acestul lucru am putut să folosesc
+plugin-ul de la Share.JS pentru editare colaborativă.
+
+\subsection{\acr{PDF}.js}
+
+\acr{PDF}.js este o librărie JavaScript care poate să randeze documente
+\acr{PDF} pe partea de client fără folosirea de cod nativ. Proiectul este
+dezvoltat de Mozilla. Pentru randarea paginilor \acr{PDF}.js folosește eticheta
+\cod{canvas}.
+
+Printre avantajele lui se numără:
+
+\begin{itemize}
+
+\item Este bun pentru securitate pentru că nu se mai execută cod nativ în
+randarea documentelor \acr{PDF}. Spre exemplu Adobe Acrobat Reader a avut un
+număr mare de vulnerabilități.
+
+\item Poate fi manipulat din alt cod JavaScript. Un plugin nativ nu poate fi
+controlat la fel de ușor (spre exemplu folosind eticheta \cod{iframe}) în primul
+rând datorită faptului că sunt multe platforme și nu toate au un \acr{API} prin
+care pot fi controlate.
+
+\end{itemize}
+
+Un dezvantaj mare este că randarea este prea înceată pentru a nu fi
+perceptibilă. Acest lucru este agravat la documente foarte mari.
 
 \section{Comun \eng{back-end} și \eng{front-end}}
 
@@ -1072,14 +1109,18 @@ calculate la fiecare a fișare în pagina web);
 \section{Notificări}
 \label{notificarisec}
 
-Pentru utilizatorii care editează în mod direct un proiect este foarte important
-să poată comunica în mod direct. Din acest motiv am implementat notificările în
-mod direct. Ele fac parte din editor. Notificările principale sunt de tip
-\eng{chat}, dar sunt și cele generate automat din eveniment de tip \eng{commit}
-nou al proiectului.
+Pentru utilizatorii care editează concurent un proiect este foarte important să
+poată comunica în mod direct. Din acest motiv am implementat notificările în
+timp real care fac parte din editor. Notificările principale sunt de tip
+\eng{chat}, dar sunt și cele generate automat din evenimente specifice (spre
+exemplu când se face un \eng{commit} nou al proiectului).
 
-În baza de date notificările sunt stocate doar prin lista de mesaje care sunt
-recunoscute în mod diferit de editor.
+În baza de date notificările sunt stocate doar prin lista de mesaje și
+interpretarea lor este lăsată pentru editorul de pe partea de client.
+
+În acest mod anumite mesaje pot fi adnotate. Spre exemplu, dacă un utilizator
+trimite mesajul „Uită-te la conținut.tex:84.“, atunci fraza „conținut.tex:84“ va
+fi o legatură la linia respectivă (și se deschide fișierul dacă este nevoie).
 
 \section{\eng{File store}}
 
@@ -1123,9 +1164,7 @@ Dacă există mai mulți utilizatori conectați simultan aceștia sunt notifica�
 schimbările celorlalți. Dacă sunt mai mulți care editează un fișier, editarea
 lor este administrată prin Share.JS. În plus, ei pot comunica direct prin
 notificări (vezi secțiunea~\ref{notificarisec} la
-pagina~\pageref{notificarisec}), prin care anumite mesaje sunt adnotate. Spre
-exemplu, dacă un utilizator trimite mesajul „Uită-te la conținut.tex:84.“,
-atunci fraza „conținut.tex:84“ va fi o legatură la linia respectivă.
+pagina~\pageref{notificarisec}).
 
 Pe partea de server pentru comunicarea WebSocket folosesc pachetul Node numit
 \cod{ws}. El are avantajul că imită comunicarea JavaScript de pe client.
@@ -1196,6 +1235,9 @@ paralel și pot fi folosite și pentru alte proiecte.
 
 \bibitem{statcount}
 \url{gs.statcounter.com}
+
+\bibitem{ace}
+\url{ace.c9.io}
 
 \end{thebibliography}
 
