@@ -228,6 +228,10 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \chapter{Sisteme existente}
 
+În acest capitol prezint funcționarea \TeX{} și \LaTeX{} și problemele pe care
+le au. Apoi prezint cum au rezolvat alții aceste deficiențe folosind technologii
+web.
+
 \section{\TeX}
 
 \TeX{} este un program de compoziție tipografică care a fost început în 1977 de
@@ -289,17 +293,31 @@ să existe în dosar.
 
 \subsection{Sistemul de pachete}
 
-\LaTeX{} are suport limitat pentru pachete. Nu există versionarea declararea
-folosirii pachetelor, deci compilarea unui document poate duce la rezultatea
-diferite (sau la erori) într-un mod neașteptat.
+\LaTeX{} are suport limitat pentru pachete. Nu se specifică versiunea pachetelor
+când sunt declarate în document, deci compilarea poate duce la rezultate
+diferite (sau la erori) într-un mod neașteptat. Un model bun în acest caz
+este Node.js unde există multe modalități de specificare a versiunii preferate
+și versiuni diferite pot coexista.
 
-\idee{Repositories are based on distributions.}
+Ce-i mai rău este că repo-urile sunt specifice fiecărei distribuții de \LaTeX{}.
+
+Pentru a avea o compatibilitate cât mai mare, configurarea mașinii virtuale
+(secțiunea \ref{vagrantsub}, pagina~\pageref{vagrantsub}) depinde de instalarea
+completă a celei mai noi versiuni de \TeX{} Live (\cod{texlive-full}) de pe
+Ubuntu.
 
 \section{ShareLatex}
 
+\idee{TODO}
+
 \section{WriteLatex}
 
+\idee{TODO}
+
 \chapter{Sistemul propriu}
+
+În acest capitol prezint cum am proiectat Multilatex și explic în detaliu
+fiecare componentă.
 
 \section{Proiectare}
 
@@ -416,9 +434,9 @@ deschis.
 Tot aici sunt listate și șabloanele precompilate (secțiunea~\ref{sabloanesec},
 pagina~\pageref{sabloanesec}) de unde pot fi și duplicate ușor.
 
-\subsection{Editor}
-
 \subsection{Istoric}
+
+\idee{TODO}
 
 \subsection{Pagina utilizator}
 
@@ -621,7 +639,7 @@ de configurații stufoase.
 Astfel construirea proiectului poate fi descrisă printr-un graf de dependințe și
 transformări din care se execută doar cele necesare.
 
-\idee{Un grafic cu transformările.}
+\idee{TODO: graficul cu transformările}
 
 \subsubsection{CoffeeScript}
 
@@ -660,6 +678,7 @@ aplicația web
 \end{itemize}
 
 \subsection{Vagrant}
+\label{vagrantsub}
 
 Dezvoltarea Web, mai mult decât alte tipuri, necesită folosirea a unei
 multitudini de tehnologii disparate sau strâns legate. Configurarea lor poate fi
@@ -814,6 +833,8 @@ a:hover, code:hover {
 \endminipage
 
 \subsection{MongoDB}
+
+\idee{TODO}
 
 \section{\eng{Front-end}}
 
@@ -1023,8 +1044,6 @@ proiectelor \LaTeX.
 Una dintre primele probleme este că \LaTeX{} poate să execute comenzi de sistem
 arbitrare folosind construcția \cod{\textbackslash write18\{comandă\}}.
 
-\idee{Arată un exemplu de comandă.}
-
 In mod normal acestă construcție nu este disponibilă, dar pentru mai mare
 siguranță poate fi oprită direct din execuția \cod{pdflatex} cu argumentul
 \cod{-no-shell-escape}. \poate{Se mai folosește în plus argumentul
@@ -1033,8 +1052,8 @@ corectarea interactivă a erorilor.}
 
 \subsection{Cod rău-intenționat}
 
-\TeX{} este un limbaj Turing-complet \idee{(dovadă)} deci nu se poate determina
-fără a fi fie excutat codul dacă compilarea documentului se va termina.
+\TeX{} este un limbaj Turing-complet deci nu se poate determina fără a fi fie
+excutat codul dacă compilarea documentului se va termina.
 
 \LaTeX{}, cu toate pachetele sale, este uriaș, deci foarte probabil există
 probleme nedescoperite care pot duce la umplerea memoriei sau intrarea în bucle
@@ -1350,21 +1369,45 @@ paralel și pot fi folosite și pentru alte proiecte.
 
 \chapter{Rezultate}
 
-\idee{JavaScript, + Browserify, + minificare}
+\idee{TODO}
 
 \chapter{Îmbunătățiri}
+
+\idee{TODO}
 
 \section{Compilator \LaTeX}
 \label{comlatsec}
 
+\idee{TODO}
+
 \section{\eng{File store}}
 \label{filestoresec}
 
-\idee{hard links, soft links}
+Există mai multe modalități prin care poate fi îmbunătățită metoda curentă.
+
+\subsection{Comprimare}
+
+Deoarece cele mai multe fișiere sunt de tip text, ele pot fi comprimate ușor.
+În acest caz pot fi folosite sisteme de fișiere cu suport pentru comprimare
+a fișierelor sau fiecare fișier să fie comprimat la scriere și decomprimat la
+citire.
+
+Însă aceste soluții nu ar fi chiar cele mai bune. O comprimare mai eficientă
+ar ține cont de faptul că există diferențe mici între foarte multe fișiere.
+
+\subsection{Legături}
+
+Deoarece unele fișiere din dosarul de lucru se schimbă rar (mai ales cele
+de dimenisuni mai mari cum ar fi resursele), o optimizare posibilă ar fi să se
+folosească hard link-uri către fișierele din \eng{file store}.
 
 \chapter{Aplicații}
 
+\idee{TODO}
+
 \capfara{Concluzii}
+
+\idee{TODO}
 
 \begin{thebibliography}{1}
 \addcontentsline{toc}{chapter}{Bibliografie}
