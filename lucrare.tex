@@ -477,9 +477,8 @@ Datorită creșterii utilizării dispozitivelor mobile pe web
 
 Pentru realizarea sitului am utilizat o proiectare web adaptabilă
 (\eng{responsive}) folosind interogări \cod{@media}. Singura excepție este
-pagina editorului deoarece necesită un ecran mare.
-
-\idee{Imagine cu versiunea desktop vs mobile.}
+pagina editorului deoarece necesită un ecran mare. Pot fi observate diferențele
+în figura~\ref{desktopsitefig} (desktop) și figura~\ref{mobilesitefig} (mobil).
 
 \begin{figure}[hb]
 \begin{center}
@@ -500,6 +499,22 @@ pagina editorului deoarece necesită un ecran mare.
 \label{mobilefig}
 \end{figure}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{imagini/desktop}
+\end{center}
+\caption{Situl vizualizat în format pentru desktop.}
+\label{desktopsitefig}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=7cm]{imagini/mobile}
+\end{center}
+\caption{Situl vizualizat în format pentru dispozitive mobile.}
+\label{mobilesitefig}
+\end{figure}
+
 \subsection{Stil}
 
 Stilul sitului nu se numără printre cele mai importante aspecte și am ales să
@@ -507,7 +522,7 @@ folosesc Bootstrap 3 cu puține modificări pentru o estetică plată și simpl�
 
 \section{Integrare continuă}
 
-\idee{rsync}
+\idee{TODO: rsync}
 
 \section{Construirea}
 
@@ -665,13 +680,15 @@ este descris într-un singur fișier cu toate proprietățile sale cum ar fi:
 \item imaginea sistemului de operare de bază (neconfigurat);
 
 \item specificarea sistemului virtual (mărime \acr{RAM}, număr de procesoare
-etc)
+etc);
 
 \item specificarea rețelei interne (adrese \acr{IP} folosite, redirectare
-porturi etc)
+porturi etc);
 
 \item modul de provizionare, fie prin scripturi de sistem sau folosind folosind
-programe avansate (Chef, Puppet)
+programe avansate (Chef, Puppet);
+
+\item și altele.
 
 \end{itemize}
 
@@ -734,6 +751,8 @@ cazul în care eșuează mai multe de 10 ori în 5 secunde);
 \end{itemize}
 
 \subsection{Node}
+
+\idee{TODO}
 
 \subsection{Express}
 
@@ -1211,8 +1230,17 @@ ShareJS (descris la secțiunea~\ref{sharejssub}, pagina~\pageref{sharejssub})
 
 \section{Editor}
 
-Editorul este compus ca o aplicație care folosește întreaga pagină. Deoarece
-necesită un ecran mare, editorul nu este suportat și pe platforme mobile.
+Editorul (afișat în figura~\ref{editorfig}) este compus ca o aplicație care
+folosește întreaga pagină. Deoarece necesită un ecran mare, editorul nu este
+suportat și pe platforme mobile.
+
+\begin{figure}[bh]
+\begin{center}
+\includegraphics[width=16cm]{imagini/editor}
+\end{center}
+\caption{Editorul}
+\label{editorfig}
+\end{figure}
 
 El are și funcționalitatea de a fi folosit pe tot ecranul (\eng{fullscreen}).
 
