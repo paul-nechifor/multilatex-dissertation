@@ -802,20 +802,34 @@ Pe partea de client am folosit următoarele tehnologii/aplicații:
 
 \begin{itemize}
 
-\item \textbf{Backbone}
+\item \textbf{Backbone} pentru paradigma \acr{MVC} pe client;
 
-\item \textbf{jQuery}
+\item \textbf{jQuery} (cu anumite plugin-uri) pentru compatibilitate mai mare pe
+diferite navigatoare;
 
 \item \textbf{Ace}, ca editor de cod în pagini web;
 
-\item și \textbf{PDF.js}, pentru randarea și vizualizarea documentelor
+\item și \textbf{\acr{PDF}.js}, pentru randarea și vizualizarea documentelor
 \acr{PDF}.
 
 \end{itemize}
 
-\subsection{Backbone}
+\subsection{Backbone.js}
+
+Backbone.js\cite{backbone} este o librărie JavaScript pentru partea de client
+care furnizează paradigma model--view--controller (\acr{MVC}).
+
+În principal, Backbone este făcut pentru aplicații cu o singură pagină.
+
+Backbone are o mărime foarte mică. Comprimat, are doar 6,5~\acr{KiB}. Spre
+diferență de alte \eng{framework}-uri, Backbone e făcut să fie foarte simplu și
+nu este cuplat strâns. Deci poate fi folosit cu multe alte librării fără să
+necesite controlarea întregului \acr{DOM}.
 
 \subsection{jQuery}
+
+jQuery este o librărie JavaScript care simplifică programarea pe partea de
+client și rezolvă parțial lipsa de compatibilitate între diferitele platforme.
 
 \subsection{Ace}
 
@@ -865,6 +879,8 @@ Comun pentru client și server este:
 
 \item \textbf{Bower} care-i folosit pentru administrarea pachetelor pentru
 \eng{front-end};
+
+\item \textbf{WebSocket} prin care se face comunicarea dintre editor și server;
 
 \item și \textbf{Share.JS} care-i folosit pentru editarea colaborativă a
 fișierelor.
@@ -1238,6 +1254,9 @@ paralel și pot fi folosite și pentru alte proiecte.
 
 \bibitem{ace}
 \url{ace.c9.io}
+
+\bibitem{backbone}
+\url{backbonejs.org}
 
 \end{thebibliography}
 
