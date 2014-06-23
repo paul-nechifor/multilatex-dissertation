@@ -24,7 +24,7 @@ decorations.pathreplacing, plotmarks}
 \newcommand{\cod}[1]{\texttt{#1}}
 \newcommand{\url}[1]{\texttt{#1}}
 \newcommand{\uplu}[1]{$\langle$#1$\rangle$}
-\newcommand{\floor}[1]{\lfloor{}#1\rfloor} % Pentru trunchere.
+\newcommand{\floor}[1]{\lfloor{}#1\rfloor} % Pentru trunchiere.
 \newcommand{\acr}[1]{{\textsmaller[1]{\textsc{#1}}}} % Pentru acronime.
 \newcommand{\idee}[1]{{\color{red} #1}}
 \newcommand{\poate}[1]{#1}
@@ -222,14 +222,12 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \secfara{Motivație}
 
-\secfara{Challanges}
-
 \capfara{Contribuții}
 
 \chapter{Sisteme existente}
 
 În acest capitol prezint funcționarea \TeX{} și \LaTeX{} și problemele pe care
-le au. Apoi prezint cum au rezolvat alții aceste deficiențe folosind technologii
+le au. Apoi prezint cum au rezolvat alții aceste deficiențe folosind tehnologii
 web.
 
 \section{\TeX}
@@ -238,20 +236,20 @@ web.
 către Donald Knuth pentru a permite o compoziție mai bună a articolelor și
 cărților științifice.
 
-Codul sursă pentru \TeX{}\cite{texweb} este scris în WEB, un limbaj de
+Codul sursă pentru \TeX{}\cite{texweb} este scris în \acr{WEB}, un limbaj de
 programare literară\footnote{Un tip de programare prin care codul sursă este
-îmbinat descrierea lui astfel încât să poată fi citit similar cu o carte.}
+îmbinat cu descrierea lui astfel încât să poată fi citit similar cu o carte.}
 similar cu Pascal. Folosind acest tip de programare codul sursă poate fi
-compilat într-un fișier PDF\cite{texwebpdf}.
+compilat într-un fișier \acr{PDF}\cite{texwebpdf}.
 
 \section{\LaTeX}
 
 \LaTeX{} este un set generalizat de macrouri bazat pe \TeX{}.
 
-Spre diferența de editoarele WYSIWYG, \LaTeX{} are avantajul că permite
-concentrarea pe conținut și nu pe presentarea lui. În editoare WYSIWYG
-utilizatorii sunt temptați să folosească spații și linii goale pentru aliniere
-și \cod{page breaking} pentru că editează prezentarea în loc de semantică.
+Spre diferența de editoarele \acr{WYSIWYG}, \LaTeX{} are avantajul că permite
+concentrarea pe conținut și nu pe prezentarea lui. În editoare \acr{WYSIWYG}
+utilizatorii sunt tentați să folosească spații și linii goale pentru aliniere
+și \eng{page breaking} pentru că editează prezentarea în loc de semantică.
 
 Deși era un program bun la conceperea lui pe sistemele limitate de atunci,
 astăzi \LaTeX{} nu exploatează avantajele aduse de sistemele moderne.
@@ -263,10 +261,11 @@ propriu.
 \subsection{Modul de lucru}
 
 \LaTeX{} are un mod de lucru static: editarea fișierelor, compilarea,
-vizualizarea documentului compilat, repetarea. \LaTeX{} nu suportă doar
-recompilarea modificărilor ci necesită recompilarea întregului document ceea ce
-este încet. Mai rău este că este nevoie de mai multe compilări dacă se folosește
-un cuprins, bibliografie, referințe și altele.
+vizualizarea documentului compilat și repetarea.
+
+\LaTeX{} nu suportă doar recompilarea modificărilor ci necesită recompilarea
+întregului document ceea ce este încet. Mai rău, sunt necesare mai multe
+compilări dacă se folosește un cuprins, bibliografie, referințe și altele.
 
 Această problemă nu poate fi rezolvată ușor deoarece ar necesita rescrierea
 aplicațiilor de bază.
@@ -329,7 +328,7 @@ principalele probleme asupra cărora a trebuit să mă decid.
 
 Deseori, un document \LaTeX{} mare este împărțit în mai multe fișiere \cod{.tex}
 care sunt incluse în cel principal. Deși acest lucru este suportat, eu am ales
-să nu încurajez acest lucru pentru că am observat că întră în conflict cu modul
+să nu încurajez acest lucru pentru că am observat că intră în conflict cu modul
 meu de lucru: când încep un document nu specific perfect structura lui și ajung
 des să mut secțiuni și paragrafe prin el.
 
@@ -337,7 +336,7 @@ Principala problemă la a folosi un fișier monolitic este greutatea de navigare
 deci am ales să rezolv problema asta prin a implementa în panoul arborelui de
 fișiere un nivel suplimentar prin care fișierele \cod{.tex} listează toate
 capitolele, secțiunile și subsecțiunile. Astfel se poate sări ușor printre
-părțile documenului.
+părțile documentului.
 
 \subsection{Editarea colaborativă}
 
@@ -345,14 +344,14 @@ Există două modalități de editare colaborativă: în timp real (precum Googl
 Docs) sau bazată pe commit-uri (precum Git sau alte sisteme de control a
 versiunilor).
 
-Deoarece \LaTeX{} nu funcționează precum un editor WYSIWYG, a doua variantă pare
-mai bună, dar operațiile de integrare ar complica mult sistemul.
+Deoarece \LaTeX{} nu funcționează precum un editor \acr{WYSIWYG}, a doua
+variantă pare mai bună, dar operațiile de integrare ar complica mult sistemul.
 
-Sunt problema și la colaborarea în timp real. Aici se complică operațiile de
+Sunt probleme și la colaborarea în timp real. Aici se complică operațiile de
 anulare (\eng{undo}) deoarece nu există un istoric bine definit. În plus, nu se
 poate decide ușor care sunt versiunile intermediare.
 
-Am ales până la urmă să le împlementez pe ambele variante. Prima folosind
+Am ales până la urmă să le implementez pe ambele variante. Prima folosind
 ShareJS și a doua folosind MongoDB și un \eng{file store} propriu. În
 retrospectivă, acest lucru a complicat mult sistemul.
 
@@ -361,7 +360,7 @@ retrospectivă, acest lucru a complicat mult sistemul.
 O altă problemă pe care mi-am pus-o la proiectarea a fost compararea versiunilor
 intermediare și contribuțiilor de la fiecare persoană. Folosind doar
 \eng{commit}-uri acest lucru este ușor, dar cu versiune în timp real este greu
-să fie revizuite contribuțiile fiecărei persoane deoare ce se pot suprapune
+să fie revizuite contribuțiile fiecărei persoane deoarece ce se pot suprapune
 foarte mult.
 
 Ca soluție am decis ca să permit \eng{commit}-uri cu mai mulți autori. Astfel
@@ -373,7 +372,7 @@ versiune ce modificare a făcut fiecare dintre autori, deci trebuiesc făcute
 \subsection{Compilatorul de \LaTeX}
 
 Am considerat și folosirea unui compilator de \LaTeX{} care să genereze
-PDF-urile pe partea de client. Spre exemplu \cod{texlive.js}\cite{texlivejs}
+\acr{PDF}-urile pe partea de client. Spre exemplu \cod{texlive.js}\cite{texlivejs}
 poate compila proiecte direct din navigator. Acest lucru este posibil pentru că
 \TeX{} Live a fost compilat în JavaScript folosind Emscripten.
 
@@ -408,14 +407,14 @@ care vor să colaboreze mai bine în editarea de proiecte \LaTeX{}.
 \subsection{Prima pagină}
 
 Rolul primei pagini este de a explica într-un mod foarte rapid ce se poate face
-cu acest sit și să-i convingă pe potențialii utlizatori să se înscrie. Pentru
+cu acest sit și să-i convingă pe potențialii utilizatori să se înscrie. Pentru
 asta am făcut posibil o înscriere cât mai rapidă (vezi
 secțiunea~\ref{inregrapsub} la pagina \pageref{inregrapsub}).
 
 Principala funcționalitate este un \eng{jumbotron} cu o demonstrație și
 formularul de înregistrare rapidă.
 
-Alte lucruri de luat în considerare ar fi recomandandări de la alți utilizatori.
+Alte lucruri de luat în considerare ar fi recomandări de la alți utilizatori.
 
 \subsection{Galerie}
 \label{galeriesub}
@@ -424,7 +423,7 @@ Galeria prezintă cele mai populare proiecte. Într-un fel, rolul ei este de a
 lista cele mai bune creații și de a demonstra ceea ce este posibil cu acest
 proiect. Pagina este structurată ca o grilă de miniaturi.
 
-Luând inspirație de la Spreaker Deck, am decis să folosesc și eu o
+Luând inspirație de la Speaker Deck, am decis să folosesc și eu o
 previzualizare dinamică a proiectelor. În loc să folosesc o pagină predefinită
 ca miniatură pentru un document, la compilarea unui \eng{commit} fac miniaturi
 la toate paginile și mișcarea pe orizontală asupra miniaturii decide care pagină
@@ -440,7 +439,7 @@ pagina~\pageref{sabloanesec}) de unde pot fi și duplicate ușor.
 
 \subsection{Pagina utilizator}
 
-Nu am intenționat să fac un sit social deci pagina unui utilizator nu conține
+Nu am intenționat să fac un sit social, deci pagina unui utilizator nu conține
 decât metadate publice și listări a proiectelor și activității lui.
 
 \subsection{\acr{URL}-uri}
@@ -484,7 +483,7 @@ unui proiect la o anumită versiune.
 
 \item[\cod{/:username/:location/head/log}] Vizualizarea logului de compilare.
 
-\item[\cod{/:username/:location/zip}] Descărcarea proiectului în format ZIP.
+\item[\cod{/:username/:location/zip}] Descărcarea proiectului în format \acr{ZIP}.
 
 \end{description}
 
@@ -540,17 +539,17 @@ folosesc Bootstrap 3 cu puține modificări pentru o estetică plată și simpl�
 
 \section{Integrare continuă}
 
-\idee{TODO: rsync}
+\idee{TODO}
 
 \section{Construirea}
 
 Construirea proiectului a susținut cele mai mari modificări și a trecut prin
-trei variante. Prin construire mă refer la compilarea, configurearea și
+trei variante. Prin construire mă refer la compilarea, configurarea și
 instalarea părților necesare.
 
 \subsection{Programul propriu}
 
-Inițial am încept prin a scrie propriul program pentru a face construirea.
+Inițial am început prin a scrie propriul program pentru a face construirea.
 Programul folosea pachetul \cod{commander} pentru a procesa argumentele (spre
 exemplu pentru a suprascrie opțiuni din fișierul de configurație) și avea
 opțiunile de a instala și de a face lansarea.
@@ -567,7 +566,7 @@ După asta am descoperit Grunt care rezolvă această problemă într-un mod gen
 \subsection{Grunt}
 
 Grunt este un sistem de automatizare a proceselor de lucru cu foarte multe
-\eng{plugin}-uri care funcționeaza prin descrirea de sarcini de lucru.
+\eng{plugin}-uri care funcționează prin descrierea de sarcini de lucru.
 
 Un avantaj peste folosirea de fișiere \cod{Makefile} este că Grunt este scris în
 JavaScript și modulele sunt făcute să fie independente de platformă.
@@ -581,7 +580,7 @@ eficient să fie compilate dinainte în CSS.
 
 În mod normal fișierele JavaScript sunt incluse individual in pagini prin
 etichete \cod{script}. Acest lucru obligă trimiterea unei cereri pentru fiecare
-fișier. În HTTP~1.1, nu mai este necesară creearea unei conexiuni noi per
+fișier. În HTTP~1.1, nu mai este necesară crearea unei conexiuni noi per
 cerere, dar tot există \eng{overhead} pentru cereri.
 
 O altă problemă este lipsa de modularizare. Un modul logic compus din mai multe
@@ -597,7 +596,7 @@ dependințe are și Browserify compune tot codul necesar în funcție de fișier
 intrare și dependințele acestuia în mod recursiv.
 
 Un dezavantaj la acest mod de lucru este că se complică procesul de depanare
-doarece nu mai corespund liniile la \eng{runtime} cu liniile din fișierele
+deoarece nu mai corespund liniile la \eng{runtime} cu liniile din fișierele
 proiectului. Din fericire acest lucru este rezolvat prin folosirea de mapări la
 sursă (\eng{source maps}) unde pe lângă codul modulului unificat este inclusă în
 comentarii și maparea la codul inițial. Însă recunoașterea mapărilor este
@@ -613,7 +612,7 @@ multe ori la CSS).
 
 \subsubsection{Instalarea și lansarea}
 
-De data aceasta pașii pentru instalare sunt descriși in JavaScript. După
+De data aceasta pașii pentru instalare sunt descriși în JavaScript. După
 compilarea fișierelor, ele sunt copiate în dosarul necesar (folosind \cod{rsync}
 pentru evitarea copierii fișierelor neschimbate) și se execută restul pașilor
 (crearea dosarelor și utilizatorilor dacă e nevoie, repornirea serviciului).
@@ -651,7 +650,7 @@ unificare.
 \subsubsection{Bower}
 
 Începând cu mutarea la Gulp am început să folosesc și Bower (discutat la
-secțiunea~\ref{bowersub}, pagina~\pageref{bowersub}) pentru adminstrarea
+secțiunea~\ref{bowersub}, pagina~\pageref{bowersub}) pentru administrarea
 pachetelor pentru \eng{front-end}.
 
 \section{\eng{Back-end}}
@@ -712,7 +711,7 @@ programe avansate (Chef, Puppet);
 \end{itemize}
 
 Multe imagini de sisteme de operare sunt făcute publice și duplicate local. Prin
-urmare, transferul unui mediu de lucru nou deseori necesită doar copirea unor
+urmare, transferul unui mediu de lucru nou deseori necesită doar copierea unor
 fișiere text și reprovizionarea.
 
 În mod normal se instalează sisteme de operare Linux pentru server care rulează
@@ -736,10 +735,10 @@ mai avansate. În principal provizionarea consistă din:
 
 \item actualizarea pachetelor sistemului (pentru securitate);
 
-\item instalează versiunile cele mai recente de MongoDB și Node de la furnizori
+\item instalarea versiunilor cele mai recente de MongoDB și Node de la furnizori
 (nu din Ubuntu);
 
-\item instalarea distribuției \LaTeX{} \cod{texlive-full} care are peste 2~GB;
+\item instalarea distribuției \LaTeX{} \cod{texlive-full} care are peste 2~GiB;
 
 \item și instalarea altor pachete folosite de aplicație.
 
@@ -760,7 +759,7 @@ Eu folosesc Upstart prin scriptul care specifică:
 \begin{itemize}
 
 \item ce utilizator să fie folosit pentru executarea programului (ca să nu fie
-utilizat \cod{root} pentru sigurantă;
+utilizat \cod{root} pentru siguranță;
 
 \item cum să repornească serviciul în caz de erori (se abandonează repornirea în
 cazul în care eșuează mai multe de 10 ori în 5 secunde);
@@ -787,6 +786,8 @@ acestuia.
 
 Jade este un motor de șablonare pentru Node cu sintaxă bazată pe indentare.
 
+\idee{TODO}
+
 \subsection{Stylus}
 
 Stylus (2010) este un limbaj \eng{stylesheet} care compilează în CSS. Este
@@ -795,8 +796,8 @@ mult mai succint și este bazat pe indentare. Totuși, Stylus suportă și sinta
 CSS.
 
 În următorul exemplu este arătat codul Stylus în stânga și rezultatul CSS în
-dreapta. Se folosește o variabliă \cod{main-color} pentru culoare care este și
-manipulată pentru \cod{:hover} (înalbită cu 20~\%). Folosind \cod{main-size}
+dreapta. Se folosește o variabilă \cod{main-color} pentru culoare care este și
+manipulată pentru \cod{:hover} (înălbita cu 20~\%). Folosind \cod{main-size}
 mărimea textului pe dispozitive cu ecran mic este micșorată la 80~\%. Este
 demonstrată și imbricarea care evită repetarea: se folosește doar \cod{\&:hover}
 în loc de \cod{a:hover, code:hover}.
@@ -934,10 +935,12 @@ fișierelor.
 În variantele precedente am inclus codul pentru modulele necesare (Ace, PDF.js
 etc) direct în codul sursă a proiectului. Acest lucru duce la supradimensionarea
 proiectului cu cod care nu-mi aparține. Pentru foarte mult timp acest mod de
-lucru era normal pentru că nu exista un mod de a administra pachetelele
+lucru era normal pentru că nu exista un mod de a administra pachetele
 \eng{front-end}.
 
 Bower este un astfel de manager de pachete pentru web.
+
+\idee{TODO}
 
 \subsection{WebSocket}
 \label{websocketsub}
@@ -977,7 +980,7 @@ date.
 În mod normal comunicarea dintre client și server se poate face prin WebSocket,
 dar dacă nu este disponibilă se poate face și folosind comunicarea Comet.
 
-Pentru menținerea modelului de consistență este folosită technologia operational
+Pentru menținerea modelului de consistență este folosită tehnologia operational
 transformation (\acr{OT}).
 
 \section{Autentificare}
@@ -1033,18 +1036,18 @@ deci autentificarea nu este foarte sigură.
 
 \section{Izolare \LaTeX}
 
-\TeX este un limbaj puternic și deci posibil periculos. Trebuie avut grijă când
+\TeX{} este un limbaj puternic și deci posibil periculos. Trebuie avut grijă când
 se execută cod arbitrar de la surse necunoscute.
 
 Am scris un modul care să izoleze (\eng{sandboxing}) pe cât posibil compilarea
-proiectelor \LaTeX.
+proiectelor \LaTeX{}.
 
 \subsection{Execuția comenzilor de sistem}
 
 Una dintre primele probleme este că \LaTeX{} poate să execute comenzi de sistem
 arbitrare folosind construcția \cod{\textbackslash write18\{comandă\}}.
 
-In mod normal acestă construcție nu este disponibilă, dar pentru mai mare
+În mod normal acestă construcție nu este disponibilă, dar pentru mai mare
 siguranță poate fi oprită direct din execuția \cod{pdflatex} cu argumentul
 \cod{-no-shell-escape}. \poate{Se mai folosește în plus argumentul
 \cod{-halt-on-error} pentru a se opri execuția programului în loc să aștepte
@@ -1053,7 +1056,7 @@ corectarea interactivă a erorilor.}
 \subsection{Cod rău-intenționat}
 
 \TeX{} este un limbaj Turing-complet deci nu se poate determina fără a fi fie
-excutat codul dacă compilarea documentului se va termina.
+executat codul dacă compilarea documentului se va termina.
 
 \LaTeX{}, cu toate pachetele sale, este uriaș, deci foarte probabil există
 probleme nedescoperite care pot duce la umplerea memoriei sau intrarea în bucle
@@ -1073,7 +1076,7 @@ Acest lucru permite în Linux și setarea de limite:
 
 \item spre unde poate scrie un utilizator;
 
-\item câtă memorie virtuală poate utiliza (folosing \cod{ulimits});
+\item câtă memorie virtuală poate utiliza (folosind \cod{ulimits});
 
 \item cât timp de CPU poate folosi, și altele.
 
@@ -1144,12 +1147,12 @@ trebuiesc citite toate modificările intermediare pentru a se reconstrui o
 anumită versiune. În secțiunea~\ref{filestoresec} de la
 pagina~\pageref{filestoresec} arăt cum s-ar putea reduce acest lucru.
 
-Ca și în Git, unitatea de bază este setul de modifcare a proiectului și nu este
+Ca și în Git, unitatea de bază este setul de modificare a proiectului și nu este
 folosit un istoric separat pentru fiecare fișier în parte (cum se procedează la
 \acr{SVN}).
 
-Când se creează o nouă versiune a proiectulului toate fișierele sursă sunt
-intruduse în \eng{file store} unde primesc și un cod (rezumatul \acr{SHA1}).
+Când se creează o nouă versiune a proiectului toate fișierele sursă sunt
+introduse în \eng{file store} unde primesc și un cod (rezumatul \acr{SHA1}).
 Dacă proiectul compilează cu succes, este introdus și \acr{PDF}-ul rezultat.
 Pentru fiecare pagină din \acr{PDF} este făcută o miniatură. Miniatura dinamică
 (explicată în secțiunea~\ref{galeriesub}, pagina~\pageref{galeriesub}) este
@@ -1194,7 +1197,7 @@ interpretarea lor este lăsată pentru editorul de pe partea de client.
 
 În acest mod anumite mesaje pot fi adnotate. Spre exemplu, dacă un utilizator
 trimite mesajul „Uită-te la conținut.tex:84.“, atunci fraza „conținut.tex:84“ va
-fi o legatură la linia respectivă (și se deschide fișierul dacă este nevoie).
+fi o legătură la linia respectivă (și se deschide fișierul dacă este nevoie).
 
 \section{\eng{File store}}
 
@@ -1348,7 +1351,7 @@ Proiectul conține și o listă de șabloane precompilate cu rolul de:
 
 \begin{itemize}
 
-\item a demonstra imediat posibilitațile de documente care pot fi create cu
+\item a demonstra imediat posibilitățile de documente care pot fi create cu
 \LaTeX{};
 
 \item a testa rapid funcționalitătile și modul de lucru oferit de Multilatex;
@@ -1395,11 +1398,15 @@ citire.
 Însă aceste soluții nu ar fi chiar cele mai bune. O comprimare mai eficientă
 ar ține cont de faptul că există diferențe mici între foarte multe fișiere.
 
+\idee{TODO}
+
 \subsection{Legături}
 
 Deoarece unele fișiere din dosarul de lucru se schimbă rar (mai ales cele
-de dimenisuni mai mari cum ar fi resursele), o optimizare posibilă ar fi să se
-folosească hard link-uri către fișierele din \eng{file store}.
+de dimensiuni mai mari cum ar fi resursele), o optimizare posibilă ar fi să se
+folosească hard link-uri către fișierele din \eng{file store}. Bineînțeles,
+legăturile trebuiesc înlocuite dacă se editează fișierul pentru anu fi alterate
+fișierele statice din \eng{file store}.
 
 \chapter{Aplicații}
 
@@ -1432,6 +1439,8 @@ folosească hard link-uri către fișierele din \eng{file store}.
 
 \bibitem{backbone}
 \url{backbonejs.org}
+
+\idee{TODO}
 
 \end{thebibliography}
 
