@@ -786,7 +786,51 @@ acestuia.
 
 Jade este un motor de șablonare pentru Node cu sintaxă bazată pe indentare.
 
-\idee{TODO}
+Exemplu de cod Jade:
+
+\begin{verbatim}
+mixin authors(list)
+  p.authors(class=list.length > 1 ? 'multiple-authors': null)
+    each names in list
+      span.names= names.join(' ')
+
+#container
+  p Primul <em>paragraf</em>.
+  .project: +authors([['Paul', 'Nechifor']])
+  .project: +authors([['Nechifor'], ['<nume>']])
+\end{verbatim}
+
+Rezultatul pe care îl produce:
+
+\begin{verbatim}
+<div id="container">
+  <p>Primul <em>paragraf</em>.</p>
+  <div class="project">
+    <p class="authors"><span class="names">Paul Nechifor</span></p>
+  </div>
+  <div class="project">
+    <p class="authors multiple-authors">
+      <span class="names">Nechifor</span>
+      <span class="names">&lt;nume&gt;</span></p>
+  </div>
+</div>
+\end{verbatim}
+
+Funcționalități demonstrate în cod:
+
+\begin{itemize}
+
+\item etichetele nespecificate sunt implicit de tip \cod{div};
+
+\item folosirea de cod JavaScript pentru valori;
+
+\item se poate folosi și sintaxa \acr{HTML} standard (\cod{<em>}).
+
+\end{itemize}
+
+Deoarece Jade are sintaxă cu spații semnificative, ele nu fac parte din codul
+emis. În rezultatul afișat, spațiile sunt adăugate doar pentru a fi mai ușor
+de citit, dar în mod normal codul produs nu conține niciun spațiu în plus.
 
 \subsection{Stylus}
 
@@ -795,14 +839,8 @@ asemănător cu Sass (2007) și LESS (2009), dar cu diferența principală că e
 mult mai succint și este bazat pe indentare. Totuși, Stylus suportă și sintaxa
 CSS.
 
-În următorul exemplu este arătat codul Stylus în stânga și rezultatul CSS în
-dreapta. Se folosește o variabilă \cod{main-color} pentru culoare care este și
-manipulată pentru \cod{:hover} (înălbita cu 20~\%). Folosind \cod{main-size}
-mărimea textului pe dispozitive cu ecran mic este micșorată la 80~\%. Este
-demonstrată și imbricarea care evită repetarea: se folosește doar \cod{\&:hover}
-în loc de \cod{a:hover, code:hover}.
+Exemplu de cod Stylus:
 
-\minipage{9cm}
 \begin{verbatim}
 main-color = #f7a
 main-size = 18px
@@ -815,15 +853,16 @@ a, code
   &:hover
     color lighten(main-color, 20%)
 \end{verbatim}
-\endminipage
-\minipage{4cm}
+
+Rezultatul care va fi produs:
+
 \begin{verbatim}
 a, code {
   color: #f7a;
   font-size: 18px;
 }
 @media (max-width: 479px) {
-  a, code {
+  a, code { 
     font-size: 14px;
   }
 }
@@ -831,7 +870,12 @@ a:hover, code:hover {
   color: #ff92bb;
 }
 \end{verbatim}
-\endminipage
+
+În acest exemplu se folosește o variabilă \cod{main-color} pentru culoare care este și
+manipulată pentru \cod{:hover} (înălbită cu 20~\%). Folosind \cod{main-size}
+mărimea textului pe dispozitive cu ecran mic este micșorată la 80~\%. Este
+demonstrată și imbricarea care evită repetarea: se folosește doar \cod{\&:hover}
+în loc de \cod{a:hover, code:hover}.
 
 \subsection{MongoDB}
 
