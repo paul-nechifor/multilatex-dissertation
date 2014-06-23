@@ -932,15 +932,24 @@ fișierelor.
 \subsection{Bower}
 \label{bowersub}
 
-În variantele precedente am inclus codul pentru modulele necesare (Ace, PDF.js
-etc) direct în codul sursă a proiectului. Acest lucru duce la supradimensionarea
-proiectului cu cod care nu-mi aparține. Pentru foarte mult timp acest mod de
-lucru era normal pentru că nu exista un mod de a administra pachetele
-\eng{front-end}.
+În variantele precedente am inclus codul pentru modulele necesare (Ace,
+\acr{PDF}.js etc) direct în codul sursă a proiectului. Acest lucru duce la
+supradimensionarea proiectului cu cod care nu-mi aparține. Pentru foarte mult
+timp acest mod de lucru era normal pentru că nu exista un mod de a administra
+pachetele \eng{front-end}.
 
-Bower este un astfel de manager de pachete pentru web.
+Bower este un astfel de manager de pachete pentru web. Spre diferență de
+\acr{NPM} și altele Bower nu este un manager de pachete pentru un limbaj
+specific. El funcționează pentru orice tip de fișiere: JavaScript, \acr{HTML},
+\acr{CSS} și altele. În acest caz Bower definește un pachet ca orice colecție de
+fișiere și lasă modul de folosirea a codului pentru utilizatori. Bower se
+folosește de repozitorii de tip Git pentru răspândirea fișierelor.
 
-\idee{TODO}
+În acest fel am putut să mut codul pentru dependințele de front-end în afara
+proiectului. Un avantaj aici este că pot să am un istoric separat. Dacă trebuie
+să actualizez la un pachet mai nou nu trebuie să includ tot codul modificat ci
+doar trebuie să specific versiunea nouă în fișierul de configurare Bower și să
+fac actualizarea locală.
 
 \subsection{WebSocket}
 \label{websocketsub}
