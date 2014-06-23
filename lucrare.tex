@@ -956,7 +956,7 @@ fac actualizarea locală.
 
 WebSocket este un protocol de comunicare \eng{full-duplex} în principal
 implementat pentru comunicarea cu navigatoare web. Specificația WebSocket a fost
-standardizată în 2011 și face parte din grupul de funcționalități HTML5.
+standardizată în 2011 și face parte din grupul de funcționalități \acr{HTML5}.
 
 WebSocket are mai multe avantaje peste versiunea de comunicarea Comet sau Ajax:
 
@@ -1148,6 +1148,7 @@ fișierului drept cod (spre exemplu în comunicarea dintre colaboratori la
 editare), dar acest lucru cauzează probleme la redenumire.
 
 \section{Versionare}
+\label{versionaresec}
 
 Modul de memorarea a istoricului de editare este inspirat de Git. Mereu se
 stochează fișierele noi rezultate și nu doar diferențele. Acest lucru duce la
@@ -1163,9 +1164,15 @@ folosit un istoric separat pentru fiecare fișier în parte (cum se procedează 
 Când se creează o nouă versiune a proiectului toate fișierele sursă sunt
 introduse în \eng{file store} unde primesc și un cod (rezumatul \acr{SHA1}).
 Dacă proiectul compilează cu succes, este introdus și \acr{PDF}-ul rezultat.
+
 Pentru fiecare pagină din \acr{PDF} este făcută o miniatură. Miniatura dinamică
 (explicată în secțiunea~\ref{galeriesub}, pagina~\pageref{galeriesub}) este
 afișată pe pagina proiectului și în galerie.
+
+Dacă fișierul a fost compilat cu succes, atunci se face și o arhivă \acr{ZIP} cu
+conținutul proiectului. Arhiva poate fi folosită pentru exportare și conține și
+documentul \acr{PDF} (dar nu și celelalte fișiere generate de \cod{pdflatex}).
+Am ales formatul \acr{ZIP} pentru că este printre cele mai recunoscute.
 
 Se poate face duplicare (\eng{fork}) la oricare versiune a unui proiect, nu doar
 la versiunea cea mai recentă.
@@ -1179,7 +1186,9 @@ la versiunea cea mai recentă.
 \item lista fișierelor sursă din \eng{file store} identificate după rezumatul
 \acr{SHA1};
 
-\item fișierul \acr{PDF} (\eng{file store});
+\item fișierul \acr{PDF} din \eng{file store} (dacă există);
+
+\item arhiva \acr{ZIP} din \eng{file store} (dacă există);
 
 \item lista fișierelor miniatură (\eng{file store});
 
@@ -1385,17 +1394,27 @@ paralel și pot fi folosite și pentru alte proiecte.
 
 \chapter{Îmbunătățiri}
 
-\idee{TODO}
+În acest capitol discut o serie de îmbunătățiri care pot fi aduse proiectului.
+Sunt multe feluri în care poate fi făcut mai bun, dar eu o să mă concentrez pe
+cele care pot fi aduse proiectului în starea sa curentă.
 
 \section{Compilator \LaTeX}
 \label{comlatsec}
 
-\idee{TODO}
+Datorită faptului că compilarea documentelor \LaTeX{} este partea cea mai
+costisitoare, ea ar trebuie separată de aplicația web.
+
+Metoda cea mai bună ar fi să creez un serviciu special de compilare a
+documentelor \LaTeX{} care să fie scalabil. Acest lucru nu ar fi foarte greu
+deoarece doar ar trebui să fie un \eng{wrapper} pentru utilizarea a
+\cod{pdflatex}.
 
 \section{\eng{File store}}
 \label{filestoresec}
 
-Există mai multe modalități prin care poate fi îmbunătățită metoda curentă.
+Există cel puțin două modalități prin care poate fi îmbunătățită metoda curentă:
+se pot comprima fișierele și se poate refolosi fișierele din \eng{file store} în
+dosarul de lucru.
 
 \subsection{Comprimare}
 
@@ -1407,15 +1426,31 @@ citire.
 Însă aceste soluții nu ar fi chiar cele mai bune. O comprimare mai eficientă
 ar ține cont de faptul că există diferențe mici între foarte multe fișiere.
 
-\idee{TODO}
+Sistemele de fișiere care arhivează bine de obicei sunt read-only (SquashFS,
+cramfs etc).
+
+O variantă în acest caz ar fi scrierea unui sistem de fișiere virtual (folosind
+FUSE pentru Linux) care să arhiveze doar fișierele text accesul la restul fiind
+furnizat direct de disc prin folosirea unui union mount (spre exemplu cu
+UnionFS).
 
 \subsection{Legături}
 
 Deoarece unele fișiere din dosarul de lucru se schimbă rar (mai ales cele
 de dimensiuni mai mari cum ar fi resursele), o optimizare posibilă ar fi să se
 folosească hard link-uri către fișierele din \eng{file store}. Bineînțeles,
-legăturile trebuiesc înlocuite dacă se editează fișierul pentru anu fi alterate
+legăturile trebuiesc înlocuite dacă se editează fișierul pentru a nu fi alterate
 fișierele statice din \eng{file store}.
+
+\subsection{Altele}
+
+Alte modalități ar fi să fie șterse periodic fișierele generate care nu sunt
+accesate de multe ori. La secțiunea \ref{versionaresec} de la
+pagina~\pageref{versionaresec} explic că documentul \acr{PDF} și arhiva
+\acr{ZIP} sunt create la fiecare \eng{commit}. Ele ar putea fi șterse și
+recreate dacă este din nou nevoie de ele.
+
+\section{Înlocuire ShareJS}
 
 \chapter{Aplicații}
 
