@@ -433,14 +433,91 @@ deschis.
 Tot aici sunt listate și șabloanele precompilate (secțiunea~\ref{sabloanesec},
 pagina~\pageref{sabloanesec}) de unde pot fi și duplicate ușor.
 
-\subsection{Istoric}
-
-\idee{TODO}
-
-\subsection{Pagina utilizator}
+\subsection{Utilizator}
 
 Nu am intenționat să fac un sit social, deci pagina unui utilizator nu conține
 decât metadate publice și listări a proiectelor și activității lui.
+
+\subsection{Proiect}
+
+Pagina proiectului conține o prezentare generală a proiectului cu toate modurile
+principale de controlare a lui.
+
+În mod proeminent este afișată lista de butoane simple pentru:
+
+\begin{itemize}
+
+\item accesarea editorului de proiect;
+
+\item vizualizarea documentului \acr{PDF} rezultat
+
+\item duplicarea proiectului;
+
+\item și descărcarea proiectului în format \acr{ZIP}.
+
+\end{itemize}
+
+\subsubsection{Duplicarea}
+
+Duplicarea proiectului nu este costisitoare pentru server (explicat la secțiunea
+\ref{filestoresec}, pagina \pageref{filestoresec}) și din acest motiv ea este
+încurajată.
+
+Dacă proiectul a fost duplicat din altul, este afișată legătura către proiectul
+părinte.
+
+La secțiunea \ref{mulverssec} de la pagina \pageref{mulverssec} se discută cum
+poate fi folosită duplicarea pentru editare colaborativă.
+
+\subsubsection{Descărcare}
+
+Cu butonul de descărcare se poate lua doar versiunea curentă a proiectului.
+Descărcarea versiunilor vechi poate fi făcută din istoric. La fel și duplicarea
+sau vizualizarea versiunilor vechi.
+
+\subsubsection{Colaboratori}
+
+Din pagina proiectului se poate face și administrarea setului de colaboratori
+(cei care pot edita proiectul curent în totalitate). Implicit, doar creatorul
+este listat și doar el poate să adauge și să șteargă alți utilizatori.
+
+Intuitiv nu are sens să fie afișat și autorul deoarece nu poate fi șters, dar
+așa se poate afla instant că acolo este lista de colaboratori și de acolo pot fi
+adăugați.
+
+\subsection{Istoric}
+
+Istoricul conține legături spre versiunile fișierelor
+
+Pagina de istoric a unui proiecte listează toate versiunile sale. O versiune
+afișează:
+
+\begin{itemize}
+
+\item numele versiunii și legături către pagina versiunii și opțiuni de
+descărcare;
+
+\item lista de autori a versiunii (cei care au făcut o modificare oricât de mică
+de la ultima versiune);
+
+\item un rezumat al modificărilor făcute asupra proiectului (ce fișiere au fost
+modificate, șterse etc)
+
+\item și alte metadate scurte.
+
+\end{itemize}
+
+Pagina unei versiuni vechi este aproape identică cu pagina proiectului la
+starea la care s-a făcut \eng{commit}-ul.
+
+\subsection{Fișiere}
+
+Listarea fișierelor este prezentă pagina proiectului, pagina de versiune și
+în listarea conținutului fișierului însăși.
+
+Pentru listarea fișierelor este folosită colorarea sintactică pe parte de client
+folosind o librărie JavaScript. Pe lângă lângă recunoașterea fișierelor text mai
+sunt afișate și un număr de imagini suportate de \LaTeX{}.
 
 \subsection{\acr{URL}-uri}
 
@@ -1262,6 +1339,7 @@ trimite mesajul „Uită-te la conținut.tex:84.“, atunci fraza „conținut.t
 fi o legătură la linia respectivă (și se deschide fișierul dacă este nevoie).
 
 \section{\eng{File store}}
+\label{filestoresec}
 
 \eng{File store}-ul este o aplatizare a fișierelor din toate proiectele după
 rezumatul \acr{SHA1}. El dispune de următoare le avantaje.
@@ -1360,7 +1438,10 @@ Funcționalitățile implementate în meniu sunt de:
 
 \item crearea unei versiuni noi (\eng{commit});
 
-\item vizualizrea fișierului de logare de la compilarea documentului (pentru
+\item descărcarea proiectului în starea curentă (din pagina proiectului se
+poate descărca doar cea mai nouă versiune);
+
+\item vizualizarea fișierului de logare de la compilarea documentului (pentru
 depanare);
 
 \item și modificarea setărilor de editor.
@@ -1498,7 +1579,23 @@ recreate dacă este din nou nevoie de ele.
 
 \chapter{Aplicații}
 
-\idee{TODO}
+\section{Colaborare}
+
+\section{Mai multe versiuni}
+\label{mulverssec}
+
+În Multilatex nu există \eng{branching} ca în Git sau alte sisteme de versionare
+(pentru că ar complica sistemul) și din acest motiv duplicarea proiectelor este
+motoda recomandată pentru a încerca lucruri noi în paralel.
+
+Pentru a încerca o editare care modifică în mod radical documentul un utilizator
+în poate duplica proiectul și poate să facă modificările cu mai multe
+\eng{commit}-uri fără a intra în conflicte cu ceilalți colaboratori.
+
+Dacă modificările sunt considerate bune ele pot fi incluse în proiectul
+principal.
+
+Chiar și autorul proiectului îl poate duplica pentru a încerca lucruri noi.
 
 \capfara{Concluzii}
 
