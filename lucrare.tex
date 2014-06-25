@@ -106,7 +106,7 @@ in out
 
     \LARGE{\textsf{Facultatea de Informatică}}
 
-    \large{\textsf{Master Ingineria Sistemelor Soft}}
+    \large{\textsf{Master Ingineria Sistemelor Software}}
 \endminipage\hfill
 \minipage{2cm}%
     % FCS logo.
@@ -226,8 +226,8 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \chapter{Sisteme existente}
 
-În acest capitol prezint funcționarea \TeX{} și \LaTeX{} și problemele pe care
-le au. Apoi prezint cum au rezolvat alții aceste deficiențe folosind tehnologii
+În acest capitol se prezintă funcționarea \TeX{} și \LaTeX{} și problemele pe care
+le au. Apoi se va prezenta cum au rezolvat alții aceste deficiențe folosind tehnologii
 web.
 
 \section{\TeX}
@@ -298,7 +298,8 @@ diferite (sau la erori) într-un mod neașteptat. Un model bun în acest caz
 este Node.js unde există multe modalități de specificare a versiunii preferate
 și versiuni diferite pot coexista.
 
-Ce-i mai rău este că repo-urile sunt specifice fiecărei distribuții de \LaTeX{}.
+În prezent sunt trei distribuții\cite{majordist} majore de \LaTeX{} cu diferite
+pachete instalate implicit.
 
 Pentru a avea o compatibilitate cât mai mare, configurarea mașinii virtuale
 (secțiunea \ref{vagrantsub}, pagina~\pageref{vagrantsub}) depinde de instalarea
@@ -313,9 +314,9 @@ Ubuntu.
 
 \idee{TODO}
 
-\chapter{Sistemul propriu}
+\chapter{Sistemul propus}
 
-În acest capitol prezint cum am proiectat Multilatex și explic în detaliu
+În acest capitol se prezintă proiectarea Multilatex și se explică în detaliu
 fiecare componentă.
 
 \section{Proiectare}
@@ -326,11 +327,14 @@ principalele probleme asupra cărora a trebuit să mă decid.
 
 \subsection{Documente mari}
 
-Deseori, un document \LaTeX{} mare este împărțit în mai multe fișiere \cod{.tex}
-care sunt incluse în cel principal. Deși acest lucru este suportat, eu am ales
-să nu încurajez acest lucru pentru că am observat că intră în conflict cu modul
-meu de lucru: când încep un document nu specific perfect structura lui și ajung
-des să mut secțiuni și paragrafe prin el.
+\LaTeX{} suportă includerea fișierelor \cod{.tex} în alte fișiere \cod{.tex}.
+Prin urmare, un mod de lucru cu documente mare este să fie separate în fișiere
+pe bază de capitole sau secțiuni.
+
+Deși această variantă este suportată în Multilatex, poate fi problematică din
+unele puncte de vedere: când un document este la început structura lui nu este
+foarte clară și se recurge la mutarea de capitole, paragrafe etc. între
+diferitele fișiere.
 
 Principala problemă la a folosi un fișier monolitic este greutatea de navigare,
 deci am ales să rezolv problema asta prin a implementa în panoul arborelui de
@@ -392,10 +396,10 @@ sau singurul fișier \cod{.tex} este cel principal.
 \subsection{Altele}
 
 Alte probleme au fost legate de tehnologiile pe care să le folosesc pentru
-construirea proiectului. Aceste programe/librării vor fi prezentate mai departe
+construirea proiectului. Aceste programe/biblioteci vor fi prezentate mai departe
 în acest capitol.
 
-\section{Structura sitului}
+\section{Structura aplicației web}
 
 În ceea ce urmează am să descriu cum am structurat paginile, conținutul și
 organizarea sitului.
@@ -516,7 +520,7 @@ Listarea fișierelor este prezentă pagina proiectului, pagina de versiune și
 în listarea conținutului fișierului însăși.
 
 Pentru listarea fișierelor este folosită colorarea sintactică pe parte de client
-folosind o librărie JavaScript. Pe lângă lângă recunoașterea fișierelor text mai
+folosind o bibliotecă JavaScript. Pe lângă lângă recunoașterea fișierelor text mai
 sunt afișate și un număr de imagini suportate de \LaTeX{}.
 
 \subsection{\acr{URL}-uri}
@@ -978,19 +982,19 @@ diferite navigatoare;
 
 \subsection{Backbone.js}
 
-Backbone.js\cite{backbone} este o librărie JavaScript pentru partea de client
+Backbone.js\cite{backbone} este o bibliotecă JavaScript pentru partea de client
 care furnizează paradigma model--view--controller (\acr{MVC}).
 
 În principal, Backbone este făcut pentru aplicații cu o singură pagină.
 
 Backbone are o mărime foarte mică. Comprimat, are doar 6,5~\acr{KiB}. Spre
 diferență de alte \eng{framework}-uri, Backbone e făcut să fie foarte simplu și
-nu este cuplat strâns. Deci poate fi folosit cu multe alte librării fără să
+nu este cuplat strâns. Deci poate fi folosit cu multe alte biblioteci fără să
 necesite controlarea întregului \acr{DOM}.
 
 \subsection{jQuery}
 
-jQuery este o librărie JavaScript care simplifică programarea pe partea de
+jQuery este o bibliotecă JavaScript care simplifică programarea pe partea de
 client și rezolvă parțial lipsa de compatibilitate între diferitele platforme.
 
 \subsection{Ace}
@@ -1011,7 +1015,7 @@ plugin-ul de la ShareJS pentru editare colaborativă.
 
 \subsection{\acr{PDF}.js}
 
-\acr{PDF}.js este o librărie JavaScript care poate să randeze documente
+\acr{PDF}.js\cite{pdfjs} este o bibliotecă JavaScript care poate să randeze documente
 \acr{PDF} pe partea de client fără folosirea de cod nativ. Proiectul este
 dezvoltat de Mozilla. Pentru randarea paginilor \acr{PDF}.js folosește eticheta
 \cod{canvas}.
@@ -1102,7 +1106,7 @@ caracteristicile de securitate (el fiind rar blocat).
 \label{sharejssub}
 
 ShareJS este \eng{framework} pentru editarea colaborativă a fișierelor text.
-Este compus dintr-o librărie pentru partea de client și un pachet pentru Node.
+Este compus dintr-o bibliotecă pentru partea de client și un pachet pentru Node.
 
 Pentru permanența fișierelor, ShareJS folosește mai multe tipuri de baze de
 date.
@@ -1185,7 +1189,7 @@ corectarea interactivă a erorilor.}
 
 \subsection{Cod rău-intenționat}
 
-\TeX{} este un limbaj Turing-complet deci nu se poate determina fără a fi fie
+\TeX{} este un limbaj Turing-complet\cite{basictc} deci nu se poate determina fără a fi fie
 executat codul dacă compilarea documentului se va termina.
 
 \LaTeX{}, cu toate pachetele sale, este uriaș, deci foarte probabil există
@@ -1610,6 +1614,9 @@ Chiar și autorul proiectului îl poate duplica pentru a încerca lucruri noi.
 \bibitem{texwebpdf}
 \url{brokestream.com/tex.pdf}
 
+\bibitem{basictc}
+Andrew Marc Greene, BASIX --- An Interpreter Written in TEX, TUGboat, Volume 11 (1990), No. 3
+
 \bibitem{passleak}
 \url{thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
 
@@ -1625,7 +1632,11 @@ Chiar și autorul proiectului îl poate duplica pentru a încerca lucruri noi.
 \bibitem{backbone}
 \url{backbonejs.org}
 
-\idee{TODO}
+\bibitem{majordist}
+\url{en.wikibooks.org/wiki/LaTeX/Installation\#Distributions}
+
+\bibitem{pdfjs}
+\url{mozilla.github.io/pdf.js}
 
 \end{thebibliography}
 
