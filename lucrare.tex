@@ -20,7 +20,7 @@
 decorations.pathreplacing, plotmarks}
 
 % Comenzi
-\newcommand{\eng}[1]{\emph{#1}} % Pentru cuvinte în limba engleză.
+\newcommand{\eng}[1]{{#1}} % Pentru cuvinte în limba engleză.
 \newcommand{\cod}[1]{\texttt{#1}}
 \newcommand{\url}[1]{\texttt{#1}}
 \newcommand{\uplu}[1]{$\langle$#1$\rangle$}
@@ -313,6 +313,391 @@ Ubuntu.
 \section{WriteLatex}
 
 \idee{TODO}
+
+\chapter{Tehnologii folosite}
+
+\section{\eng{Back-end}}
+
+Pe partea de server am folosit următoarele aplicații/tehnologii:
+
+\begin{itemize}
+
+\item \textbf{Vagrant}, pentru administrarea mediului de lucru;
+
+\item \textbf{Upstart}, pentru descrierea serviciului Linux sub care rulează
+aplicația web
+
+\item \textbf{Node.js}, pentru aplicația web;
+
+\item \textbf{Express.js}, pentru \eng{framework}-ul web;
+
+\item \textbf{Jade}, pentru șabloane HTML;
+
+\item \textbf{Stylus}, pentru generarea CSS;
+
+\item și \textbf{MongoDB} pentru baza de date.
+
+\end{itemize}
+
+\subsection{Vagrant}
+\label{vagrantsub}
+
+Dezvoltarea Web, mai mult decât alte tipuri, necesită folosirea a unei
+multitudini de tehnologii disparate sau strâns legate. Configurarea lor poate fi
+problematică și a dus la separarea în specializări de dezvoltare și operare
+\acr{IT}.
+
+O soluție este să se folosească mașini virtuale cu tot \eng{software}-ul
+instalat. Însă acest mod de lucru încetinește pasul de dezvoltare și necesită
+trafic mult: dacă se schimbă o piesă, durează mult timp până se reconfigurează
+sistemul virtual și până este transmis la toți dezvoltatorii.
+
+Vagrant este un sistem de a lucra cu și de a partaja medii de dezvoltare
+virtuale care rezolvă această problemă într-un mod diferit. Un sistem virtual
+este descris într-un singur fișier cu toate proprietățile sale cum ar fi:
+
+\begin{itemize}
+
+\item imaginea sistemului de operare de bază (neconfigurat);
+
+\item specificarea sistemului virtual (mărime \acr{RAM}, număr de procesoare
+etc);
+
+\item specificarea rețelei interne (adrese \acr{IP} folosite, redirectare
+porturi etc);
+
+\item modul de provizionare, fie prin scripturi de sistem sau folosind folosind
+programe avansate (Chef, Puppet);
+
+\item și altele.
+
+\end{itemize}
+
+Multe imagini de sisteme de operare sunt făcute publice și duplicate local. Prin
+urmare, transferul unui mediu de lucru nou deseori necesită doar copierea unor
+fișiere text și reprovizionarea.
+
+În mod normal se instalează sisteme de operare Linux pentru server care rulează
+fără un afișaj grafic și deci toată comunicarea se realizează prin \acr{SSH}.
+
+Vagrant folosește implicit VirtualBox pentru virtualizare, dar pot fi folosiți
+și alți furnizori cum ar fi VMware (pentru care pot fi folosite opțiuni de
+configurare specializate).
+
+Un alt avantaj este că Vagrant suportă și lansarea pe medii de lucru non-locale
+cum ar fi Amazon EC2. Acest lucru înseamnă că poate fi folosit pentru
+dezvoltare, dar și pentru lansare în producție.
+
+Imaginea sistemului de operare pe care o folosesc este Ubuntu 12.04 deoarece era
+varianta cu suport pe termen lung când am început proiectul.
+
+Pentru provizionare folosesc un script deoarece n-am nevoie de funcționalități
+mai avansate. În principal provizionarea consistă din:
+
+\begin{itemize}
+
+\item actualizarea pachetelor sistemului (pentru securitate);
+
+\item instalarea versiunilor cele mai recente de MongoDB și Node de la furnizori
+(nu din Ubuntu);
+
+\item instalarea distribuției \LaTeX{} \cod{texlive-full} care are peste 2~GiB;
+
+\item și instalarea altor pachete folosite de aplicație.
+
+\end{itemize}
+
+\subsection{Upstart}
+
+Programul construit rulează pe \eng{backend} ca un serviciu în Upstart. Upstart
+este un sistem de administrare a serviciilor pentru Unix bazat pe evenimente. El
+a fost proiectat ca un înlocuitor pentru init.
+
+Am ales Upstart pentru că este instalat inițial în Ubuntu 12.04. Din următoarele
+versiuni, însă, Ubuntu și Debian se vor schimba la Systemd care are mai multe
+funcționalități.
+
+Eu folosesc Upstart prin scriptul care specifică:
+
+\begin{itemize}
+
+\item ce utilizator să fie folosit pentru executarea programului (ca să nu fie
+utilizat \cod{root} pentru siguranță;
+
+\item cum să repornească serviciul în caz de erori (se abandonează repornirea în
+cazul în care eșuează mai multe de 10 ori în 5 secunde);
+
+\item spre ce fișier de logare să fie redirectate ieșirile.
+
+\end{itemize}
+
+\subsection{Node}
+
+\idee{TODO}
+
+\subsection{Express}
+
+Express este un \eng{framework} de aplicații web pentru Node făcut să fie
+minimal și flexibil. El este modular și nu include funcționalități statice cum
+ar fi motoare de șablonare unice, dosare statice predefinite etc. O aplicație
+Express poate chiar fi definită într-un singur fișier.
+
+Deoarece este un nivel foarte mic peste Node, nu reduce din performanța
+acestuia.
+
+\subsection{Jade}
+
+Jade este un motor de șablonare pentru Node cu sintaxă bazată pe indentare.
+
+Exemplu de cod Jade:
+
+\begin{verbatim}
+mixin authors(list)
+  p.authors(class=list.length > 1 ? 'multiple-authors': null)
+    each names in list
+      span.names= names.join(' ')
+
+#container
+  p Primul <em>paragraf</em>.
+  .project: +authors([['Paul', 'Nechifor']])
+  .project: +authors([['Nechifor'], ['<nume>']])
+\end{verbatim}
+
+Rezultatul pe care îl produce:
+
+\begin{verbatim}
+<div id="container">
+  <p>Primul <em>paragraf</em>.</p>
+  <div class="project">
+    <p class="authors"><span class="names">Paul Nechifor</span></p>
+  </div>
+  <div class="project">
+    <p class="authors multiple-authors">
+      <span class="names">Nechifor</span>
+      <span class="names">&lt;nume&gt;</span></p>
+  </div>
+</div>
+\end{verbatim}
+
+Funcționalități demonstrate în cod:
+
+\begin{itemize}
+
+\item etichetele nespecificate sunt implicit de tip \cod{div};
+
+\item folosirea de cod JavaScript pentru valori;
+
+\item se poate folosi și sintaxa \acr{HTML} standard (\cod{<em>}).
+
+\end{itemize}
+
+Deoarece Jade are sintaxă cu spații semnificative, ele nu fac parte din codul
+emis. În rezultatul afișat, spațiile sunt adăugate doar pentru a fi mai ușor
+de citit, dar în mod normal codul produs nu conține niciun spațiu în plus.
+
+\subsection{Stylus}
+
+Stylus (2010) este un limbaj \eng{stylesheet} care compilează în CSS. Este
+asemănător cu Sass (2007) și LESS (2009), dar cu diferența principală că este
+mult mai succint și este bazat pe indentare. Totuși, Stylus suportă și sintaxa
+CSS.
+
+Exemplu de cod Stylus:
+
+\begin{verbatim}
+main-color = #f7a
+main-size = 18px
+
+a, code
+  color main-color
+  font-size main-size
+  @media (max-width: 479px)
+    font-size floor(main-size * 0.8)
+  &:hover
+    color lighten(main-color, 20%)
+\end{verbatim}
+
+Rezultatul care va fi produs:
+
+\begin{verbatim}
+a, code {
+  color: #f7a;
+  font-size: 18px;
+}
+@media (max-width: 479px) {
+  a, code { 
+    font-size: 14px;
+  }
+}
+a:hover, code:hover {
+  color: #ff92bb;
+}
+\end{verbatim}
+
+În acest exemplu se folosește o variabilă \cod{main-color} pentru culoare care este și
+manipulată pentru \cod{:hover} (înălbită cu 20~\%). Folosind \cod{main-size}
+mărimea textului pe dispozitive cu ecran mic este micșorată la 80~\%. Este
+demonstrată și imbricarea care evită repetarea: se folosește doar \cod{\&:hover}
+în loc de \cod{a:hover, code:hover}.
+
+\subsection{MongoDB}
+
+\idee{TODO}
+
+\section{\eng{Front-end}}
+
+Pe partea de client am folosit următoarele tehnologii/aplicații:
+
+\begin{itemize}
+
+\item \textbf{Backbone} pentru paradigma \acr{MVC} pe client;
+
+\item \textbf{jQuery} (cu anumite plugin-uri) pentru compatibilitate mai mare pe
+diferite navigatoare;
+
+\item \textbf{Ace}, ca editor de cod în pagini web;
+
+\item și \textbf{\acr{PDF}.js}, pentru randarea și vizualizarea documentelor
+\acr{PDF}.
+
+\end{itemize}
+
+\subsection{Backbone.js}
+
+Backbone.js\cite{backbone} este o bibliotecă JavaScript pentru partea de client
+care furnizează paradigma model--view--controller (\acr{MVC}).
+
+În principal, Backbone este făcut pentru aplicații cu o singură pagină.
+
+Backbone are o mărime foarte mică. Comprimat, are doar 6,5~\acr{KiB}. Spre
+diferență de alte \eng{framework}-uri, Backbone e făcut să fie foarte simplu și
+nu este cuplat strâns. Deci poate fi folosit cu multe alte biblioteci fără să
+necesite controlarea întregului \acr{DOM}.
+
+\subsection{jQuery}
+
+jQuery este o bibliotecă JavaScript care simplifică programarea pe partea de
+client și rezolvă parțial lipsa de compatibilitate între diferitele platforme.
+
+\subsection{Ace}
+\label{acesub}
+
+Ace\cite{ace} este un editor de text \eng{open source} făcut de Cloud9 care
+poate fi incorporat în pagini \acr{HTML}.
+
+Este făcut specific pentru editare de cod și suport o multitudine de limbaje
+(printre care și \LaTeX{}).
+
+Editorul este scris în JavaScript și folosește \acr{DOM}-ul pentru afișare. Ace
+este succesorul proiectului Mozilla Skywriter care folosea \cod{canvas} pentru
+afișare.
+
+El este modular și poate fi extins. Datorită acestul lucru am putut să folosesc
+plugin-ul de la ShareJS pentru editare colaborativă.
+
+\subsection{\acr{PDF}.js}
+
+\acr{PDF}.js\cite{pdfjs} este o bibliotecă JavaScript care poate să randeze documente
+\acr{PDF} pe partea de client fără folosirea de cod nativ. Proiectul este
+dezvoltat de Mozilla. Pentru randarea paginilor \acr{PDF}.js folosește eticheta
+\cod{canvas}.
+
+Printre avantajele lui se numără:
+
+\begin{itemize}
+
+\item Este bun pentru securitate pentru că nu se mai execută cod nativ în
+randarea documentelor \acr{PDF}. Spre exemplu Adobe Acrobat Reader a avut un
+număr mare de vulnerabilități.
+
+\item Poate fi manipulat din alt cod JavaScript. Un plugin nativ nu poate fi
+controlat la fel de ușor (spre exemplu folosind eticheta \cod{iframe}) în primul
+rând datorită faptului că sunt multe platforme și nu toate au un \acr{API} prin
+care pot fi controlate.
+
+\end{itemize}
+
+Un dezvantaj mare este că randarea este prea înceată pentru a nu fi
+perceptibilă. Acest lucru este agravat la documente foarte mari.
+
+\section{Comun \eng{back-end} și \eng{front-end}}
+
+Comun pentru client și server este:
+
+\begin{itemize}
+
+\item \textbf{Bower} care-i folosit pentru administrarea pachetelor pentru
+\eng{front-end};
+
+\item \textbf{WebSocket} prin care se face comunicarea dintre editor și server;
+
+\item și \textbf{ShareJS} care-i folosit pentru editarea colaborativă a
+fișierelor.
+
+\end{itemize}
+
+\subsection{Bower}
+\label{bowersub}
+
+În variantele precedente am inclus codul pentru modulele necesare (Ace,
+\acr{PDF}.js etc) direct în codul sursă a proiectului. Acest lucru duce la
+supradimensionarea proiectului cu cod care nu-mi aparține. Pentru foarte mult
+timp acest mod de lucru era normal pentru că nu exista un mod de a administra
+pachetele \eng{front-end}.
+
+Bower este un astfel de manager de pachete pentru web. Spre diferență de
+\acr{NPM} și altele Bower nu este un manager de pachete pentru un limbaj
+specific. El funcționează pentru orice tip de fișiere: JavaScript, \acr{HTML},
+\acr{CSS} și altele. În acest caz Bower definește un pachet ca orice colecție de
+fișiere și lasă modul de folosirea a codului pentru utilizatori. Bower se
+folosește de repozitorii de tip Git pentru răspândirea fișierelor.
+
+În acest fel am putut să mut codul pentru dependințele de front-end în afara
+proiectului. Un avantaj aici este că pot să am un istoric separat. Dacă trebuie
+să actualizez la un pachet mai nou nu trebuie să includ tot codul modificat ci
+doar trebuie să specific versiunea nouă în fișierul de configurare Bower și să
+fac actualizarea locală.
+
+\subsection{WebSocket}
+\label{websocketsub}
+
+WebSocket este un protocol de comunicare \eng{full-duplex} în principal
+implementat pentru comunicarea cu navigatoare web. Specificația WebSocket a fost
+standardizată în 2011 și face parte din grupul de funcționalități \acr{HTML5}.
+
+WebSocket are mai multe avantaje peste versiunea de comunicarea Comet sau Ajax:
+
+\begin{itemize}
+
+\item se reduce traficul și latența deoarece nu trebuie retrimis tot antetul
+HTTP de mai multe ori;
+
+\item se poate face comunicare bidirecțională printr-o singură conexiune;
+
+\item permite trimiterea de mesaje text sau binare, nu doar de flux de caractere
+ca la HTTP.
+
+\end{itemize}
+
+În plus, datorita faptului că se folosește tot portul 80 se păstrează
+caracteristicile de securitate (el fiind rar blocat).
+
+În prezent, toate navigatoarele moderne suportă protocolul WebSocket.
+
+\subsection{ShareJS}
+\label{sharejssub}
+
+ShareJS este \eng{framework} pentru editarea colaborativă a fișierelor text.
+Este compus dintr-o bibliotecă pentru partea de client și un pachet pentru Node.
+
+Pentru permanența fișierelor, ShareJS folosește mai multe tipuri de baze de
+date.
+
+În mod normal comunicarea dintre client și server se poate face prin WebSocket,
+dar dacă nu este disponibilă se poate face și folosind comunicarea Comet.
+
+Pentru menținerea modelului de consistență este folosită tehnologia operational
+transformation (\acr{OT}).
 
 \chapter{Sistemul propus}
 
@@ -719,8 +1104,6 @@ de configurații stufoase.
 Astfel construirea proiectului poate fi descrisă printr-un graf de dependințe și
 transformări din care se execută doar cele necesare.
 
-\idee{TODO: graficul cu transformările}
-
 \subsubsection{CoffeeScript}
 
 A treia iterație a fost și momentul în care am început să folosesc CoffeeScript.
@@ -733,389 +1116,6 @@ unificare.
 Începând cu mutarea la Gulp am început să folosesc și Bower (discutat la
 secțiunea~\ref{bowersub}, pagina~\pageref{bowersub}) pentru administrarea
 pachetelor pentru \eng{front-end}.
-
-\section{\eng{Back-end}}
-
-Pe partea de server am folosit următoarele aplicații/tehnologii:
-
-\begin{itemize}
-
-\item \textbf{Vagrant}, pentru administrarea mediului de lucru;
-
-\item \textbf{Upstart}, pentru descrierea serviciului Linux sub care rulează
-aplicația web
-
-\item \textbf{Node.js}, pentru aplicația web;
-
-\item \textbf{Express.js}, pentru \eng{framework}-ul web;
-
-\item \textbf{Jade}, pentru șabloane HTML;
-
-\item \textbf{Stylus}, pentru generarea CSS;
-
-\item și \textbf{MongoDB} pentru baza de date.
-
-\end{itemize}
-
-\subsection{Vagrant}
-\label{vagrantsub}
-
-Dezvoltarea Web, mai mult decât alte tipuri, necesită folosirea a unei
-multitudini de tehnologii disparate sau strâns legate. Configurarea lor poate fi
-problematică și a dus la separarea în specializări de dezvoltare și operare
-\acr{IT}.
-
-O soluție este să se folosească mașini virtuale cu tot \eng{software}-ul
-instalat. Însă acest mod de lucru încetinește pasul de dezvoltare și necesită
-trafic mult: dacă se schimbă o piesă, durează mult timp până se reconfigurează
-sistemul virtual și până este transmis la toți dezvoltatorii.
-
-Vagrant este un sistem de a lucra cu și de a partaja medii de dezvoltare
-virtuale care rezolvă această problemă într-un mod diferit. Un sistem virtual
-este descris într-un singur fișier cu toate proprietățile sale cum ar fi:
-
-\begin{itemize}
-
-\item imaginea sistemului de operare de bază (neconfigurat);
-
-\item specificarea sistemului virtual (mărime \acr{RAM}, număr de procesoare
-etc);
-
-\item specificarea rețelei interne (adrese \acr{IP} folosite, redirectare
-porturi etc);
-
-\item modul de provizionare, fie prin scripturi de sistem sau folosind folosind
-programe avansate (Chef, Puppet);
-
-\item și altele.
-
-\end{itemize}
-
-Multe imagini de sisteme de operare sunt făcute publice și duplicate local. Prin
-urmare, transferul unui mediu de lucru nou deseori necesită doar copierea unor
-fișiere text și reprovizionarea.
-
-În mod normal se instalează sisteme de operare Linux pentru server care rulează
-fără un afișaj grafic și deci toată comunicarea se realizează prin \acr{SSH}.
-
-Vagrant folosește implicit VirtualBox pentru virtualizare, dar pot fi folosiți
-și alți furnizori cum ar fi VMware (pentru care pot fi folosite opțiuni de
-configurare specializate).
-
-Un alt avantaj este că Vagrant suportă și lansarea pe medii de lucru non-locale
-cum ar fi Amazon EC2. Acest lucru înseamnă că poate fi folosit pentru
-dezvoltare, dar și pentru lansare în producție.
-
-Imaginea sistemului de operare pe care o folosesc este Ubuntu 12.04 deoarece era
-varianta cu suport pe termen lung când am început proiectul.
-
-Pentru provizionare folosesc un script deoarece n-am nevoie de funcționalități
-mai avansate. În principal provizionarea consistă din:
-
-\begin{itemize}
-
-\item actualizarea pachetelor sistemului (pentru securitate);
-
-\item instalarea versiunilor cele mai recente de MongoDB și Node de la furnizori
-(nu din Ubuntu);
-
-\item instalarea distribuției \LaTeX{} \cod{texlive-full} care are peste 2~GiB;
-
-\item și instalarea altor pachete folosite de aplicație.
-
-\end{itemize}
-
-\subsection{Upstart}
-
-Programul construit rulează pe \eng{backend} ca un serviciu în Upstart. Upstart
-este un sistem de administrare a serviciilor pentru Unix bazat pe evenimente. El
-a fost proiectat ca un înlocuitor pentru init.
-
-Am ales Upstart pentru că este instalat inițial în Ubuntu 12.04. Din următoarele
-versiuni, însă, Ubuntu și Debian se vor schimba la Systemd care are mai multe
-funcționalități.
-
-Eu folosesc Upstart prin scriptul care specifică:
-
-\begin{itemize}
-
-\item ce utilizator să fie folosit pentru executarea programului (ca să nu fie
-utilizat \cod{root} pentru siguranță;
-
-\item cum să repornească serviciul în caz de erori (se abandonează repornirea în
-cazul în care eșuează mai multe de 10 ori în 5 secunde);
-
-\item spre ce fișier de logare să fie redirectate ieșirile.
-
-\end{itemize}
-
-\subsection{Node}
-
-\idee{TODO}
-
-\subsection{Express}
-
-Express este un \eng{framework} de aplicații web pentru Node făcut să fie
-minimal și flexibil. El este modular și nu include funcționalități statice cum
-ar fi motoare de șablonare unice, dosare statice predefinite etc. O aplicație
-Express poate chiar fi definită într-un singur fișier.
-
-Deoarece este un nivel foarte mic peste Node, nu reduce din performanța
-acestuia.
-
-\subsection{Jade}
-
-Jade este un motor de șablonare pentru Node cu sintaxă bazată pe indentare.
-
-Exemplu de cod Jade:
-
-\begin{verbatim}
-mixin authors(list)
-  p.authors(class=list.length > 1 ? 'multiple-authors': null)
-    each names in list
-      span.names= names.join(' ')
-
-#container
-  p Primul <em>paragraf</em>.
-  .project: +authors([['Paul', 'Nechifor']])
-  .project: +authors([['Nechifor'], ['<nume>']])
-\end{verbatim}
-
-Rezultatul pe care îl produce:
-
-\begin{verbatim}
-<div id="container">
-  <p>Primul <em>paragraf</em>.</p>
-  <div class="project">
-    <p class="authors"><span class="names">Paul Nechifor</span></p>
-  </div>
-  <div class="project">
-    <p class="authors multiple-authors">
-      <span class="names">Nechifor</span>
-      <span class="names">&lt;nume&gt;</span></p>
-  </div>
-</div>
-\end{verbatim}
-
-Funcționalități demonstrate în cod:
-
-\begin{itemize}
-
-\item etichetele nespecificate sunt implicit de tip \cod{div};
-
-\item folosirea de cod JavaScript pentru valori;
-
-\item se poate folosi și sintaxa \acr{HTML} standard (\cod{<em>}).
-
-\end{itemize}
-
-Deoarece Jade are sintaxă cu spații semnificative, ele nu fac parte din codul
-emis. În rezultatul afișat, spațiile sunt adăugate doar pentru a fi mai ușor
-de citit, dar în mod normal codul produs nu conține niciun spațiu în plus.
-
-\subsection{Stylus}
-
-Stylus (2010) este un limbaj \eng{stylesheet} care compilează în CSS. Este
-asemănător cu Sass (2007) și LESS (2009), dar cu diferența principală că este
-mult mai succint și este bazat pe indentare. Totuși, Stylus suportă și sintaxa
-CSS.
-
-Exemplu de cod Stylus:
-
-\begin{verbatim}
-main-color = #f7a
-main-size = 18px
-
-a, code
-  color main-color
-  font-size main-size
-  @media (max-width: 479px)
-    font-size floor(main-size * 0.8)
-  &:hover
-    color lighten(main-color, 20%)
-\end{verbatim}
-
-Rezultatul care va fi produs:
-
-\begin{verbatim}
-a, code {
-  color: #f7a;
-  font-size: 18px;
-}
-@media (max-width: 479px) {
-  a, code { 
-    font-size: 14px;
-  }
-}
-a:hover, code:hover {
-  color: #ff92bb;
-}
-\end{verbatim}
-
-În acest exemplu se folosește o variabilă \cod{main-color} pentru culoare care este și
-manipulată pentru \cod{:hover} (înălbită cu 20~\%). Folosind \cod{main-size}
-mărimea textului pe dispozitive cu ecran mic este micșorată la 80~\%. Este
-demonstrată și imbricarea care evită repetarea: se folosește doar \cod{\&:hover}
-în loc de \cod{a:hover, code:hover}.
-
-\subsection{MongoDB}
-
-\idee{TODO}
-
-\section{\eng{Front-end}}
-
-Pe partea de client am folosit următoarele tehnologii/aplicații:
-
-\begin{itemize}
-
-\item \textbf{Backbone} pentru paradigma \acr{MVC} pe client;
-
-\item \textbf{jQuery} (cu anumite plugin-uri) pentru compatibilitate mai mare pe
-diferite navigatoare;
-
-\item \textbf{Ace}, ca editor de cod în pagini web;
-
-\item și \textbf{\acr{PDF}.js}, pentru randarea și vizualizarea documentelor
-\acr{PDF}.
-
-\end{itemize}
-
-\subsection{Backbone.js}
-
-Backbone.js\cite{backbone} este o bibliotecă JavaScript pentru partea de client
-care furnizează paradigma model--view--controller (\acr{MVC}).
-
-În principal, Backbone este făcut pentru aplicații cu o singură pagină.
-
-Backbone are o mărime foarte mică. Comprimat, are doar 6,5~\acr{KiB}. Spre
-diferență de alte \eng{framework}-uri, Backbone e făcut să fie foarte simplu și
-nu este cuplat strâns. Deci poate fi folosit cu multe alte biblioteci fără să
-necesite controlarea întregului \acr{DOM}.
-
-\subsection{jQuery}
-
-jQuery este o bibliotecă JavaScript care simplifică programarea pe partea de
-client și rezolvă parțial lipsa de compatibilitate între diferitele platforme.
-
-\subsection{Ace}
-\label{acesub}
-
-Ace\cite{ace} este un editor de text \eng{open source} făcut de Cloud9 care
-poate fi incorporat în pagini \acr{HTML}.
-
-Este făcut specific pentru editare de cod și suport o multitudine de limbaje
-(printre care și \LaTeX{}).
-
-Editorul este scris în JavaScript și folosește \acr{DOM}-ul pentru afișare. Ace
-este succesorul proiectului Mozilla Skywriter care folosea \cod{canvas} pentru
-afișare.
-
-El este modular și poate fi extins. Datorită acestul lucru am putut să folosesc
-plugin-ul de la ShareJS pentru editare colaborativă.
-
-\subsection{\acr{PDF}.js}
-
-\acr{PDF}.js\cite{pdfjs} este o bibliotecă JavaScript care poate să randeze documente
-\acr{PDF} pe partea de client fără folosirea de cod nativ. Proiectul este
-dezvoltat de Mozilla. Pentru randarea paginilor \acr{PDF}.js folosește eticheta
-\cod{canvas}.
-
-Printre avantajele lui se numără:
-
-\begin{itemize}
-
-\item Este bun pentru securitate pentru că nu se mai execută cod nativ în
-randarea documentelor \acr{PDF}. Spre exemplu Adobe Acrobat Reader a avut un
-număr mare de vulnerabilități.
-
-\item Poate fi manipulat din alt cod JavaScript. Un plugin nativ nu poate fi
-controlat la fel de ușor (spre exemplu folosind eticheta \cod{iframe}) în primul
-rând datorită faptului că sunt multe platforme și nu toate au un \acr{API} prin
-care pot fi controlate.
-
-\end{itemize}
-
-Un dezvantaj mare este că randarea este prea înceată pentru a nu fi
-perceptibilă. Acest lucru este agravat la documente foarte mari.
-
-\section{Comun \eng{back-end} și \eng{front-end}}
-
-Comun pentru client și server este:
-
-\begin{itemize}
-
-\item \textbf{Bower} care-i folosit pentru administrarea pachetelor pentru
-\eng{front-end};
-
-\item \textbf{WebSocket} prin care se face comunicarea dintre editor și server;
-
-\item și \textbf{ShareJS} care-i folosit pentru editarea colaborativă a
-fișierelor.
-
-\end{itemize}
-
-\subsection{Bower}
-\label{bowersub}
-
-În variantele precedente am inclus codul pentru modulele necesare (Ace,
-\acr{PDF}.js etc) direct în codul sursă a proiectului. Acest lucru duce la
-supradimensionarea proiectului cu cod care nu-mi aparține. Pentru foarte mult
-timp acest mod de lucru era normal pentru că nu exista un mod de a administra
-pachetele \eng{front-end}.
-
-Bower este un astfel de manager de pachete pentru web. Spre diferență de
-\acr{NPM} și altele Bower nu este un manager de pachete pentru un limbaj
-specific. El funcționează pentru orice tip de fișiere: JavaScript, \acr{HTML},
-\acr{CSS} și altele. În acest caz Bower definește un pachet ca orice colecție de
-fișiere și lasă modul de folosirea a codului pentru utilizatori. Bower se
-folosește de repozitorii de tip Git pentru răspândirea fișierelor.
-
-În acest fel am putut să mut codul pentru dependințele de front-end în afara
-proiectului. Un avantaj aici este că pot să am un istoric separat. Dacă trebuie
-să actualizez la un pachet mai nou nu trebuie să includ tot codul modificat ci
-doar trebuie să specific versiunea nouă în fișierul de configurare Bower și să
-fac actualizarea locală.
-
-\subsection{WebSocket}
-\label{websocketsub}
-
-WebSocket este un protocol de comunicare \eng{full-duplex} în principal
-implementat pentru comunicarea cu navigatoare web. Specificația WebSocket a fost
-standardizată în 2011 și face parte din grupul de funcționalități \acr{HTML5}.
-
-WebSocket are mai multe avantaje peste versiunea de comunicarea Comet sau Ajax:
-
-\begin{itemize}
-
-\item se reduce traficul și latența deoarece nu trebuie retrimis tot antetul
-HTTP de mai multe ori;
-
-\item se poate face comunicare bidirecțională printr-o singură conexiune;
-
-\item permite trimiterea de mesaje text sau binare, nu doar de flux de caractere
-ca la HTTP.
-
-\end{itemize}
-
-În plus, datorita faptului că se folosește tot portul 80 se păstrează
-caracteristicile de securitate (el fiind rar blocat).
-
-În prezent, toate navigatoarele moderne suportă protocolul WebSocket.
-
-\subsection{ShareJS}
-\label{sharejssub}
-
-ShareJS este \eng{framework} pentru editarea colaborativă a fișierelor text.
-Este compus dintr-o bibliotecă pentru partea de client și un pachet pentru Node.
-
-Pentru permanența fișierelor, ShareJS folosește mai multe tipuri de baze de
-date.
-
-În mod normal comunicarea dintre client și server se poate face prin WebSocket,
-dar dacă nu este disponibilă se poate face și folosind comunicarea Comet.
-
-Pentru menținerea modelului de consistență este folosită tehnologia operational
-transformation (\acr{OT}).
 
 \section{Autentificare}
 
@@ -1516,10 +1516,6 @@ Inițial șabloanele făceam parte din proiect, dar odată cu mutarea dependinț
 Bower în afară am mutat și șabloanele ca un modul separat care este inclus în
 proiect prin funcționalitatea submodule din Git. Astfel se pot dezvolta în
 paralel și pot fi folosite și pentru alte proiecte.
-
-\chapter{Rezultate}
-
-\idee{TODO}
 
 \chapter{Îmbunătățiri}
 
