@@ -699,6 +699,28 @@ dar dacă nu este disponibilă se poate face și folosind comunicarea Comet.
 Pentru menținerea modelului de consistență este folosită tehnologia operational
 transformation (\acr{OT}).
 
+\acr{OT} a fost inventat în 1989 de către C. Ellis și S. Gibbs și a fost folosit
+pentru prima dată în sistemul \acr{GROVE}\cite{concont}.
+
+\acr{OT} este o tehnologie de menținere a consistenței în sistemele colaborative
+și inițial a fost folosit doar pentru fișierele text după care a fost extinsă
+pentru funcționalități mai avansate (\eng{undo}, blocare) și documente
+structurate (non-text).
+
+În figura \ref{otfig} este demonstrat un mic exemplu de comunicare. Se presupune
+un document cu textul „abc“. Un utilizator vrea să adauge „x“ la început și
+altul să șteargă „c“. Documentele lor diferă până când își comunică modificările.
+Deoarece fiecare știe starea documentului când s-a făcut modificarea celuilalt
+aplicând transformările se ajunge la același document.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{imagini/ot}
+\end{center}
+\caption{Exemplu de comunicare \acr{OT}.\cite{otimage}}
+\label{otfig}
+\end{figure}
+
 \chapter{Sistemul propus}
 
 În acest capitol se prezintă proiectarea Multilatex și se explică în detaliu
@@ -1260,7 +1282,7 @@ Compilarea documentelor \LaTeX{} este partea cea mai costisitoare din punctul de
 vederea al procesorului, deci ar trebui extrasă într-un serviciu separat
 (discutat în secțiunea~\ref{comlatsec} de la pagina~\pageref{comlatsec}).
 
-\section{Structura proiect}
+\section{Structură proiect}
 
 În baza de date un proiect conține:
 
@@ -1418,6 +1440,14 @@ Pe partea de server pentru comunicarea WebSocket folosesc pachetul Node numit
 \subsection{ShareJS}
 
 ShareJS (descris la secțiunea~\ref{sharejssub}, pagina~\pageref{sharejssub})
+este folosit pentru colaborarea pentru editarea unui fișier text în parte.
+Dacă mai mulți utilizatori editează fișiere diferite nu există probleme de
+sincronizare între ei (dar tastele tot sunt transmise în timp real către
+server).
+
+Problemele de consistentă apar când mai mulți utilizatori editează un fișier.
+ShareJS asigură că documentul va ajunge la aceeași stare indiferent de
+latența dintre utilizatori.
 
 \section{Editor}
 
@@ -1602,6 +1632,24 @@ recreate dacă este din nou nevoie de ele.
 
 \section{Înlocuire ShareJS}
 
+Deși ShareJS funcționează corect există probleme de performanță:
+
+\begin{itemize}
+
+\item Pentru Multilatex fișierele editate sunt stocate pe disc în dosarul de
+lucru al proiectului, dar ShareJS folosește o bază de date deci se face
+transferul inutil intre baza de date și fișier normal.
+
+\item ShareJS memoreză pe client fișierul ca un singur șir de caractere ceea
+ce este încet deoarece JavaScript nu poate modifica șirurile de caractere și
+trebuie alocată și dealocată multă memorie pentru fiecare schimbare a
+documentului.
+
+\end{itemize}
+
+ShareJS ar putea fi înlocuit cu biblioteci ca \acr{OT}.js\cite{otjs} care sunt
+mai eficiente.
+
 \chapter{Aplicații}
 
 \section{Colaborare}
@@ -1640,7 +1688,10 @@ Andrew Marc Greene. BASIX --- An Interpreter Written in TEX. TUGboat, Volume 11 
 
 \bibitem{contint}
 Kent Beck. Extreme Programming: A Humanistic Discipline of Software Development.
-Fundamental Approaches to Software Engineering. Proceedings, Volume 1. Springer. (1998)
+Fundamental Approaches to Software Engineering. Proceedings, Volume 1. Springer. 1998
+
+\bibitem{concont}
+C. A. Ellis, S. J. Gibbs. Concurrency Control in Groupware Systems. ACM SIGMOD Record 18. 1989
 
 \bibitem{passleak}
 \url{thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
@@ -1662,6 +1713,12 @@ Fundamental Approaches to Software Engineering. Proceedings, Volume 1. Springer.
 
 \bibitem{pdfjs}
 \url{mozilla.github.io/pdf.js}
+
+\bibitem{otimage}
+\url{upload.wikimedia.org/wikipedia/commons/5/58/Basicot.png}
+
+\bibitem{otjs}
+\url{github.com/Operational-Transformation/ot.js}
 
 \end{thebibliography}
 
