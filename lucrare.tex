@@ -1005,9 +1005,34 @@ folosesc Bootstrap 3 cu puține modificări pentru o estetică plată și simpl�
 
 \section{Integrare continuă}
 
-\idee{TODO}
+Această practică se referă la integrarea de mai multe ori pe zi a modificărilor
+din ramura principală.
+
+Kent Beck și Ron Jeffries au inventat integrarea continuă odată cu Extreme
+Programming în 1997. Kent Beck a publicat o carte în care detaliază integrarea
+continuă în 1998\cite{contint}.
+
+Printre principiile acestei metodologii se numără:
+
+\begin{itemize}
+
+\item folosirea unui sistem de versionare (pentru sistemul propus s-a folosit
+Git).
+
+\item automatizarea construirii programului (aici s-a trecut prin trei versiuni
+și s-a rămas la folosirea Gulp care este discutat la secțiunea
+\ref{construireasec} de la pagina \pageref{construireasec});
+
+\item accesul tuturor dezvoltatorilor la ramura principală;
+
+\item automatizarea lansării (acest lucru este descris tot în Gulp)
+
+\item și altele.
+
+\end{itemize}
 
 \section{Construirea}
+\label{construireasec}
 
 Construirea proiectului a susținut cele mai mari modificări și a trecut prin
 trei variante. Prin construire mă refer la compilarea, configurarea și
@@ -1611,7 +1636,11 @@ Chiar și autorul proiectului îl poate duplica pentru a încerca lucruri noi.
 \url{brokestream.com/tex.pdf}
 
 \bibitem{basictc}
-Andrew Marc Greene, BASIX --- An Interpreter Written in TEX, TUGboat, Volume 11 (1990), No. 3
+Andrew Marc Greene. BASIX --- An Interpreter Written in TEX. TUGboat, Volume 11 (1990). No. 3
+
+\bibitem{contint}
+Kent Beck. Extreme Programming: A Humanistic Discipline of Software Development.
+Fundamental Approaches to Software Engineering. Proceedings, Volume 1. Springer. (1998)
 
 \bibitem{passleak}
 \url{thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
