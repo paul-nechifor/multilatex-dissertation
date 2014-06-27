@@ -224,6 +224,31 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \capfara{Contribuții}
 
+Contribuția mea constă în proiectarea și implementarea întregii aplicații web
+folosind tehnologii recente care este lansată la \cod{multilatex.com} și al
+cărei surse este publicată pe GitHub\cite{multigit}.
+
+Funcționalitățile diferite față de alte proiecte similare sunt:
+
+\begin{itemize}
+
+\item folosirea unei metode proprii de memorare a istoricului
+(secțiunea \ref{versionaresec}, pagina \pageref{versionaresec}) folosind un
+data store propriu (secțiunea \ref{filestoresec}, pagina
+\pageref{filestoresec});
+
+\item previzualizări dinamice a documentelor prin memorarea
+tuturor miniaturilor de pagini (secțiunea \ref{galeriesub}, pagina
+\ref{galeriesub});
+
+\item notificări pe proiect incluzând comunicare text cu recunoaștere contextuală
+(secțiunea \ref{notificarisec}, pagina \pageref{notificarisec});
+
+\item și navigarea secțiunilor documentului prin recunoașterea dinamică a acestora
+(secțiunea \ref{documentemarisub}, pagina \pageref{documentemarisub}).
+
+\end{itemize}
+
 \chapter{Sisteme existente}
 
 În acest capitol se prezintă funcționarea \TeX{} și \LaTeX{} și problemele pe care
@@ -795,6 +820,7 @@ descris-o pe situl proiectului la \cod{multilatex.com/blog} . Urmează
 principalele probleme asupra cărora a trebuit să mă decid.
 
 \subsection{Documente mari}
+\label{documentemarisub}
 
 \LaTeX{} suportă includerea fișierelor \cod{.tex} în alte fișiere \cod{.tex}.
 Prin urmare, un mod de lucru cu documente mare este să fie separate în fișiere
@@ -959,8 +985,6 @@ așa se poate afla instant că acolo este lista de colaboratori și de acolo pot
 adăugați.
 
 \subsection{Istoric}
-
-Istoricul conține legături spre versiunile fișierelor
 
 Pagina de istoric a unui proiecte listează toate versiunile sale. O versiune
 afișează:
@@ -1829,6 +1853,10 @@ Software—Practice \& Experience Volume 15 Issue 7. 1985
 
 \bibitem{mongodb}
 \url{www.mongodb.org/}
+
+\bibitem{multigit}
+\url{github.com/paul-nechifor/multilatex} (proiect) \\
+\mbox{ }\url{github.com/paul-nechifor/multilatex-dissertation} (lucrare)
 
 \end{thebibliography}
 
