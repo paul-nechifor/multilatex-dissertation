@@ -1,5 +1,6 @@
 all:
 	pdflatex lucrare.tex
+	pdflatex rezumat.tex
 
 listen:
 	while inotifywait -e close_write lucrare.tex; do sleep 1; make; done
