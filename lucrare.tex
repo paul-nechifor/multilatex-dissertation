@@ -220,7 +220,35 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 \capfara{Introducere}
 
-Am ales acest subliect ...
+Obiectivul acestui proiect este dezvoltarea unui editor/compilator online de
+documente \LaTeX{} cu suport pentru editarea colaborativă și administrare a
+istoricului de modificări. Proiectul ar trebui să aibă și alte funcționalități
+care să ajute editarea colaborativă.
+
+Am ales acest subiect deoarece tipografia și \LaTeX{} se numără printre
+interesele mele și am ocazia să învăț și să lucrez cu tehnologii pe care nu le-am
+mai folosit.
+
+Proiectul pe partea de server este scris ca o aplicație web în Node.js folosind
+JavaScript. Aplicația rulează un serviciu în Upstart care administrează
+repornirea ei dacă se închide în mod neașteptat precum și alte funcționalități
+de securitate și logare.
+
+Partea de client folosește multe biblioteci des întâlnite și este scrisă în
+JavaScript și CoffeeScript (care interoperează bine). Editorul este scris
+modular (în mai multe fișiere) și se folosește Browserify pentru culegerea
+dependințelor și unirea într-un singur fișier \cod{.js} care este apoi minificat
+pentru a-i reduce părțile inutile (comentarii, spații în plus etc).
+
+Toate acțiunile de construire și lansare a aplicației sunt automatizate folosind
+Gulp pentru a putea integra continuu ușor (de la linia de comandă) modificările
+făcute proiectului.
+
+Proiectul folosește Vagrant pentru descrierea și provizionarea mașinii virtuale sub care să
+ruleze serviciul și toate celelalte programe necesare (MongoDB, \TeX{} Live etc).
+Astfel proiectul poate fi rulat și dezvoltat pe orice sistem de operare și fără
+a fi necesară instalarea de pachete locale (cu excepția Vagrant și VirtualBox).
+În plus, în acest fel se prezintă o interfață uniformă fiecărui posibil dezvoltator.
 
 \capfara{Contribuții}
 
@@ -1559,7 +1587,7 @@ editare și panoul de previzualizare.
 Cele trei panouri principale sunt separate de marcaje de control. Panoul din
 stânga (de proiect) poate fi ascuns în stânga prin marcajul de control și panoul
 din dreapta (de previzualizare) poate fi ascuns în dreapta. Panoul de editare
-este singurul care nu poate fi minimizat.
+este singurul care nu poate fi minificat.
 
 Editorul are mai multe setări care pot fi controlate fie prin meniu fie prin
 controale. Setările sunt sincronizate în timp direct cu serverul și prin urmare
