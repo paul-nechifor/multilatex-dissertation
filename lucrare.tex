@@ -1393,7 +1393,9 @@ fi o legătură la linia respectivă (și se deschide fișierul dacă este nevoi
 \label{filestoresec}
 
 \eng{File store}-ul este o aplatizare a fișierelor din toate proiectele după
-rezumatul \acr{SHA1}. El dispune de următoare le avantaje.
+rezumatul \acr{SHA1}. Fișierele adăugate în el nu mai pot fi modificate
+(deoarece n-ar mai corespunde rezumatul). \eng{File store}-ul dispune de
+următoarele avantaje.
 
 \begin{itemize}
 
@@ -1574,8 +1576,8 @@ paralel și pot fi folosite și pentru alte proiecte.
 
 \chapter{Îmbunătățiri}
 
-În acest capitol discut o serie de îmbunătățiri care pot fi aduse proiectului.
-Sunt multe feluri în care poate fi făcut mai bun, dar eu o să mă concentrez pe
+În acest capitol se discută o serie de îmbunătățiri care pot fi aduse proiectului.
+Sunt multe feluri în care poate fi făcut mai bun, dar concentrarea o să fie pe
 cele care pot fi aduse proiectului în starea sa curentă.
 
 \section{Compilator \LaTeX}
@@ -1584,34 +1586,44 @@ cele care pot fi aduse proiectului în starea sa curentă.
 Datorită faptului că compilarea documentelor \LaTeX{} este partea cea mai
 costisitoare, ea ar trebuie separată de aplicația web.
 
-Metoda cea mai bună ar fi să creez un serviciu special de compilare a
-documentelor \LaTeX{} care să fie scalabil. Acest lucru nu ar fi foarte greu
-deoarece doar ar trebui să fie un \eng{wrapper} pentru utilizarea a
-\cod{pdflatex}.
+Metoda cea mai bună ar fi crearea unui serviciu web special pentru compilarea
+documentelor \LaTeX{} care să fie scalabil.
+
+Acțiunile unui worker în parte nu ar fi greu de implementat deoarece nu ar trebui
+să fie decât un \eng{wrapper} pentru utilizarea programului \cod{pdflatex} ca
+în sistemul propus.
 
 \section{\eng{File store}}
 \label{filestoresec}
 
 Există cel puțin două modalități prin care poate fi îmbunătățită metoda curentă:
-se pot comprima fișierele și se poate refolosi fișierele din \eng{file store} în
+se pot comprima fișierele și se pot refolosi fișierele din \eng{file store} în
 dosarul de lucru.
 
 \subsection{Comprimare}
 
 Deoarece cele mai multe fișiere sunt de tip text, ele pot fi comprimate ușor.
-În acest caz pot fi folosite sisteme de fișiere cu suport pentru comprimare
-a fișierelor sau fiecare fișier să fie comprimat la scriere și decomprimat la
+În acest caz pot fi folosite sisteme de fișiere cu suport pentru comprimarea
+fișierelor sau fiecare fișier să fie comprimat la scriere și decomprimat la
 citire.
 
 Însă aceste soluții nu ar fi chiar cele mai bune. O comprimare mai eficientă
-ar ține cont de faptul că există diferențe mici între foarte multe fișiere.
+ar ține cont de faptul că există diferențe mici între multe fișiere, spre
+exemplu, un fișier pentru care se modifică la fiecare versiune doar câteva linii
+de text. Sistemele de versionare mai vechi rezolvau această problemă prin memorarea
+doar a diferențelor aduse în fiecare versiune (RCS\cite{rcs}, CVS etc).
 
-Sistemele de fișiere care arhivează bine de obicei sunt read-only (SquashFS,
+O altă soluție ar fi folosirea unui sistem de fișiere cu comprimare. Formatul
+de compresie ar folosi dicționare de mărime fixă care, posibil, ar fi mai
+eficient de încărcat în memorie și decomprimat decât reconstruirea unei versiuni
+specifice prin aplicarea diferențelor dintre versiuni.
+
+Sistemele de fișiere care comprimă bine de obicei sunt read-only (SquashFS,
 cramfs etc).
 
 O variantă în acest caz ar fi scrierea unui sistem de fișiere virtual (folosind
-FUSE pentru Linux) care să arhiveze doar fișierele text accesul la restul fiind
-furnizat direct de disc prin folosirea unui union mount (spre exemplu cu
+FUSE pentru Linux) care să arhiveze doar fișierele text și accesul la restul să
+fie furnizat direct de disc prin folosirea unui union mount (spre exemplu cu
 UnionFS).
 
 \subsection{Legături}
@@ -1638,9 +1650,9 @@ Deși ShareJS funcționează corect există probleme de performanță:
 
 \item Pentru Multilatex fișierele editate sunt stocate pe disc în dosarul de
 lucru al proiectului, dar ShareJS folosește o bază de date deci se face
-transferul inutil intre baza de date și fișier normal.
+transferul inutil între baza de date și fișierul normal.
 
-\item ShareJS memoreză pe client fișierul ca un singur șir de caractere ceea
+\item ShareJS memoreză fișierul pe client ca un singur șir de caractere ceea
 ce este încet deoarece JavaScript nu poate modifica șirurile de caractere și
 trebuie alocată și dealocată multă memorie pentru fiecare schimbare a
 documentului.
@@ -1648,7 +1660,7 @@ documentului.
 \end{itemize}
 
 ShareJS ar putea fi înlocuit cu biblioteci ca \acr{OT}.js\cite{otjs} care sunt
-mai eficiente.
+mai simple și au mai puține funcționalități.
 
 \chapter{Aplicații}
 
@@ -1692,6 +1704,10 @@ Fundamental Approaches to Software Engineering. Proceedings, Volume 1. Springer.
 
 \bibitem{concont}
 C. A. Ellis, S. J. Gibbs. Concurrency Control in Groupware Systems. ACM SIGMOD Record 18. 1989
+
+\bibitem{rcs}
+Walter F. Tichy. RCS—a system for version control. Journal
+Software—Practice \& Experience Volume 15 Issue 7. 1985
 
 \bibitem{passleak}
 \url{thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
