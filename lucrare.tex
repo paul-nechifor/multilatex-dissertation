@@ -222,7 +222,6 @@ realizate de mine în cadrul prezentei lucrări de licență.
 
 Am ales acest subliect ...
 
-
 \capfara{Contribuții}
 
 Contribuția mea constă în proiectarea și implementarea întregii aplicații web
@@ -240,7 +239,7 @@ data store propriu (secțiunea \ref{filestoresec}, pagina
 
 \item previzualizări dinamice a documentelor prin memorarea
 tuturor miniaturilor de pagini (secțiunea \ref{galeriesub}, pagina
-\ref{galeriesub});
+\pageref{galeriesub});
 
 \item notificări pe proiect incluzând comunicare text cu recunoaștere contextuală
 (secțiunea \ref{notificarisec}, pagina \pageref{notificarisec});
@@ -353,7 +352,7 @@ locul unde este afișat rezultatul în \acr{PDF};
 \item folosește \acr{PDF}.js pentru previzualizarea documentului \acr{PDF}
 rezultat;
 
-\item și conține un număr foarte mare de șabloane.
+\item și conține un număr foarte mare de șabloane \LaTeX{}.
 
 \end{itemize}
 
@@ -372,11 +371,11 @@ că:
 
 \begin{itemize}
 
-\item poate folosi în loc de editarea textului sursă o variantă numită text
-îmbogățit care îmbină funcționalități \acr{WYSIWYG} cu text normal \LaTeX{};
+\item poate folosi în loc de editarea textului sursă o variantă numită „text
+îmbogățit“ care îmbină funcționalități \acr{WYSIWYG} cu text normal \LaTeX{};
 
-\item folosește randarea paginilor pe server și afișează imagini \acr{JPEG} în
-loc (ceea ce reduce din claritatea textului);
+\item folosește randarea paginilor pe server și afișează imagini \acr{JPEG} pe
+client (ceea ce reduce din claritatea textului);
 
 \item și permite editarea fără înregistrare.
 
@@ -389,22 +388,22 @@ proiectului și motivele pentru care au fost alese.
 
 \section{\eng{Back-end}}
 
-Pe partea de server am folosit următoarele aplicații/tehnologii:
+Pe partea de server s-au folosit următoarele aplicații/tehnologii:
 
 \begin{itemize}
 
 \item \textbf{Vagrant}, pentru administrarea mediului de lucru;
 
 \item \textbf{Upstart}, pentru descrierea serviciului Linux sub care rulează
-aplicația web
+aplicația web;
 
-\item \textbf{Node.js}, pentru aplicația web;
+\item \textbf{Node.js}, pentru rularea aplicației web;
 
 \item \textbf{Express.js}, pentru \eng{framework}-ul web;
 
-\item \textbf{Jade}, pentru șabloane HTML;
+\item \textbf{Jade}, pentru șabloane \acr{HTML};
 
-\item \textbf{Stylus}, pentru generarea CSS;
+\item \textbf{Stylus}, pentru generarea \acr{CSS};
 
 \item și \textbf{MongoDB} pentru baza de date.
 
@@ -423,7 +422,7 @@ instalat. Însă acest mod de lucru încetinește pasul de dezvoltare și necesi
 trafic mult: dacă se schimbă o piesă, durează mult timp până se reconfigurează
 sistemul virtual și până este transmis la toți dezvoltatorii.
 
-Vagrant este un sistem de a lucra cu și de a partaja medii de dezvoltare
+Vagrant\cite{vagrant} este un sistem de a lucra cu și de a partaja medii de dezvoltare
 virtuale care rezolvă această problemă într-un mod diferit. Un sistem virtual
 este descris într-un singur fișier cu toate proprietățile sale cum ar fi:
 
@@ -480,7 +479,7 @@ mai avansate. În principal provizionarea consistă din:
 
 \subsection{Upstart}
 
-Programul construit rulează pe \eng{backend} ca un serviciu în Upstart. Upstart
+Programul construit rulează pe \eng{backend} ca un serviciu în Upstart. Upstart\cite{upstart}
 este un sistem de administrare a serviciilor pentru Unix bazat pe evenimente. El
 a fost proiectat ca un înlocuitor pentru init.
 
@@ -520,7 +519,7 @@ funcționalități non-esențiale.
 
 \subsection{Express}
 
-Express este un \eng{framework} de aplicații web pentru Node făcut să fie
+Express\cite{express} este un \eng{framework} de aplicații web pentru Node făcut să fie
 minimal și flexibil. El este modular și nu include funcționalități statice cum
 ar fi motoare de șablonare unice, dosare statice predefinite etc. O aplicație
 Express poate chiar fi definită într-un singur fișier.
@@ -530,7 +529,7 @@ acestuia.
 
 \subsection{Jade}
 
-Jade este un motor de șablonare pentru Node cu sintaxă bazată pe indentare.
+Jade\cite{jade} este un motor de șablonare pentru Node cu sintaxă bazată pe indentare.
 
 Exemplu de cod Jade:
 
@@ -580,7 +579,7 @@ de citit, dar în mod normal codul produs nu conține niciun spațiu în plus.
 
 \subsection{Stylus}
 
-Stylus (2010) este un limbaj \eng{stylesheet} care compilează în CSS. Este
+Stylus\cite{stylus} (2010) este un limbaj \eng{stylesheet} care compilează în CSS. Este
 asemănător cu Sass (2007) și LESS (2009), dar cu diferența principală că este
 mult mai succint și este bazat pe indentare. Totuși, Stylus suportă și sintaxa
 CSS.
@@ -638,7 +637,7 @@ Pe partea de client am folosit următoarele tehnologii/aplicații:
 
 \begin{itemize}
 
-\item \textbf{Backbone} pentru paradigma \acr{MVC} pe client;
+\item \textbf{Backbone} pentru paradigma \acr{MVC}\cite{mvcpaper} pe client;
 
 \item \textbf{jQuery} (cu anumite plugin-uri) pentru compatibilitate mai mare pe
 diferite navigatoare;
@@ -733,7 +732,7 @@ supradimensionarea proiectului cu cod care nu-mi aparține. Pentru foarte mult
 timp acest mod de lucru era normal pentru că nu exista un mod de a administra
 pachetele \eng{front-end}.
 
-Bower este un astfel de manager de pachete pentru web. Spre diferență de
+Bower\cite{bower} este un astfel de manager de pachete pentru web. Spre diferență de
 \acr{NPM} și altele Bower nu este un manager de pachete pentru un limbaj
 specific. El funcționează pentru orice tip de fișiere: JavaScript, \acr{HTML},
 \acr{CSS} și altele. În acest caz Bower definește un pachet ca orice colecție de
@@ -749,7 +748,7 @@ fac actualizarea locală.
 \subsection{WebSocket}
 \label{websocketsub}
 
-WebSocket este un protocol de comunicare \eng{full-duplex} în principal
+WebSocket\cite{websocket} este un protocol de comunicare \eng{full-duplex} în principal
 implementat pentru comunicarea cu navigatoare web. Specificația WebSocket a fost
 standardizată în 2011 și face parte din grupul de funcționalități \acr{HTML5}.
 
@@ -775,7 +774,7 @@ caracteristicile de securitate (el fiind rar blocat).
 \subsection{ShareJS}
 \label{sharejssub}
 
-ShareJS este \eng{framework} pentru editarea colaborativă a fișierelor text.
+ShareJS\cite{sharejs} este \eng{framework} pentru editarea colaborativă a fișierelor text.
 Este compus dintr-o bibliotecă pentru partea de client și un pachet pentru Node.
 
 \begin{figure}[h!]
@@ -1165,7 +1164,7 @@ După asta am descoperit Grunt care rezolvă această problemă într-un mod gen
 
 \subsection{Grunt}
 
-Grunt este un sistem de automatizare a proceselor de lucru cu foarte multe
+Grunt\cite{grunt} este un sistem de automatizare a proceselor de lucru cu foarte multe
 \eng{plugin}-uri care funcționează prin descrierea de sarcini de lucru.
 
 Un avantaj peste folosirea de fișiere \cod{Makefile} este că Grunt este scris în
@@ -1188,7 +1187,7 @@ fișiere JavaScript trebuie inclus în fiecare pagină. Astfel pot exista colizi
 de variabile și includerea etichetelor \cod{script} în ordine greșită poate duce
 la erori.
 
-Pachetul Browserify permite compunerea fișierelor JavaScript într-unul singur
+Pachetul Browserify\cite{browserify} permite compunerea fișierelor JavaScript într-unul singur
 folosind specificația CommonJS de descriere a modulelor (cea folosită și de
 Node). Astfel, în loc să fie descris un pachet în mod liniar prin etichete
 \cod{script} în fiecare pagină în care este inclus, fiecare fișier descrie ce
@@ -1231,7 +1230,7 @@ construirii.
 
 \subsection{Gulp}
 
-Gulp este un sistem de automatizare similar, dar cu diferența principală că
+Gulp\cite{gulp} este un sistem de automatizare similar, dar cu diferența principală că
 sarcinile sunt descrise prin fluxuri de transformare și se preferă cod înainte
 de configurații stufoase.
 
@@ -1812,6 +1811,14 @@ C. A. Ellis, S. J. Gibbs. Concurrency Control in Groupware Systems. ACM SIGMOD R
 Walter F. Tichy. RCS—a system for version control. Journal
 Software—Practice \& Experience Volume 15 Issue 7. 1985
 
+\bibitem{mvcpaper}
+Glenn E. Krasner, Stephen T. Pope. A cookbook for using the
+model--view--controller user interface paradigm in Smalltalk-80. Journal of
+Object-Oriented Programming, Volume 1, Issue 3. 1988
+
+\bibitem{websocket}
+I. Fette, A. Melnikov. The WebSocket Protocol. RFC 6455. 2011
+
 \bibitem{passleak}
 \url{thepasswordproject.com/leaked\_password\_lists\_and\_dictionaries}
 
@@ -1849,7 +1856,37 @@ Software—Practice \& Experience Volume 15 Issue 7. 1985
 \url{developers.google.com/v8/intro}
 
 \bibitem{mongodb}
-\url{www.mongodb.org/}
+\url{www.mongodb.org}
+
+\bibitem{vagrant}
+\url{www.vagrantup.com}
+
+\bibitem{upstart}
+\url{upstart.ubuntu.com}
+
+\bibitem{express}
+\url{expressjs.com}
+
+\bibitem{jade}
+\url{jade-lang.com}
+
+\bibitem{stylus}
+\url{learnboost.github.io/stylus}
+
+\bibitem{bower}
+\url{bower.io}
+
+\bibitem{sharejs}
+\url{github.com/share/ShareJS/tree/0.6}
+
+\bibitem{grunt}
+\url{gruntjs.com}
+
+\bibitem{browserify}
+\url{browserify.org}
+
+\bibitem{gulp}
+\url{gulpjs.com}
 
 \bibitem{multigit}
 \url{github.com/paul-nechifor/multilatex} (proiect) \\
