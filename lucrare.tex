@@ -478,7 +478,19 @@ cazul în care eșuează mai multe de 10 ori în 5 secunde);
 
 \subsection{Node}
 
-\idee{TODO}
+Node.js\cite{nodejs} este o platformă pentru scrierea de aplicații server care
+folosește motorul de JavaScript numit V8 folosit și de Google Chrome.
+
+Node a fost proiectat să maximizeze transferul de date prin folosirea de
+input-output asincron.
+
+V8 poate fi foarte eficient pentru că compilează codul JavaScript în cod nativ
+(în loc să interpreteze bytecode) și poate să reoptimizeze codul în mod dinamic
+la rulare în funcție de profilare.\cite{vopt}
+
+Unul dintre principalele avantaje Node este că are un număr de pachete incorporate
+foarte mic și în schimb se bazează pe managerul de pachete \acr{NPM} pentru
+funcționalități non-esențiale.
 
 \subsection{Express}
 
@@ -587,7 +599,12 @@ demonstrată și imbricarea care evită repetarea: se folosește doar \cod{\&:ho
 
 \subsection{MongoDB}
 
-\idee{TODO}
+MongoDB\cite{mongodb} este o bază de date NoSQL bazată pe documente. Documentele
+sunt stocate în formatul \acr{BSON} care este asemănător cu \acr{JSON} doar că
+se folosește o stocare binară și are mai multe tipuri de date.
+
+S-a ales această bază de date pentru că avea bibliotecile cele mai mature la
+începutul proiectării Multilatex.
 
 \section{\eng{Front-end}}
 
@@ -735,6 +752,14 @@ caracteristicile de securitate (el fiind rar blocat).
 ShareJS este \eng{framework} pentru editarea colaborativă a fișierelor text.
 Este compus dintr-o bibliotecă pentru partea de client și un pachet pentru Node.
 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=10cm]{imagini/ot}
+\end{center}
+\caption{Exemplu de comunicare \acr{OT}.\cite{otimage}}
+\label{otfig}
+\end{figure}
+
 Pentru permanența fișierelor, ShareJS folosește mai multe tipuri de baze de
 date.
 
@@ -757,14 +782,6 @@ un document cu textul „abc“. Un utilizator vrea să adauge „x“ la încep
 altul să șteargă „c“. Documentele lor diferă până când își comunică modificările.
 Deoarece fiecare știe starea documentului când s-a făcut modificarea celuilalt
 aplicând transformările se ajunge la același document.
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{imagini/ot}
-\end{center}
-\caption{Exemplu de comunicare \acr{OT}.\cite{otimage}}
-\label{otfig}
-\end{figure}
 
 \chapter{Sistemul propus}
 
@@ -1783,6 +1800,15 @@ Software—Practice \& Experience Volume 15 Issue 7. 1985
 
 \bibitem{sharelatexrepo}
 \url{github.com/sharelatex/sharelatex}
+
+\bibitem{nodejs}
+\url{nodejs.org}
+
+\bibitem{vopt}
+\url{developers.google.com/v8/intro}
+
+\bibitem{mongodb}
+\url{www.mongodb.org/}
 
 \end{thebibliography}
 
