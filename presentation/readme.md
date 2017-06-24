@@ -5,12 +5,10 @@
 Get the dependencies:
 
     npm install
-    bower install
-    npm install -g coffee-script
 
 Build it:
 
-    cake build
+    npm run build
 
 ## Images used:
 
