@@ -176,6 +176,15 @@ body {
 .reveal .dark-inverse h2 {
   background-color: rgba(0,0,0,0.32);
 }
+.reveal .main-links {
+  font-size: 15px;
+  margin-top: 40px;
+  clear: both;
+  color: #fff;
+}
+.reveal .main-links a {
+  color: #fff;
+}
 .reveal .sub-info {
   margin-top: 30px;
 }

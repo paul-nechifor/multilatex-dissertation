@@ -4,11 +4,11 @@
 
 Get the dependencies:
 
-    npm install
+    yarn
 
 Build it:
 
-    npm run build
+    yarn build
 
 ## Images used:
 

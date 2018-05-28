@@ -13,6 +13,14 @@ mixin content
       p.left
         a(href='http://www.infoiasi.ro/bin/Main/') FII
       p.right 2 July 2014
+    p.main-links
+      a(href='/') Home
+      = ' • '
+      a(href='/blog') Blog
+      = ' • '
+      a(href='/projects') Projects
+      = ' • '
+      a(href='https://twitter.com/PaulNechifor') Twitter
   section
     h2 Overview
     ul
@@ -71,7 +79,7 @@ mixin content
   section
     pre: code.go.
       $ gulp && gulp dev-deploy && gulp dev-log
-      
+
       $ gulp --production && gulp dev-deploy && gulp dev-log
   section
     pre.small-pre: code.ruby.
@@ -91,7 +99,7 @@ mixin content
               machine.vm.provision "shell", path: "scripts/provision.sh"
             end
           end
-          
+
           if File.file?('../private/client_id')
             vmname = "machine-do"
             config.vm.define vmname.to_sym do |machine|
@@ -170,9 +178,12 @@ html(lang='en')
   head
     meta(charset='utf-8')
     title Multilatex
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    meta(name='description', content='Presentation on my collaborative web editor for LaTeX called Multilatex.')
+    link(rel='apple-touch-icon', href='/favicon152.png')
     meta(name='apple-mobile-web-app-capable', content='yes')
     meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
     link(rel='stylesheet', href='reveal/reveal.min.css')
     link(rel='stylesheet', href='style.css')
   body
