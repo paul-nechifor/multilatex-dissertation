@@ -1,3 +1,7 @@
+# This repository has been moved to [gitlab.com/paul-nechifor/multilatex-dissertation](http://gitlab.com/paul-nechifor/multilatex-dissertation).
+
+Old readme:
+
 # Multilatex (lucrarea de dizertație)
 
 ![screenshot](screenshot.png)
